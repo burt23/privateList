@@ -8,12 +8,16 @@ class Search extends React.Component {
     }
   this.handleChange = this.handleChange.bind(this);
   this.handleSubmit = this.handleSubmit.bind(this);
+  console.log('inside search', this);
   }
 
   handleSubmit(event) {
+    console.log('this', this);
+    this.props.search(this.state.value);
     event.preventDefault();
-    this.setState({ value: '' })
+    this.setState({ value: '' });
   }
+
   handleChange(event) {
     this.setState({ value: event.target.value });
   }

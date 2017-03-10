@@ -22,9 +22,15 @@ class App extends React.Component {
          description: 'pusherman'}
       ],
     };
+    this.search = this.search.bind(this);
+      console.log('inside index', this);
+
   }
 
   componentDidMount() {
+    //invoke get
+  }
+  get() {
     $.ajax({
       url: '/items',
       success: (data) => {
@@ -37,19 +43,24 @@ class App extends React.Component {
       }
     });
   }
-  search () {
+  search (term) {
+    console.log('term from search', term);
     $.ajax({
-      url: 'http://127.0.0.1',
+      url: 'http://127.0.0.1:3000/songs/users',
       type: 'POST',
-
-
+      success: function(error, data) {
+        console.log('successful post');
+      },
+      error: function(error) {
+        console.log('error', error);
+      }
     })
   }
 
   render () {
     return (<div>
       <h1 id='mainTitle'>SoundShuffle</h1>
-      <Search handleChange = {this.props.handleChange} handleSubmit = {this.props.handleSubmit}/>
+      <Search search = {this.search} handleChange = {this.props.handleChange} handleSubmit = {this.props.handleSubmit}/>
       <List songs={this.state.songs}/>
     </div>)
   }
