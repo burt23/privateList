@@ -49,3 +49,16 @@ p {
   margin: 0 auto;
 }
 
+#searchBox {
+  padding: 0.5em;
+  font-family: 'Special Elite', cursive;
+
+  font-size: 1.1em;
+}
+
+::-webkit-input-placeholder {
+   text-align: center;
+   font-family: 'Fugaz One', cursive;
+}
+
+

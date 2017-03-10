@@ -21,11 +21,7 @@ class App extends React.Component {
         {name: 'curtis mayfield',
          description: 'pusherman'}
       ],
-      searchTerm: '',
-      value: 'placeholder',
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -43,23 +39,17 @@ class App extends React.Component {
   }
   search () {
     $.ajax({
+      url: 'http://127.0.0.1',
+      type: 'POST',
+
 
     })
-  }
-
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
-
-  handleSubmit(event) {
-    this.setState({searchTerm: event.target.value});
-    event.preventDefault();
   }
 
   render () {
     return (<div>
       <h1 id='mainTitle'>SoundShuffle</h1>
-      <Search handleChange = {this.props.handleChange}/>
+      <Search handleChange = {this.props.handleChange} handleSubmit = {this.props.handleSubmit}/>
       <List songs={this.state.songs}/>
     </div>)
   }
