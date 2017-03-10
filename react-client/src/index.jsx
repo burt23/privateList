@@ -15,10 +15,17 @@ class App extends React.Component {
         {name: 'will withers',
          description: 'grandmas hands'},
 
+        {name: 'ottis redding',
+          description: 'a change is gonna come'},
+
         {name: 'curtis mayfield',
          description: 'pusherman'}
       ],
-    }
+      searchTerm: '',
+      value: 'placeholder',
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -40,10 +47,19 @@ class App extends React.Component {
     })
   }
 
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    this.setState({searchTerm: event.target.value});
+    event.preventDefault();
+  }
+
   render () {
     return (<div>
       <h1 id='mainTitle'>SoundShuffle</h1>
-      <Search />
+      <Search handleChange = {this.props.handleChange}/>
       <List songs={this.state.songs}/>
     </div>)
   }

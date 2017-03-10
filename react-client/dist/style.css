@@ -44,3 +44,8 @@ p {
   padding-bottom: 1em;
 }
 
+#submitButton {
+  display: block;
+  margin: 0 auto;
+}
+
