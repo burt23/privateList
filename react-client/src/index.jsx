@@ -7,7 +7,11 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: [],
+      songs: [
+        'marvin gaye' : 'sexual healing',
+        'will withers' : 'grandmas hands',
+        'curtis mayfield' : 'pusherman'
+      ],
 
     }
   }
@@ -29,7 +33,7 @@ class App extends React.Component {
   render () {
     return (<div>
       <h1>SoundShuffle</h1>
-      <List items={this.state.items}/>
+      <List songs={this.state.songs}/>
     </div>)
   }
 }
