@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import List from './components/List.jsx';
+import Search from './components/Search.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -33,10 +34,16 @@ class App extends React.Component {
       }
     });
   }
+  search () {
+    $.ajax({
+
+    })
+  }
 
   render () {
     return (<div>
       <h1 id='mainTitle'>SoundShuffle</h1>
+      <Search />
       <List songs={this.state.songs}/>
     </div>)
   }
