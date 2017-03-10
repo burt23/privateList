@@ -8,11 +8,15 @@ class App extends React.Component {
     super(props);
     this.state = {
       songs: [
-        'marvin gaye' : 'sexual healing',
-        'will withers' : 'grandmas hands',
-        'curtis mayfield' : 'pusherman'
-      ],
+        {name: 'marvin gaye',
+          description: 'sexual healing'},
 
+        {name: 'will withers',
+         description: 'grandmas hands'},
+
+        {name: 'curtis mayfield',
+         description: 'pusherman'}
+      ],
     }
   }
 
@@ -32,7 +36,7 @@ class App extends React.Component {
 
   render () {
     return (<div>
-      <h1>SoundShuffle</h1>
+      <h1 id='mainTitle'>SoundShuffle</h1>
       <List songs={this.state.songs}/>
     </div>)
   }
