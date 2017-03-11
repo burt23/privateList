@@ -71,7 +71,7 @@ class App extends React.Component {
         });
       },
       error: function(error) {
-        console.log('error', error);
+        console.log('error after loggggin in dduuuude', error);
       }
     })
   }

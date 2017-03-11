@@ -43,6 +43,8 @@ app.post('/login', hashPass, function(req, res) {
   db.checkUsername(username, function(err, valid){
     if(err){
       console.log(err);
+      res.sendStatus(401);
+      res.end('Validation Failure');
     } else if (valid) {
       //ADD USERNAME AND PASSWORD TO DB
       console.log('ready to add');

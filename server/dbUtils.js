@@ -25,7 +25,7 @@ module.exports = {
       if(err) {
         callback(err, null);
       } else {
-        callback(err, true);
+        callback(null, true);
       }
     })
   },
@@ -35,9 +35,11 @@ module.exports = {
       if(err) {
         callback(err, null);
       } else if (results.length === 0){
-        console.log(results);
+        console.log('inside checkUser', results);
         callback(err, true);
       }
+      console.log('check user ? ?????');
+      console.log('check user ? ?????', results);
     })
   },
 
@@ -47,8 +49,19 @@ module.exports = {
         console.log(err)
         callback(err, null)
       } else {
-        callback(err, true);
+        callback(null, true);
       }
+    })
+  },
+
+  validateUser : function(username, password, callback) {
+    connection.query('SELECT id FROM users where user = ? AND password = ?', [username, password], function(err, results, fields) {
+      if(err){
+        console.log('error in validate user', err);
+        callback(err, null);
+      }
+        console.log('user id from results', results);
+        callback(null, results);
     })
   }
 }
