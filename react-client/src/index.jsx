@@ -46,7 +46,7 @@ class App extends React.Component {
       success: (data) => {
         console.log('successful get dataDATA', data);
         this.setState({
-          items: data
+          items: data.reverse()
         });
       },
       error: (err) => {
@@ -95,7 +95,7 @@ class App extends React.Component {
       success: function(data) {
         console.log('successful postITEMSSEARCH TEXT', data);
         context.setState({
-          items: data
+          items: data.reverse()
         });
       },
       error: function(error) {
