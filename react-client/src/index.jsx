@@ -63,9 +63,9 @@ class App extends React.Component {
         password: password
       }),
       success: function(error, data) {
-        console.log('successful post');
+        console.log('successful post on login');
         context.setState({
-          items: data
+          isLoggedIn: true
         });
       },
       error: function(error) {

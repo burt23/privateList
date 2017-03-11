@@ -28,6 +28,18 @@ module.exports = {
         callback(err, true);
       }
     })
-  }
+  },
+
+  checkUsername : function(username, callback) {
+    connection.query('SELECT * FROM users WHERE user = ? ', [username], function(err, results, fields) {
+      if(err) {
+        callback(err, null);
+      } else if (results.length === 0){
+        console.log(results);
+        callback(err, true);
+      }
+    })
+  },
+
 
 }

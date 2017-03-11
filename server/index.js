@@ -38,6 +38,16 @@ app.post('/login', function(req, res) {
   console.log('username:', username);
   console.log('password:', password);
 
+  //CHECK DB FOR USERNAME
+  db.checkUsername(username, function(err, valid){
+    if(err){
+      console.log(err);
+    } else if (valid) {
+      //ADD USERNAME AND PASSWORD TO DB
+      console.log('ready to add');
+    }
+  })
+
   res.sendStatus(201);
   res.end();
 })
