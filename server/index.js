@@ -2,7 +2,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var items = require('../database-mysql');
 var cors = require('cors');
-// var soundClound = require('soundcloud');
+var soundCloud = require('./soundcloudUtils.js');
+var db = require('./dbUtils.js');
 // var items = require('../database-mongo');
 
 var app = express();
@@ -25,9 +26,8 @@ app.get('/songs', function (req, res) {
 });
 
 app.post('/songs/users', function (req, res) {
-  console.log('inside post');
-  // console.log(Object.keys(req));
-  console.log(req.body);
+  userQuery = req.body.term;
+  console.log('userQuery:', userQuery);
   res.sendStatus(201);
   res.end();
 })
