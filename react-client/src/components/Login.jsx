@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import SignUp from './SignUp.jsx';
 
 class Login extends React.Component {
   constructor(props){
@@ -13,6 +14,7 @@ class Login extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChangeUsername = this.handleChangeUsername.bind(this);
     this.handleChangePassword = this.handleChangePassword.bind(this);
+    this.handleSignUpChange = this.handleSignUpChange.bind(this);
     console.log('inside login', this);
   }
 
@@ -36,9 +38,15 @@ class Login extends React.Component {
     this.setState({ password: event.target.value });
   }
 
+  handleSignUpChange(event) {
+    console.log(event.target);
+    this.setState({ userWantsSignUp: !this.state.userWantsSignUp });
+
+  }
+
 
   render () {
-    if(!this.userWantsSignUp){
+    if(!this.state.userWantsSignUp){
       return (
         <div className = 'container'>
           <div className = 'formWrapper'>
@@ -57,10 +65,16 @@ class Login extends React.Component {
             </form>
           </div>
           <div className='signupWrapper'>
-            <h2>Are you looking to sign up?</h2>
+            <button className='signInButton' onClick={this.handleSignUpChange} >Are you looking to sign up?</button>
           </div>
         </div>
       )
+    } else {
+      return(
+        <div>
+          <SignUp />
+        </div>
+        )
     }
   }
 }

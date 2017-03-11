@@ -14,7 +14,8 @@ CREATE TABLE users (
 CREATE TABLE messages (
   id INT NOT NULL AUTO_INCREMENT PRIMARY key,
   user_id INT NULL,
-  message VARCHAR(2000) NOT NULL
+  message VARCHAR(2000) NOT NULL,
+  time TIMESTAMP
 )
 
 /*  Execute this file from the command line by typing:

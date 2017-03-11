@@ -68,3 +68,21 @@ p {
   padding: 2em;
 }
 
+.signInButton {
+  padding: 1em;
+  font-size: 1.3em;
+  font-family: 'Special Elite', cursive;
+
+}
+
+.signInButton:hover {
+  padding: 1em;
+  font-size: 1.3em;
+  background-color: #0e7bda;
+  color: aliceblue;
+  transition: 0.2s ease;
+  border: none;
+}
+
+
+
