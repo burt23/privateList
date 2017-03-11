@@ -104,7 +104,7 @@ class App extends React.Component {
     } else {
       return (
       <div>
-        <Login />
+        <Login login={this.login}/>
       </div>
       )
     }

@@ -11,16 +11,17 @@ class Login extends React.Component {
       password: ''
     };
 
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChangeUsername = this.handleChangeUsername.bind(this);
     this.handleChangePassword = this.handleChangePassword.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     console.log('inside login', this);
   }
 
   handleSubmit(event) {
     console.log('this inside handle submit', this);
-    this.props.login(username, password)
-    this.preventDefault();
+    this.props.login(this.state.username, this.state.password)
+    event.preventDefault();
+    event.stopPropagation();
   }
 
   handleChangeUsername(event) {

@@ -32,6 +32,16 @@ app.get('/users', function (req, res) {
   });
 });
 
+app.post('/login', function(req, res) {
+  var username = req.body.username;
+  var password = req.body.password;
+  console.log('username:', username);
+  console.log('password:', password);
+
+  res.sendStatus(201);
+  res.end();
+})
+
 app.post('/items/users', function (req, res) {
   userQuery = req.body.term;
   console.log('userQuery:', userQuery);
