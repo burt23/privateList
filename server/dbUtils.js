@@ -20,12 +20,12 @@ module.exports = {
   });
 },
 
-  insert : function(user, callback) {
-    connection.query('INSERT INTO USERS (NAME) VALUES (?)', [user.name], function(err, results, fields) {
+  insert : function(message, callback) {
+    connection.query('INSERT INTO messages (message) VALUES (?)', [message], function(err, results, fields) {
       if(err) {
         callback(err, null);
       } else {
-        callback(err, null);
+        callback(err, true);
       }
     })
   }

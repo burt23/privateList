@@ -1,10 +1,10 @@
 import React from 'react';
 
 const ListItem = (props) => (
-  <div className='song' >
+  <div className='item' >
 
-    <h4>{ props.song.name }</h4>
-    <p>{ props.song.description }</p>
+    <h4>{ props.item.name }</h4>
+    <p>{ props.item.description }</p>
   </div>
 )
 

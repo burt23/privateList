@@ -8,45 +8,49 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      songs: [
-        {name: 'marvin gaye',
-          description: 'sexual healing'},
+      items: [
+        {name: 'wiki leaks',
+          description: 'send leaked docs to j assange'},
 
-        {name: 'will withers',
-         description: 'grandmas hands'},
+        {name: 'cia letters',
+         description: 'destroy evidence of breach'},
 
-        {name: 'ottis redding',
-          description: 'a change is gonna come'},
+        {name: 'burner phone',
+          description: 'buy craigslist phone for secret activities'},
 
-        {name: 'curtis mayfield',
-         description: 'pusherman'}
+        {name: '911 folsom',
+         description: 'ask for cindy, passphrase: today is an awefully nice day to ride a bike, dont you agree?'}
       ],
     };
     this.search = this.search.bind(this);
+    this.get = this.get.bind(this);
       console.log('inside index', this);
 
   }
 
   componentDidMount() {
     //invoke get()
+    this.get();
   }
   get() {
     $.ajax({
-      url: '/items',
+      url: 'http://localhost:3000/',
       success: (data) => {
-        this.setState({
-          items: data
-        })
+        // this.setState({
+        //   items: data
+        // })
+        console.log('successful get data', data);
       },
       error: (err) => {
         console.log('err', err);
       }
     });
   }
+
   search (term) {
     console.log('term from search', term);
     $.ajax({
-      url: 'http://localhost:3000/songs/users',
+      url: 'http://localhost:3000/items/users',
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({term: term}),
@@ -61,9 +65,9 @@ class App extends React.Component {
 
   render () {
     return (<div>
-      <h1 id='mainTitle'>SoundShuffle</h1>
+      <h1 id='mainTitle'>Private List</h1>
       <Search search = {this.search} handleChange = {this.props.handleChange} handleSubmit = {this.props.handleSubmit}/>
-      <List songs={this.state.songs}/>
+      <List items={this.state.items}/>
     </div>)
   }
 }

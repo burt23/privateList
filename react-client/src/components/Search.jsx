@@ -25,10 +25,10 @@ class Search extends React.Component {
   render() {
     return(
     <div id='searchBar'>
-      <h3>search tunes</h3>
+      <h3>save new list item</h3>
       <form id='searchForm' onSubmit={this.handleSubmit}>
         <label>
-          <input id='searchBox' type='text' placeholder='search away kids' value={this.state.value} onChange={this.handleChange}/>
+          <input id='searchBox' type='text' placeholder='type away kids' value={this.state.value} onChange={this.handleChange}/>
         </label>
         <input type='submit' value='Submit' id='submitButton'/>
       </form>

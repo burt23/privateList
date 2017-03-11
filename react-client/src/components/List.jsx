@@ -3,9 +3,9 @@ import ListItem from './ListItem.jsx';
 
 const List = (props) => (
   <div>
-    <h4> TOP SONGS </h4>
-    <p>There are <span id='songTotal'> { props.songs.length }</span> songs.</p>
-    { props.songs.map(song => <ListItem song={song}/>)}
+    <h4> TOP items </h4>
+    <p>There are <span id='songTotal'> { props.items.length }</span> items.</p>
+    { props.items.map(item => <ListItem item={item}/>)}
   </div>
 )
 

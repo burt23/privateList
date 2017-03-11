@@ -1,15 +1,19 @@
-DROP DATABASE IF EXISTS test;
+DROP DATABASE IF EXISTS privateList;
 
-CREATE DATABASE test;
+CREATE DATABASE privateList;
 
-USE test;
+USE privateList;
 
-CREATE TABLE items (
-  id int NOT NULL AUTO_INCREMENT,
-  quantity integer NOT NULL,
-  description varchar(50) NOT NULL,
-  PRIMARY KEY (ID)
+CREATE TABLE users (
+  id SMALLINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  user VARCHAR (50) NOT NULL
 );
+
+CREATE TABLE messages (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY key,
+  user_id INT NULL,
+  message VARCHAR(2000) NOT NULL
+)
 
 /*  Execute this file from the command line by typing:
  *    mysql -u root < server/schema.sql
