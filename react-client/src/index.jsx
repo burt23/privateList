@@ -28,7 +28,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    //invoke get
+    //invoke get()
   }
   get() {
     $.ajax({
@@ -46,8 +46,10 @@ class App extends React.Component {
   search (term) {
     console.log('term from search', term);
     $.ajax({
-      url: 'http://127.0.0.1:3000/songs/users',
+      url: 'http://localhost:3000/songs/users',
       type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify({term: term}),
       success: function(error, data) {
         console.log('successful post');
       },
