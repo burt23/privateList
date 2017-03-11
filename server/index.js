@@ -20,7 +20,9 @@ app.get('/', function(req, res) {
 });
 
 app.get('/users', function (req, res) {
-  items.selectAll(function(err, data) {
+  console.log('cookies:', req.cookies);
+
+  db.selectAll(function(err, data) {
     if(err) {
       res.sendStatus(500);
     } else {

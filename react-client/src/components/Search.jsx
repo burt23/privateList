@@ -30,7 +30,7 @@ class Search extends React.Component {
         <label>
           <input id='searchBox' type='text' placeholder='type away kids' value={this.state.value} onChange={this.handleChange}/>
         </label>
-        <input type='submit' value='Submit' id='submitButton'/>
+        <input type='submit' value='Submit' className='submitButton'/>
       </form>
     </div>
     )

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import List from './components/List.jsx';
 import Search from './components/Search.jsx';
+import Login from './components/Login.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -21,6 +22,8 @@ class App extends React.Component {
         {name: '911 folsom',
          description: 'ask for cindy, passphrase: today is an awefully nice day to ride a bike, dont you agree?'}
       ],
+      isLoggedIn: false,
+
     };
     this.search = this.search.bind(this);
     this.get = this.get.bind(this);
@@ -34,11 +37,11 @@ class App extends React.Component {
   }
   get() {
     $.ajax({
-      url: 'http://localhost:3000/',
+      url: 'http://localhost:3000/users',
       success: (data) => {
-        // this.setState({
-        //   items: data
-        // })
+        this.setState({
+          items: data
+        });
         console.log('successful get data', data);
       },
       error: (err) => {
@@ -47,7 +50,32 @@ class App extends React.Component {
     });
   }
 
+  login( username, password ) {
+    var context = this;
+    console.log('username:', username);
+    console.log('password:', password);
+    $.ajax({
+      url: 'http://localhost:3000/login',
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify({
+        username: username,
+        password: password
+      }),
+      success: function(error, data) {
+        console.log('successful post');
+        context.setState({
+          items: data
+        });
+      },
+      error: function(error) {
+        console.log('error', error);
+      }
+    })
+  }
+
   search (term) {
+    var context = this;
     console.log('term from search', term);
     $.ajax({
       url: 'http://localhost:3000/items/users',
@@ -56,6 +84,9 @@ class App extends React.Component {
       data: JSON.stringify({term: term}),
       success: function(error, data) {
         console.log('successful post');
+        context.setState({
+          items: data
+        });
       },
       error: function(error) {
         console.log('error', error);
@@ -64,11 +95,19 @@ class App extends React.Component {
   }
 
   render () {
+    if(this.props.isLoggedIn){
     return (<div>
       <h1 id='mainTitle'>Private List</h1>
       <Search search = {this.search} handleChange = {this.props.handleChange} handleSubmit = {this.props.handleSubmit}/>
       <List items={this.state.items}/>
     </div>)
+    } else {
+      return (
+      <div>
+        <Login />
+      </div>
+      )
+    }
   }
 }
 

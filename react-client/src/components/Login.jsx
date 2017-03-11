@@ -1,0 +1,64 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+
+class Login extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      'isLoggedIn': false,
+      username: '',
+      password: ''
+    };
+
+    this.handleChangeUsername = this.handleChangeUsername.bind(this);
+    this.handleChangePassword = this.handleChangePassword.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    console.log('inside login', this);
+  }
+
+  handleSubmit(event) {
+    console.log('this inside handle submit', this);
+    this.props.login(username, password)
+    this.preventDefault();
+  }
+
+  handleChangeUsername(event) {
+    console.log('changehandlers', this);
+    console.log('changehandlers', event.target.value);
+    this.setState({ username: event.target.value });
+  }
+
+  handleChangePassword(event) {
+    console.log('changehandlers', this);
+    console.log('changehandlers', event.target.value);
+    this.setState({ password: event.target.value });
+  }
+
+
+
+  render () {
+    return (
+      <div>
+        <h1 id='mainTitle'>Private List</h1>
+        <h3> Login </h3>
+
+        <form onSubmit={this.handleSubmit}>
+          <div className='loginBox'>
+            <input type='text' id='username' placeholder='username' value={this.state.username} onChange={this.handleChangeUsername} />
+          </div>
+          <div className='loginBox'>
+            <input id='password' placeholder='password' value={this.state.password} onChange={this.handleChangePassword}/>
+          </div>
+          <div className='submitButton'>
+            <input type='submit' value='Submit' />
+          </div>
+
+        </form>
+      </div>
+    )
+  }
+}
+
+
+export default Login;

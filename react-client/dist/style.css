@@ -44,7 +44,7 @@ p {
   padding-bottom: 1em;
 }
 
-#submitButton {
+.submitButton {
   display: block;
   margin: 0 auto;
 }

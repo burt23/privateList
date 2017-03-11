@@ -11,7 +11,7 @@ var connection = mysql.createConnection({
 module.exports = {
 
   selectAll : function(callback) {
-  connection.query('SELECT * FROM items', function(err, results, fields) {
+  connection.query('SELECT * FROM messages', function(err, results, fields) {
     if(err) {
       callback(err, null);
     } else {
