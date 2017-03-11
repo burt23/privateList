@@ -36,6 +36,25 @@ app.get('/users', function (req, res) {
 app.post('/login', hashPass, function(req, res) {
   var username = req.body.username;
   var password = req.body.password;
+  console.log('SIGNUPusername:', username);
+  console.log('SIGNUPpassword:', password);
+
+  db.validateUser(username, password, function(err, success, user_id){
+    if(err){
+      console.log('unable to validate');
+      res.status(401).send('try again buddy');
+    } else if (success) {
+      console.log('made it this far, correctly entered user/pass', user_id);
+      res.status(200).send({ user_id: user_id });
+    }
+  });
+  // res.sendStatus(201);
+  // res.end(JSON.stringify(true));
+});
+
+app.post('/signup', hashPass, function(req, res) {
+  var username = req.body.username;
+  var password = req.body.password;
   console.log('username:', username);
   console.log('password:', password);
 
@@ -48,19 +67,23 @@ app.post('/login', hashPass, function(req, res) {
     } else if (valid) {
       //ADD USERNAME AND PASSWORD TO DB
       console.log('ready to add');
-      db.addUser(username, password, function(err, success){
+      db.addUser(username, password, function(err, successful){
         if(err){
           console.log(err);
-        } else if (success) {
-          console.log('user added successfully');
-          res.sendStatus(201);
-          res.end(JSON.stringify(true));
+        } else if (successful) {
+          console.log('user added successfully1');
+          res.status(201);
+          console.log('user added successfully2');
+          res.send('testerbuddyDUDEFUCK!!!!');
+          console.log('user added successfully3');
         }
       })
     }
   })
+  console.log('do we get here? after user add?')
   // res.sendStatus(404);
   // res.end();
+
 })
 
 app.post('/items/users', function (req, res) {
@@ -71,7 +94,7 @@ app.post('/items/users', function (req, res) {
       console.log(err)
     }
     if(success){
-      console.log('successful insertion', success)
+      console.log('successful insertion', success);
     }
   })
   res.sendStatus(201);
