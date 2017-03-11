@@ -44,10 +44,10 @@ class App extends React.Component {
     $.ajax({
       url: 'http://localhost:3000/users',
       success: (data) => {
+        console.log('successful get dataDATA', data);
         this.setState({
           items: data
         });
-        console.log('successful get data', data);
       },
       error: (err) => {
         console.log('err', err);
@@ -60,14 +60,14 @@ class App extends React.Component {
     console.log('username:', username);
     console.log('password:', password);
     $.ajax({
-      url: 'http://localhost:3000/signup',
+      url: 'http://localhost:3000/login',
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({
         username: username,
         password: password
       }),
-      success: function(error, data) {
+      success: function(data) {
         // var el = JSON.parse(data);
         // console.log('el:', el);
         console.log('successful post on loginDATA FROM SERVER',typeof data);
@@ -92,8 +92,8 @@ class App extends React.Component {
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({term: term}),
-      success: function(error, data) {
-        console.log('successful post');
+      success: function(data) {
+        console.log('successful postITEMSSEARCH TEXT', data);
         context.setState({
           items: data
         });

@@ -45,7 +45,7 @@ app.post('/login', hashPass, function(req, res) {
       res.status(401).send('try again buddy');
     } else if (success) {
       console.log('made it this far, correctly entered user/pass', user_id);
-      res.status(200).send({ user_id: user_id });
+      res.status(200).send(user_id);
     }
   });
   // res.sendStatus(201);
@@ -67,15 +67,12 @@ app.post('/signup', hashPass, function(req, res) {
     } else if (valid) {
       //ADD USERNAME AND PASSWORD TO DB
       console.log('ready to add');
-      db.addUser(username, password, function(err, successful){
+      db.addUser(username, password, function(err, success){
         if(err){
           console.log(err);
-        } else if (successful) {
-          console.log('user added successfully1');
+        } else if (success) {
           res.status(201);
-          console.log('user added successfully2');
-          res.send('testerbuddyDUDEFUCK!!!!');
-          console.log('user added successfully3');
+          res.send({ user_added: success });
         }
       })
     }
@@ -95,10 +92,16 @@ app.post('/items/users', function (req, res) {
     }
     if(success){
       console.log('successful insertion', success);
+      db.selectAll(function(error, messages){
+        if(error){
+          console.log(error);
+        }
+        console.log('bout to send messages', messages);
+        res.send(messages);
+      })
+
     }
   })
-  res.sendStatus(201);
-  res.end();
 });
 
 app.listen(3000, function() {

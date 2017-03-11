@@ -6,7 +6,8 @@ class Login extends React.Component {
     super(props);
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      userWantsSignUp: false
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -37,23 +38,30 @@ class Login extends React.Component {
 
 
   render () {
-    return (
-      <div>
-        <h1 id='mainTitle'>Private List</h1>
-        <h3> Login </h3>
-        <form onSubmit={this.handleSubmit}>
-          <div className='loginBox'>
-            <input type='text' id='username' placeholder='username' value={this.state.username} onChange={this.handleChangeUsername} />
+    if(!this.userWantsSignUp){
+      return (
+        <div className = 'container'>
+          <div className = 'formWrapper'>
+            <h1 id='mainTitle'>Private List</h1>
+            <h3> Login </h3>
+            <form onSubmit={this.handleSubmit}>
+              <div className='loginBox'>
+                <input type='text' id='username' placeholder='username' value={this.state.username} onChange={this.handleChangeUsername} />
+              </div>
+              <div className='loginBox'>
+                <input id='password' placeholder='password' value={this.state.password} onChange={this.handleChangePassword}/>
+              </div>
+              <div className='submitButton'>
+                <input type='submit' value='Submit' />
+              </div>
+            </form>
           </div>
-          <div className='loginBox'>
-            <input id='password' placeholder='password' value={this.state.password} onChange={this.handleChangePassword}/>
+          <div className='signupWrapper'>
+            <h2>Are you looking to sign up?</h2>
           </div>
-          <div className='submitButton'>
-            <input type='submit' value='Submit' />
-          </div>
-        </form>
-      </div>
-    )
+        </div>
+      )
+    }
   }
 }
 
