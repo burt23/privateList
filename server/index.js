@@ -45,6 +45,13 @@ app.post('/login', function(req, res) {
     } else if (valid) {
       //ADD USERNAME AND PASSWORD TO DB
       console.log('ready to add');
+      db.addUser(username, password, function(err, success){
+        if(err){
+          console.log(err);
+        } else if (success) {
+          console.log('user added successfully');
+        }
+      })
     }
   })
 

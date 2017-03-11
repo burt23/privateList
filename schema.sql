@@ -6,7 +6,9 @@ USE privateList;
 
 CREATE TABLE users (
   id SMALLINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  user VARCHAR (50) NOT NULL
+  user VARCHAR (50) NOT NULL,
+  password VARCHAR (255) NOT NULL,
+  salt VARCHAR (255) NULL
 );
 
 CREATE TABLE messages (

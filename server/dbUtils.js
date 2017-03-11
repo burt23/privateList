@@ -41,5 +41,14 @@ module.exports = {
     })
   },
 
-
+  addUser : function(username, password, callback) {
+    connection.query('INSERT INTO users (user, password) values (?, ?)', [username, password], function(err, results, fields) {
+      if(err){
+        console.log(err)
+        callback(err, null)
+      } else {
+        callback(err, true);
+      }
+    })
+  }
 }
