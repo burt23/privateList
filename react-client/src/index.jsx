@@ -97,7 +97,8 @@ class App extends React.Component {
   }
 
   render () {
-    if(this.props.isLoggedIn){
+    console.log('logged in ', this.state.isLoggedIn);
+    if(this.state.isLoggedIn){
     return (<div>
       <h1 id='mainTitle'>Private List</h1>
       <Search search = {this.search} handleChange = {this.props.handleChange} handleSubmit = {this.props.handleSubmit}/>
@@ -106,7 +107,7 @@ class App extends React.Component {
     } else {
       return (
       <div>
-        <Login login={this.login} loggedIn={this.isLoggedIn}/>
+        <Login login={this.login} isLoggedIn={this.state.isLoggedIn}/>
       </div>
       )
     }

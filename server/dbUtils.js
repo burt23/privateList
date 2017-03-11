@@ -35,11 +35,13 @@ module.exports = {
       if(err) {
         callback(err, null);
       } else if (results.length === 0){
-        console.log('inside checkUser', results);
+        console.log('inside checkUser NEW USER ADDED', results);
         callback(err, true);
+      } else {
+        console.log('USER ALREADY EXISTS, try again ? ?????');
+        console.log('check user ? ?????', results);
+        callback(err, false);
       }
-      console.log('check user ? ?????');
-      console.log('check user ? ?????', results);
     })
   },
 

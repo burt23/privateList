@@ -59,7 +59,6 @@ app.post('/login', hashPass, function(req, res) {
       })
     }
   })
-
   // res.sendStatus(404);
   // res.end();
 })
