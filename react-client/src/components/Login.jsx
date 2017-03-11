@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-
 class Login extends React.Component {
   constructor(props){
     super(props);
@@ -19,7 +18,7 @@ class Login extends React.Component {
 
   handleSubmit(event) {
     console.log('this inside handle submit', this);
-    this.props.login(this.state.username, this.state.password)
+    this.props.login(this.state.username, this.state.password);
     event.preventDefault();
     event.stopPropagation();
   }
@@ -43,7 +42,6 @@ class Login extends React.Component {
       <div>
         <h1 id='mainTitle'>Private List</h1>
         <h3> Login </h3>
-
         <form onSubmit={this.handleSubmit}>
           <div className='loginBox'>
             <input type='text' id='username' placeholder='username' value={this.state.username} onChange={this.handleChangeUsername} />
@@ -54,7 +52,6 @@ class Login extends React.Component {
           <div className='submitButton'>
             <input type='submit' value='Submit' />
           </div>
-
         </form>
       </div>
     )

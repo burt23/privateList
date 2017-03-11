@@ -51,13 +51,15 @@ app.post('/login', hashPass, function(req, res) {
           console.log(err);
         } else if (success) {
           console.log('user added successfully');
+          res.sendStatus(201);
+          res.end(JSON.stringify(true));
         }
       })
     }
   })
 
-  res.sendStatus(201);
-  res.end();
+  // res.sendStatus(404);
+  // res.end();
 })
 
 app.post('/items/users', function (req, res) {

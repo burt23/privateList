@@ -26,6 +26,7 @@ class App extends React.Component {
 
     };
     this.search = this.search.bind(this);
+    this.login = this.login.bind(this);
     this.get = this.get.bind(this);
       console.log('inside index', this);
 
@@ -64,6 +65,7 @@ class App extends React.Component {
       }),
       success: function(error, data) {
         console.log('successful post on login');
+        console.log('successful post on CONTEXTSUCCESS', context);
         context.setState({
           isLoggedIn: true
         });
@@ -104,7 +106,7 @@ class App extends React.Component {
     } else {
       return (
       <div>
-        <Login login={this.login}/>
+        <Login login={this.login} loggedIn={this.isLoggedIn}/>
       </div>
       )
     }
