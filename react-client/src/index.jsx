@@ -34,11 +34,11 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    //invoke get()
-    // if(user_id){
-    //   this.get(user_id);
+    // invoke get()
+    // if(this.state.user_id){
+    //   this.get();
     // }
-    this.get();
+    // this.get();
   }
   get() {
     $.ajax({
@@ -71,11 +71,13 @@ class App extends React.Component {
         // var el = JSON.parse(data);
         // console.log('el:', el);
         console.log('successful post on loginDATA FROM SERVER',typeof data);
-        console.log('successful post on loginDATA FROM SERVER', data);
+        console.log('successful post on loginDATA FROM SERVER', data.user_id);
         console.log('successful post on CONTEXTSUCCESS', context);
         context.setState({
-          isLoggedIn: true
+          isLoggedIn: true,
+          user_id: data.user_id
         });
+        context.get();
       },
       error: function(error, data) {
         console.log('error after loggggin in dduuuude', error);
@@ -86,12 +88,17 @@ class App extends React.Component {
 
   search (term) {
     var context = this;
+
     console.log('term from search', term);
+    console.log('this.user_id from search', this.state.user_id);
     $.ajax({
       url: 'http://localhost:3000/items/users',
       type: 'POST',
       contentType: 'application/json',
-      data: JSON.stringify({term: term}),
+      data: JSON.stringify({
+        term: term,
+        id: this.state.user_id
+      }),
       success: function(data) {
         console.log('successful postITEMSSEARCH TEXT', data);
         context.setState({

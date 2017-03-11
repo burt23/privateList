@@ -45,7 +45,10 @@ app.post('/login', hashPass, function(req, res) {
       res.status(401).send('try again buddy');
     } else if (success) {
       console.log('made it this far, correctly entered user/pass', user_id);
-      res.status(200).send(user_id);
+      res.status(200).send({user_id: user_id});
+    } else if (!success) {
+      console.log('dont think that was the right combo', user_id);
+      res.status(401).send(success);
     }
   });
   // res.sendStatus(201);
@@ -85,8 +88,10 @@ app.post('/signup', hashPass, function(req, res) {
 
 app.post('/items/users', function (req, res) {
   userQuery = req.body.term;
+  userId = req.body.id;
   console.log('userQuery:', userQuery);
-  db.insert(userQuery, function(err, success) {
+  console.log('userIdREQ>BODY:', userId);
+  db.insert(userQuery, userId, function(err, success) {
     if(err){
       console.log(err)
     }

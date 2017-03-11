@@ -20,11 +20,13 @@ module.exports = {
   });
 },
 
-  insert : function(message, callback) {
-    connection.query('INSERT INTO messages (message) VALUES (?)', [message], function(err, results, fields) {
+  insert : function(message, userId, callback) {
+    connection.query('INSERT INTO messages (user_id, message) VALUES (?,?)', [userId, message], function(err, results, fields) {
       if(err) {
+        console.log('resultsERRRRR', results);
         callback(err, null);
       } else {
+        console.log('results AFTER INSERT', results);
         callback(null, true);
       }
     })
@@ -61,9 +63,13 @@ module.exports = {
       if(err){
         console.log('error in validate user', err);
         callback(err, null);
+      } else if (results.length === 0) {
+        console.log('user id from results length=0', results);
+        callback(null, false, null);
+      } else {
+        console.log('results from successful entry: ', results[0].id);
+        callback(null, true, results[0].id);
       }
-        console.log('user id from results', results);
-        callback(null, results);
     })
   }
 }
