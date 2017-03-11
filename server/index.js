@@ -6,6 +6,7 @@ var sc = require('./soundcloudUtils.js');
 var db = require('./dbUtils.js');
 var session = require('express-session');
 var cookie = require('cookie-parser');
+var hashPass = require('./middleware/hashPass.js');
 
 var app = express();
 
@@ -32,7 +33,7 @@ app.get('/users', function (req, res) {
   });
 });
 
-app.post('/login', function(req, res) {
+app.post('/login', hashPass, function(req, res) {
   var username = req.body.username;
   var password = req.body.password;
   console.log('username:', username);
