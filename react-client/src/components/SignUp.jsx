@@ -1,4 +1,5 @@
 import React from 'react';
+import Login from './Login.jsx';
 
 class SignUp extends React.Component {
   constructor(props){
@@ -7,14 +8,18 @@ class SignUp extends React.Component {
       userWantsLogin: false
     }
   //BIND FUNCTIONS
+    this.handleSignUpChange = this.handleSignUpChange.bind(this);
   }
-  this.handleSignUpChange(event){
-    this.setState({ userWantsLogin: true });
+  handleSignUpChange(event){
+    console.log('inside sign up');
+    this.setState({ userWantsLogin: !this.state.userWantsLogin });
   }
   //DECLARE FUNCTIONS
     //HANDLE CHANGE, HANDLE SUBMIT
 
   render(){
+    if(!this.state.userWantsLogin){
+
     return(
       <div className = 'container'>
         <div className = 'formWrapper'>
@@ -36,11 +41,17 @@ class SignUp extends React.Component {
             </form>
           </div>
           <div className='signupWrapper'>
-            <button className='signInButton'>Already a user?</button>
+            <button className='signInButton' onClick={this.handleSignUpChange}>Already a user?</button>
           </div>
       </div>
       )
-
+    } else {
+      return (
+        <div>
+          <Login />
+        </div>
+        )
+    }
   }
 }
 
