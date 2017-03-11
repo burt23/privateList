@@ -43,6 +43,11 @@ class App extends React.Component {
   get() {
     $.ajax({
       url: 'http://localhost:3000/users',
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify({
+        id: this.state.user_id
+      }),
       success: (data) => {
         console.log('successful get dataDATA', data);
         this.setState({

@@ -20,15 +20,18 @@ app.get('/', function(req, res) {
   console.log('cookies:', req.cookies);
 });
 
-app.get('/users', function (req, res) {
+app.post('/users', function (req, res) {
   console.log('cookies:', req.cookies);
+  var userId = req.body.id;
 
-  db.selectAll(function(err, data) {
+  db.selectAll(userId, function(err, data) {
     if(err) {
       res.sendStatus(500);
     } else {
       console.log('inside get');
-      res.json(data);
+      console.log('data', data);
+      // res.sendStatus(200);
+      res.send(data);
     }
   });
 });
@@ -104,7 +107,6 @@ app.post('/items/users', function (req, res) {
         console.log('bout to send messages', messages);
         res.send(messages);
       })
-
     }
   })
 });

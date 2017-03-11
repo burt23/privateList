@@ -10,11 +10,12 @@ var connection = mysql.createConnection({
 
 module.exports = {
 
-  selectAll : function(callback) {
-  connection.query('SELECT * FROM messages', function(err, results, fields) {
+  selectAll : function(userId, callback) {
+  connection.query('SELECT * FROM messages where user_id = ?', [userId], function(err, results, fields) {
     if(err) {
       callback(err, null);
     } else {
+      console.log('selectALLLLLLLLLLLLLLLLL results', results);
       callback(null, results);
     }
   });
