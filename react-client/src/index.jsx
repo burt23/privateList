@@ -31,6 +31,7 @@ class App extends React.Component {
     this.signup = this.signup.bind(this);
     this.get = this.get.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+    this.delete = this.delete.bind(this);
     console.log('inside index', this);
   }
 
@@ -41,6 +42,24 @@ class App extends React.Component {
   handleLogout(event){
     this.setState({
       isLoggedIn: false
+    })
+  }
+
+  delete( message_id ) {
+    var context = this;
+    $.ajax({
+      url: 'http://localhost:3000/items/remove',
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify({
+        message_id: message_id
+      }),
+      success: (function(data) {
+        context.get();
+      }),
+      error: (function(err) {
+        console.log('error in deletion', err);
+      })
     })
   }
 
@@ -152,7 +171,7 @@ class App extends React.Component {
           <button id='logoutButton' onClick={this.handleLogout}>logout</button>
         </span>
         <Search search = {this.search} handleChange = {this.props.handleChange} handleSubmit = {this.props.handleSubmit}/>
-        <List items={this.state.items}/>
+        <List delete={this.delete} items={this.state.items}/>
       </div>
     </div>)
     } else {

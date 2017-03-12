@@ -73,5 +73,16 @@ module.exports = {
         callback(null, true, results[0].id);
       }
     })
+  },
+
+  deleteMessage: function(message_id, callback) {
+    connection.query('DELETE FROM messages WHERE id = ?', [message_id], function(err, results, fields) {
+      if(err) {
+        console.log(err);
+        callback(err, false, null);
+      } else {
+        callback(err, true, results);
+      }
+    })
   }
 }

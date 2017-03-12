@@ -113,6 +113,19 @@ app.post('/items/users', function (req, res) {
   })
 });
 
+app.post('/items/remove', function (req, res) {
+  message_id = req.body.message_id;
+  console.log('message id inside post', message_id);
+  db.deleteMessage(message_id, function(err, success, results){
+    if(err){
+      console.log(err)
+    }
+    if(success){
+      res.send(success);
+    }
+  })
+});
+
 app.listen(3000, function() {
   console.log('listening on port 3000!');
 });
