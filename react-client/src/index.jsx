@@ -60,6 +60,29 @@ class App extends React.Component {
     });
   }
 
+  signup( username, password ) {
+    var context = this;
+    $.ajax({
+      url: 'http://localhost:3000/signup',
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify({
+        username: username,
+        password: password
+      }),
+      success: function(data) {
+        console.log('addedUser', data);
+        this.setState({
+          isLoggedIn: true,
+          user_id: data
+        })
+      },
+      error: function(error){
+        console.log(error);
+      }
+    })
+  }
+
   login( username, password ) {
     var context = this;
     console.log('username:', username);
@@ -75,9 +98,6 @@ class App extends React.Component {
       success: function(data) {
         // var el = JSON.parse(data);
         // console.log('el:', el);
-        console.log('successful post on loginDATA FROM SERVER',typeof data);
-        console.log('successful post on loginDATA FROM SERVER', data.user_id);
-        console.log('successful post on CONTEXTSUCCESS', context);
         context.setState({
           isLoggedIn: true,
           user_id: data.user_id
@@ -85,7 +105,6 @@ class App extends React.Component {
         context.get();
       },
       error: function(error, data) {
-        console.log('error after loggggin in dduuuude', error);
         console.log('error after loggggin in dduuuude', data);
       }
     })
@@ -93,9 +112,6 @@ class App extends React.Component {
 
   search (term) {
     var context = this;
-
-    console.log('term from search', term);
-    console.log('this.user_id from search', this.state.user_id);
     $.ajax({
       url: 'http://localhost:3000/items/users',
       type: 'POST',
@@ -117,7 +133,6 @@ class App extends React.Component {
   }
 
   render () {
-    console.log('logged in ', this.state.isLoggedIn);
     if(this.state.isLoggedIn){
     return (<div>
       <h1 id='mainTitle'>Private List</h1>
