@@ -70,9 +70,11 @@ class App extends React.Component {
       }),
       success: function(data) {
         console.log('addedUser', data);
-        this.setState({
+        console.log('addedUser', data.user_added);
+
+        context.setState({
           isLoggedIn: true,
-          user_id: data
+          user_id: data.user_added
         })
       },
       error: function(error){

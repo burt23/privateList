@@ -52,9 +52,10 @@ module.exports = {
     connection.query('INSERT INTO users (user, password) values (?, ?)', [username, password], function(err, results, fields) {
       if(err){
         console.log(err)
-        callback(err, null)
+        callback(err, null, null)
       } else {
-        callback(null, true);
+        console.log('insertID', results.insertId);
+        callback(null, true, results.insertId);
       }
     })
   },

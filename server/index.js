@@ -73,12 +73,14 @@ app.post('/signup', hashPass, function(req, res) {
     } else if (valid) {
       //ADD USERNAME AND PASSWORD TO DB
       console.log('ready to add');
-      db.addUser(username, password, function(err, success){
+      db.addUser(username, password, function(err, success, id){
         if(err){
           console.log(err);
         } else if (success) {
+          //GET USER_ID
+
           res.status(201);
-          res.send({ user_added: success });
+          res.send({ user_added: id });
         }
       })
     }
