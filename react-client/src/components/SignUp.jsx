@@ -19,6 +19,12 @@ class SignUp extends React.Component {
   }
   handleSubmit(event){
     console.log('handlin submit bbabby');
+    if(this.state.username.length > 0 && this.state.password.length > 0 && this.state.password === this.state.verifier){
+      console.log('goodpassword duude');
+      console.log('username', this.state.username);
+      console.log('password', this.state.password);
+      this.props.signup(this.state.username, this.state.password);
+    }
     event.preventDefault();
   }
 

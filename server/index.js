@@ -100,7 +100,7 @@ app.post('/items/users', function (req, res) {
     }
     if(success){
       console.log('successful insertion', success);
-      db.selectAll(function(error, messages){
+      db.selectAll(userId, function(error, messages){
         if(error){
           console.log(error);
         }

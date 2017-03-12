@@ -72,7 +72,7 @@ class Login extends React.Component {
     } else {
       return(
         <div>
-          <SignUp />
+          <SignUp signup={this.props.signup}/>
         </div>
         )
     }

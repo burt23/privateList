@@ -28,17 +28,13 @@ class App extends React.Component {
     };
     this.search = this.search.bind(this);
     this.login = this.login.bind(this);
+    this.signup = this.signup.bind(this);
     this.get = this.get.bind(this);
-      console.log('inside index', this);
-
+    console.log('inside index', this);
   }
 
   componentDidMount() {
-    // invoke get()
-    // if(this.state.user_id){
-    //   this.get();
-    // }
-    // this.get();
+  // this.get();
   }
   get() {
     $.ajax({
@@ -62,6 +58,8 @@ class App extends React.Component {
 
   signup( username, password ) {
     var context = this;
+    console.log('username:', username);
+    console.log('password:', password);
     $.ajax({
       url: 'http://localhost:3000/signup',
       type: 'POST',
@@ -142,7 +140,7 @@ class App extends React.Component {
     } else {
       return (
       <div>
-        <Login login={this.login} isLoggedIn={this.state.isLoggedIn}/>
+        <Login signup={this.signup} login={this.login} isLoggedIn={this.state.isLoggedIn}/>
       </div>
       )
     }
