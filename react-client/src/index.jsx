@@ -30,12 +30,20 @@ class App extends React.Component {
     this.login = this.login.bind(this);
     this.signup = this.signup.bind(this);
     this.get = this.get.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
     console.log('inside index', this);
   }
 
   componentDidMount() {
   // this.get();
   }
+
+  handleLogout(event){
+    this.setState({
+      isLoggedIn: false
+    })
+  }
+
   get() {
     var context = this;
     $.ajax({
@@ -139,6 +147,9 @@ class App extends React.Component {
     if(this.state.isLoggedIn){
     return (<div>
       <h1 id='mainTitle'>Private List</h1>
+      <span class='logout'>
+        <button id='logoutButton' onClick={this.handleLogout}>logout</button>
+      </span>
       <Search search = {this.search} handleChange = {this.props.handleChange} handleSubmit = {this.props.handleSubmit}/>
       <List items={this.state.items}/>
     </div>)
