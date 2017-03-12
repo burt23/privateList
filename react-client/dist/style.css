@@ -25,7 +25,7 @@ h1 {
 h2 {
   font-family: 'Special Elite', cursive;
   font-size: 1.8em;
-  color
+
 }
 
 h3 {
@@ -40,7 +40,7 @@ h4 {
 }
 
 p {
-  font-family: 'Fugaz One', cursive;
+  font-family: 'Special Elite', cursive;
   font-size: 1.1em;
 }
 
@@ -117,6 +117,11 @@ button{
   width: 50%;
   margin: 0 auto;
   color: white;
+}
+
+.timeStamp{
+  font-family: 'Special Elite', cursive;
+
 }
 
 
