@@ -1,12 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Fugaz+One|Monoton|Poiret+One|Special+Elite');
 
+html {
+  background-image: url("https://static1.squarespace.com/static/54b8b59de4b0bb2b01a161f7/54bb464de4b0d1f230d3ebd5/54bb476fe4b00aad29dae6aa/1421559665599/Untitled_HDR23-5-4.jpg?format=2500w") ;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
 body, html, h1, h2, h3, h4, p {
   margin: 0;
   padding: 0;
 }
 
 body {
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
   text-align: center;
 }
@@ -19,11 +25,13 @@ h1 {
 h2 {
   font-family: 'Special Elite', cursive;
   font-size: 1.8em;
+  color
 }
 
 h3 {
   font-family: 'Special Elite', cursive;
   font-size: 1.6em;
+
 }
 
 h4 {
@@ -35,6 +43,7 @@ p {
   font-family: 'Fugaz One', cursive;
   font-size: 1.1em;
 }
+
 
 #mainTitle {
   padding: 1em;
@@ -48,6 +57,12 @@ p {
   display: block;
   margin: 0 auto;
 }
+
+input {
+  padding: 1em;
+  position: relative;
+}
+
 
 #searchBox {
   padding: 0.5em;
@@ -70,7 +85,9 @@ p {
 
 .signInButton {
   padding: 1em;
+  background-color: rgba(85, 49, 150, 0.26);
   font-size: 1.3em;
+  color: white;
   font-family: 'Special Elite', cursive;
 
 }
@@ -78,7 +95,7 @@ p {
 .signInButton:hover {
   padding: 1em;
   font-size: 1.3em;
-  background-color: #0e7bda;
+  background-color: #rgba(200, 158, 114, 0.69);
   color: aliceblue;
   transition: 0.2s ease;
   border: none;
@@ -88,6 +105,20 @@ button#logoutButton {
     position: absolute;
     top: 2%;
     right: 2%;
+}
+
+#app{
+  background-image: url("img1.png")
+}
+
+button{
+  border-radius: 0.3em;
+}
+
+#learnMoreTextWrapper {
+  width: 50%;
+  margin: 0 auto;
+  color: white;
 }
 
 

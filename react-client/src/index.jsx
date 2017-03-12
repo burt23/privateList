@@ -145,13 +145,15 @@ class App extends React.Component {
 
   render () {
     if(this.state.isLoggedIn){
-    return (<div>
-      <h1 id='mainTitle'>Private List</h1>
-      <span class='logout'>
-        <button id='logoutButton' onClick={this.handleLogout}>logout</button>
-      </span>
-      <Search search = {this.search} handleChange = {this.props.handleChange} handleSubmit = {this.props.handleSubmit}/>
-      <List items={this.state.items}/>
+    return (<div className='container'>
+      <div className='centerLogin'>
+        <h1 id='mainTitle'>Private List</h1>
+        <span class='logout'>
+          <button id='logoutButton' onClick={this.handleLogout}>logout</button>
+        </span>
+        <Search search = {this.search} handleChange = {this.props.handleChange} handleSubmit = {this.props.handleSubmit}/>
+        <List items={this.state.items}/>
+      </div>
     </div>)
     } else {
       return (

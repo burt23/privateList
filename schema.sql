@@ -15,8 +15,17 @@ CREATE TABLE messages (
   id INT NOT NULL AUTO_INCREMENT PRIMARY key,
   user_id INT NULL,
   message VARCHAR(2000) NOT NULL,
+  secret VARCHAR(255) NULL,
   time TIMESTAMP
 )
+
+CREATE TABLE lists (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  list_name VARCHAR(255) NOT NULL,
+  user_id INT NOT NULL
+)
+
+
 
 /*  Execute this file from the command line by typing:
  *    mysql -u root < server/schema.sql
