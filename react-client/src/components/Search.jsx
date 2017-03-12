@@ -8,12 +8,12 @@ class Search extends React.Component {
     }
   this.handleChange = this.handleChange.bind(this);
   this.handleSubmit = this.handleSubmit.bind(this);
-  console.log('inside search', this);
   }
 
   handleSubmit(event) {
-    console.log('this', this);
-    this.props.search(this.state.value);
+    if(this.state.value.length > 0){
+      this.props.search(this.state.value);
+    }
     event.preventDefault();
     this.setState({ value: '' });
   }
@@ -25,6 +25,7 @@ class Search extends React.Component {
   render() {
     return(
     <div id='searchBar'>
+
       <h3>save new list item</h3>
       <form id='searchForm' onSubmit={this.handleSubmit}>
         <label>
