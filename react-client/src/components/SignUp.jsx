@@ -8,10 +8,9 @@ class SignUp extends React.Component {
       username: '',
       password: '',
       verifier: '',
-      userWantsLogin: false
     }
   //BIND FUNCTIONS
-    this.handleSignUpChange = this.handleSignUpChange.bind(this);
+    // this.handleSignUpChange = this.handleSignUpChange.bind(this);
     this.handleChangeUsername = this.handleChangeUsername.bind(this);
     this.handleChangePassword = this.handleChangePassword.bind(this);
     this.handleChangeVerifier = this.handleChangeVerifier.bind(this);
@@ -28,10 +27,10 @@ class SignUp extends React.Component {
     event.preventDefault();
   }
 
-  handleSignUpChange(event){
-    console.log('inside sign up');
-    this.setState({ userWantsLogin: !this.state.userWantsLogin });
-  }
+  // handleSignUpChange(event){
+  //   console.log('inside sign up');
+  //   this.setState({ userWantsLogin: !this.state.userWantsLogin });
+  // }
 
   handleChangeUsername(event){
     this.setState({
@@ -77,7 +76,7 @@ class SignUp extends React.Component {
             </form>
           </div>
           <div className='signupWrapper'>
-            <button className='signInButton' onClick={this.handleSignUpChange}>Already a user?</button>
+            <button className='signInButton' onClick={this.props.handleLoginChange}>Already a user?</button>
           </div>
       </div>
       )

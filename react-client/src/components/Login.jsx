@@ -89,13 +89,13 @@ class Login extends React.Component {
     } else if (this.state.userWantsSignUp) {
       return(
         <div>
-          <SignUp userWantsLogin = {this.state.userWantsLogin} signup={this.props.signup} userWantsSignUp={this.state.userWantsSignUp} handleSignUp ={this.props.handleSignUpChange}/>
+          <SignUp signup={this.props.signup} userWantsLogin = {this.state.userWantsLogin}  handleLoginChange ={this.handleLoginChange}/>
         </div>
         )
     } else if (this.state.userWantsLearnMore) {
       return(
         <div>
-          <LearnMore learnmore={this.props.signup} userWantsLogin = {this.state.userWantsLogin} userWantsSignUp = {this.state.userWantsSignUp} handleLoginChange = {this.handleLoginChange} handleSignUpChange = {this.handleSignUpChange} />
+          <LearnMore  userWantsLogin = {this.state.userWantsLogin} userWantsSignUp = {this.state.userWantsSignUp} handleLoginChange = {this.handleLoginChange} handleSignUpChange = {this.handleSignUpChange} />
         </div>
         )
     }
