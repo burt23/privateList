@@ -37,6 +37,7 @@ class App extends React.Component {
   // this.get();
   }
   get() {
+    var context = this;
     $.ajax({
       url: 'http://localhost:3000/users',
       type: 'POST',
@@ -46,7 +47,7 @@ class App extends React.Component {
       }),
       success: (data) => {
         console.log('successful get dataDATA', data);
-        this.setState({
+        context.setState({
           items: data.reverse()
         });
       },
@@ -71,11 +72,13 @@ class App extends React.Component {
       success: function(data) {
         console.log('addedUser', data);
         console.log('addedUser', data.user_added);
-
+        console.log('context', context);
         context.setState({
           isLoggedIn: true,
           user_id: data.user_added
-        })
+        });
+      context.get(context.state.user_id);
+
       },
       error: function(error){
         console.log(error);
@@ -102,7 +105,7 @@ class App extends React.Component {
           isLoggedIn: true,
           user_id: data.user_id
         });
-        context.get();
+        context.get(context.state.user_id);
       },
       error: function(error, data) {
         console.log('error after loggggin in dduuuude', data);
