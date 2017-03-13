@@ -8,6 +8,7 @@ var session = require('express-session');
 var cookie = require('cookie-parser');
 var hashPass = require('./middleware/hashPass.js');
 var hashPassNewUser = require('./middleware/hashPassNewUser.js');
+var mailer = require('./nodemailer.js');
 
 var app = express();
 
@@ -58,6 +59,24 @@ app.post('/login', hashPass, function(req, res) {
     }
   });
 });
+
+//EMAIL TOKEN
+app.post('/email', function(req, res){
+  var email = req.body.email;
+  var token = req.body.token;
+  console.log('useremail', email);
+  console.log('useremaiTOKEN', token);
+
+  mailer.sendEmail(email, token, function(error, results){
+    if(error){
+      console.log(error)
+    }
+    console.log('successful email', results);
+    res.send(results);
+  })
+
+  res.send('one your way');
+})
 
 //NEW USER SIGN UP
 app.post('/signup', hashPassNewUser, function(req, res) {

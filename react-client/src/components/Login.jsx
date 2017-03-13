@@ -55,7 +55,6 @@ class Login extends React.Component {
   }
 
   handleSignUpChange(event) {
-    console.log(event.target);
     this.setState({ userWantsSignUp: true });
     this.setState({ userWantsLogin: false });
     this.setState({ userWantsLearnMore: false });
@@ -64,7 +63,6 @@ class Login extends React.Component {
   }
 
   handleLearnMoreChange(event) {
-    console.log('inside learn more');
     this.setState({ userWantsSignUp: false });
     this.setState({ userWantsLogin: false });
     this.setState({ userWantsLearnMore: true });
@@ -73,7 +71,6 @@ class Login extends React.Component {
   }
 
   handleLoginChange(event){
-    console.log('inside login change');
     this.setState({ userWantsSignUp: false });
     this.setState({ userWantsLearnMore: false });
     this.setState({ userWantsLogin: true });
@@ -119,7 +116,7 @@ class Login extends React.Component {
     } else if (this.state.userWantsSignUp) {
       return(
         <div>
-          <SignUp signup={this.props.signup} userWantsLogin = {this.state.userWantsLogin}  handleLoginChange ={this.handleLoginChange}/>
+          <SignUp signup={this.props.signup} userWantsLogin = {this.state.userWantsLogin}  handleLoginChange = {this.handleLoginChange}/>
         </div>
         )
     } else if (this.state.userWantsLearnMore) {

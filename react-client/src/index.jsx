@@ -28,7 +28,8 @@ class App extends React.Component {
       accessToken: '',
       requestedToken: false,
       userCanEdit: false,
-      invalidUserPass: false
+      invalidUserPass: false,
+      senderEmail: ''
 
     };
     this.search = this.search.bind(this);
@@ -40,6 +41,8 @@ class App extends React.Component {
     this.handleTokenChange = this.handleTokenChange.bind(this);
     this.checkToken = this.checkToken.bind(this);
     this.generateAccessToken = this.generateAccessToken.bind(this);
+    this.handleSenderEmail = this.handleSenderEmail.bind(this);
+    this.handleEmailSubmit = this.handleEmailSubmit.bind(this);
     console.log('inside index', this);
   }
 
@@ -52,6 +55,43 @@ class App extends React.Component {
       isLoggedIn: false,
       showToken: false
     })
+  }
+
+  handleEmailSubmit(event){
+    console.log('inside email submit', this.state.senderEmail);
+    event.preventDefault();
+    this.emailToken(this.state.senderEmail, this.state.accessToken);
+  }
+
+  emailToken(email, token){
+    var context = this;
+    console.log('emailToken',email);
+    console.log('emailToken',token);
+
+    $.ajax({
+      url: 'http://localhost:3000/email',
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify({
+        email: email,
+        token: token
+      }),
+      success: function(data){
+        console.log('mailer success', data);
+        context.setState({
+          tokenMailed: true
+        });
+      },
+      error: function(error){
+        console.log(error);
+      }
+    })
+  }
+
+  handleSenderEmail(event){
+    this.setState({
+      senderEmail: event.target.value
+    });
   }
 
   handleTokenChange(event) {
@@ -71,7 +111,8 @@ class App extends React.Component {
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({
-        user_id: this.state.user_id
+        user_id: this.state.user_id,
+        token: this.state.accessToken
       }),
       success: function(data){
         console.log('data from access token', data);
@@ -244,6 +285,12 @@ class App extends React.Component {
           <button id='generateAccessToken' onClick={this.handleTokenChange}>Access Token</button>
           <div className={this.state.showToken ? 'showAccessToken' : 'hidden'}>
             <input type='text' value={this.state.accessToken} className = 'showToken'></input>
+            <form className='mailTokenForm' onSubmit={this.handleEmailSubmit}>
+              <input type='text' value={this.state.senderEmail} onChange={this.handleSenderEmail} placeholder='Enter your email'></input>
+              <div>
+                <button type='submit' submitid='mailTokenButton'>Email Token</button>
+              </div>
+            </form>
           </div>
         </span>
         <Search search = {this.search} handleChange = {this.props.handleChange} handleSubmit = {this.props.handleSubmit}/>
