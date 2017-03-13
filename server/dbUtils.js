@@ -33,6 +33,17 @@ module.exports = {
     })
   },
 
+  getUserSalt: function(username, callback){
+    connection.query('SELECT salt FROM users WHERE user = ?', [username], function(err, results, fields) {
+      if(err){
+        callback(err, null)
+      } else {
+        console.log('getUserSalt', results);
+        callback(null, results);
+      }
+    })
+  },
+
   checkUsername : function(username, callback) {
     connection.query('SELECT * FROM users WHERE user = ? ', [username], function(err, results, fields) {
       if(err) {
@@ -41,15 +52,14 @@ module.exports = {
         console.log('inside checkUser NEW USER ADDED', results);
         callback(err, true);
       } else {
-        console.log('USER ALREADY EXISTS, try again ? ?????');
-        console.log('check user ? ?????', results);
+        console.log('USER ALREADY EXISTS, try again ??????', results);
         callback(err, false);
       }
     })
   },
 
-  addUser : function(username, password, callback) {
-    connection.query('INSERT INTO users (user, password) values (?, ?)', [username, password], function(err, results, fields) {
+  addUser : function(username, password, salt, callback) {
+    connection.query('INSERT INTO users (user, password, salt) values (?, ?, ?)', [username, password, salt], function(err, results, fields) {
       if(err){
         console.log(err)
         callback(err, null, null)
@@ -60,16 +70,14 @@ module.exports = {
     })
   },
 
-  validateUser : function(username, password, callback) {
+  validateUser : function(username, password, salt, callback) {
     connection.query('SELECT id FROM users where user = ? AND password = ?', [username, password], function(err, results, fields) {
       if(err){
         console.log('error in validate user', err);
         callback(err, null);
       } else if (results.length === 0) {
-        console.log('user id from results length=0', results);
         callback(null, false, null);
       } else {
-        console.log('results from successful entry: ', results[0].id);
         callback(null, true, results[0].id);
       }
     })

@@ -7,6 +7,7 @@ var db = require('./dbUtils.js');
 var session = require('express-session');
 var cookie = require('cookie-parser');
 var hashPass = require('./middleware/hashPass.js');
+var hashPassNewUser = require('./middleware/hashPassNewUser.js');
 
 var app = express();
 
@@ -36,13 +37,15 @@ app.post('/users', function (req, res) {
   });
 });
 
+//USER LOGIN
 app.post('/login', hashPass, function(req, res) {
   var username = req.body.username;
   var password = req.body.password;
+  var salt = req.body.salt;
   console.log('SIGNUPusername:', username);
   console.log('SIGNUPpassword:', password);
 
-  db.validateUser(username, password, function(err, success, user_id){
+  db.validateUser(username, password, salt, function(err, success, user_id){
     if(err){
       console.log('unable to validate');
       res.status(401).send('try again buddy');
@@ -54,15 +57,16 @@ app.post('/login', hashPass, function(req, res) {
       res.status(401).send(success);
     }
   });
-  // res.sendStatus(201);
-  // res.end(JSON.stringify(true));
 });
 
-app.post('/signup', hashPass, function(req, res) {
+//NEW USER SIGN UP
+app.post('/signup', hashPassNewUser, function(req, res) {
   var username = req.body.username;
   var password = req.body.password;
+  var salt = req.body.salt;
   console.log('username:', username);
   console.log('password:', password);
+  console.log('salt:', salt);
 
   //CHECK DB FOR USERNAME
   db.checkUsername(username, function(err, valid){
@@ -73,7 +77,7 @@ app.post('/signup', hashPass, function(req, res) {
     } else if (valid) {
       //ADD USERNAME AND PASSWORD TO DB
       console.log('ready to add');
-      db.addUser(username, password, function(err, success, id){
+      db.addUser(username, password, salt, function(err, success, id){
         if(err){
           console.log(err);
         } else if (success) {
@@ -85,20 +89,17 @@ app.post('/signup', hashPass, function(req, res) {
       })
     }
   })
-  console.log('do we get here? after user add?')
-  // res.sendStatus(404);
-  // res.end();
-
 })
 
+//INSERT POST INTO DB
 app.post('/items/users', function (req, res) {
   userQuery = req.body.term;
   userId = req.body.id;
-  console.log('userQuery:', userQuery);
-  console.log('userIdREQ>BODY:', userId);
   db.insert(userQuery, userId, function(err, success) {
     if(err){
       console.log(err)
+      res.sendStatus(400);
+      res.send('Insert Error');
     }
     if(success){
       console.log('successful insertion', success);
@@ -113,6 +114,7 @@ app.post('/items/users', function (req, res) {
   })
 });
 
+//REMOVE POST FROM DB
 app.post('/items/remove', function (req, res) {
   message_id = req.body.message_id;
   console.log('message id inside post', message_id);
