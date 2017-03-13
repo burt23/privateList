@@ -44,6 +44,9 @@ class App extends React.Component {
 
   componentDidMount() {
   // this.get();
+    if(this.state.showToken){
+
+    }
   }
 
   handleLogout(event){
@@ -232,10 +235,10 @@ class App extends React.Component {
     return (<div className='container'>
       <div className='centerLogin'>
         <h1 id='mainTitle'>Private List</h1>
-        <span class='logout'>
+        <span className='logout'>
           <button id='logoutButton' onClick={this.handleLogout}>logout</button>
         </span>
-        <span class='accessToken'>
+        <span className='accessToken'>
           <button id='generateAccessToken' onClick={this.handleTokenChange}>Access Token</button>
           <div>
             <input type='text' value={this.state.accessToken} className = 'showToken'></input>

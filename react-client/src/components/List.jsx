@@ -6,7 +6,7 @@ const List = (props) => (
     <h4> TOP items </h4>
     <div className = 'selectList'>
       <select>
-        <option value='value1' selected>Select List</option>
+        <option value='value1' defaultValue>Select List</option>
         <option value='value2'>Create New List</option>
       </select>
     </div>

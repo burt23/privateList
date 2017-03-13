@@ -28,6 +28,9 @@ var hashPass = function(req, res, next) {
     var userSalt = getSalt(req.body.username, function(error, salt){
       if(error){
         console.log(error);
+      } else if (salt.length === 0) {
+        console.log('cant find users salt, ', salt)
+        next();
       } else {
         var passwordData = sha512(req.body.password, salt[0].salt);
         req.body.password = passwordData.passwordHash;

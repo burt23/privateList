@@ -18,36 +18,34 @@ Once the project moves into development, the press release can be used as a touc
 
 ## Heading ##
   > Name the product in a way the reader (i.e. your target customers) will understand.
-  Sound Shuffle
+  Private List
 
 ## Sub-Heading ##
   > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
-  Product for music lovers who are looking for new and exciting playlists based of the web's best source for music, soundCloud
+  Generate secret lists that that you can easy share via access tokens
 
 ## Summary ##
   > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
-  Ever have trouble deciding what music to play next? Want awesome playlists just a single click away? SoundShuffle takes the pain out of selecting tunes and presents users with the most popular songs on the web. We handle the decision making so users can focus on whatever they're doing with the best music alongside them.
+ Need to share secure way to share idea's with others? Private List is an easy way to create a list and share it freely quickly and securely. Generate secret keys to share your list with only people you choose, free and easy
 
 ## Problem ##
   > Describe the problem your product solves.
-  Many people are indecisive and have trouble picking music. SoundShuffle takes the amazing library of music provided by soundCloud and presents that information to the user in a much more simplistic and friendly way.  Users can select from existing playlists or create their own station based off of their request.
+  In days of increasing concerns over privacy, people want ways to share idea's freely and securely.  Private list allows users to create lists of whatever information they'd like, and generate tokens to share with others to access their content.
 
 ## Solution ##
   > Describe how your product elegantly solves the problem.
-  By tying into the soundCloud API we are able to use the metrics already provide by user input on soundcloud to filter and narrow out only the best songs for our users.
+  By using modern cryptography, we are able to provide an easy way for users to share information securely. Just type in the token and you're able to see whatever is on the Private List!
 
 ## Quote from You ##
   > A quote from a spokesperson in your company.
-  Use soundShuffle for great music all day long
+  Makes sharing ideas secure, free, and easy.
 
 ## How to Get Started ##
   > Describe how easy it is to get started.
-  No sign up required, just visit and try out one of our playlists enter in your preferences and we'll make on for you!
-
+  Create an account in seconds and start storing list items.  Once you're ready generate an access token to share with people who you want to see your list. Have a token? Enter it in and check out whats on the list!
 ## Customer Quote ##
   > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
-  soundShuffle completely changed how I listen to music, no ads, just music. Now I listen to it during my commute, at work, at the gym, and even at home!
-
+  By far the easiest way to share information with my students, friends, and collegues. Simply create a list and share the token!
 ## Closing and Call to Action ##
   > Wrap it up and give pointers where the reader should go next.
-  Go to soundShuffle.com to give it try today!
+  What's on your private list!?
