@@ -140,12 +140,13 @@ class App extends React.Component {
       }),
       success: function(data){
         console.log('data from access token', data);
-        context.setState({
-          isLoggedIn: true,
-          userCanEdit: false,
-          items: data
-        })
-
+          if(data.length>0){
+          context.setState({
+            isLoggedIn: true,
+            userCanEdit: false,
+            items: data
+          })
+        }
       },
       error: function(error){
         console.log('err', error);
