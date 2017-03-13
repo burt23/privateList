@@ -114,6 +114,7 @@ app.post('/items/users', function (req, res) {
   })
 });
 
+
 //REMOVE POST FROM DB
 app.post('/items/remove', function (req, res) {
   message_id = req.body.message_id;
@@ -127,6 +128,28 @@ app.post('/items/remove', function (req, res) {
     }
   })
 });
+
+app.post('/token/new', function(req, res) {
+  console.log('inside token get');
+  var userId = req.body.user_id;
+  console.log(userId);
+  //generate random token and store in messages
+  db.getToken(userId, function(error, accessToken){
+    if(error){
+      console.log(error)
+    } else {
+      console.log('accessToken', accessToken);
+      res.send(accessToken);
+
+    }
+  })
+
+})
+
+app.post('/token', function(req, res) {
+  console.log('inside token post');
+  res.send('niceWorkPOSTER');
+})
 
 app.listen(3000, function() {
   console.log('listening on port 3000!');

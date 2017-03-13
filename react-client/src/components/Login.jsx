@@ -9,6 +9,7 @@ class Login extends React.Component {
     this.state = {
       username: '',
       password: '',
+      accessToken: '',
       userWantsSignUp: false,
       userWantsLearnMore: false,
       userWantsLogin: true
@@ -20,6 +21,7 @@ class Login extends React.Component {
     this.handleSignUpChange = this.handleSignUpChange.bind(this);
     this.handleLearnMoreChange = this.handleLearnMoreChange.bind(this);
     this.handleLoginChange = this.handleLoginChange.bind(this);
+    this.handleTokenChange = this.handleTokenChange.bind(this);
   }
 
   handleSubmit(event) {
@@ -27,6 +29,16 @@ class Login extends React.Component {
     event.preventDefault();
     this.setState({ username: '' });
     this.setState({ password: '' });
+  }
+
+  handleTokenSubmit(event) {
+    this.props.token(this.state.accessToken);
+    event.preventDefault();
+    this.setState({ accessToken: '' });
+  }
+
+  handleTokenChange(event) {
+    this.setState({ accessToken: event.target.value });
   }
 
   handleChangeUsername(event) {
@@ -83,6 +95,9 @@ class Login extends React.Component {
           </div>
           <div className='learnMoreWrapper'>
             <button className='signInButton learnMoreButton' onClick={this.handleLearnMoreChange} >Want to learn more?</button>
+          </div>
+          <div className='accessTokenWrapper'>
+            <input className='accessTokenField' type='text' value={this.state.accessToken} onChange={this.handleTokenChange} placeholder='Access Token'></input>
           </div>
         </div>
       )

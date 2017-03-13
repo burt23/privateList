@@ -1,5 +1,6 @@
 var mysql = require('mysql');
 var dbConfig = require('./dbConfig.js');
+var crypto = require('crypto');
 
 var connection = mysql.createConnection({
   host: 'localhost',
@@ -90,6 +91,19 @@ module.exports = {
         callback(err, false, null);
       } else {
         callback(err, true, results);
+      }
+    })
+  },
+
+  getToken: function(userId, callback){
+    var randomString = crypto.randomBytes(30).toString('hex').slice(0, 30);
+    console.log('random strin ', randomString);
+    connection.query('UPDATE MESSAGES SET secret=? WHERE user_id = ?', [randomString, userId], function(error, results, fields){
+      if(error){
+        console.log(error)
+        callback(error, null)
+      } else {
+        callback(null, randomString);
       }
     })
   }

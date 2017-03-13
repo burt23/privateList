@@ -23,7 +23,10 @@ class App extends React.Component {
          description: 'ask for cindy, passphrase: today is an awefully nice day to ride a bike, dont you agree?'}
       ],
       isLoggedIn: false,
-      user_id: null
+      user_id: null,
+      showToken: false,
+      accessToken: '',
+      requestedToken: false
 
     };
     this.search = this.search.bind(this);
@@ -32,6 +35,9 @@ class App extends React.Component {
     this.get = this.get.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
     this.delete = this.delete.bind(this);
+    this.handleTokenChange = this.handleTokenChange.bind(this);
+    this.checkToken = this.checkToken.bind(this);
+    this.generateAccessToken = this.generateAccessToken.bind(this);
     console.log('inside index', this);
   }
 
@@ -45,6 +51,62 @@ class App extends React.Component {
     })
   }
 
+  handleTokenChange(event) {
+    if(!this.state.requestedToken){
+      this.setState({
+        requestedToken: true
+      });
+      this.generateAccessToken(this.state.accessToken);
+    }
+  }
+
+  generateAccessToken(){
+    var context = this;
+
+    $.ajax({
+      url: 'http://localhost:3000/token/new',
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify({
+        user_id: this.state.user_id
+      }),
+      success: function(data){
+        console.log('data from access token', data);
+        context.setState({
+          accessToken: data,
+          showToken: true
+        })
+      },
+      error: function(error){
+        console.log('err', error);
+      }
+    })
+  }
+
+  checkToken(accessToken){
+    var context = this;
+
+    $.ajax({
+      url: 'http://localhost:3000/token',
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify({
+        accessToken: accessToken
+      }),
+      success: function(data){
+        console.log('data from access token', data);
+        context.setState({
+          isLoggedIn: true,
+          user_id: data
+        })
+
+      },
+      error: function(error){
+        console.log('err', error);
+      }
+    })
+  }
+
   delete( message_id ) {
     var context = this;
     $.ajax({
@@ -54,9 +116,9 @@ class App extends React.Component {
       data: JSON.stringify({
         message_id: message_id
       }),
-      success: (function(data) {
+      success: function(data) {
         context.get();
-      }),
+      },
       error: (function(err) {
         console.log('error in deletion', err);
       })
@@ -170,6 +232,12 @@ class App extends React.Component {
         <span class='logout'>
           <button id='logoutButton' onClick={this.handleLogout}>logout</button>
         </span>
+        <span class='accessToken'>
+          <button id='generateAccessToken' onClick={this.handleTokenChange}>Access Token</button>
+          <div>
+            <input type='text' value={this.state.accessToken} className = 'showToken'></input>
+          </div>
+        </span>
         <Search search = {this.search} handleChange = {this.props.handleChange} handleSubmit = {this.props.handleSubmit}/>
         <List delete={this.delete} items={this.state.items}/>
       </div>
@@ -177,7 +245,7 @@ class App extends React.Component {
     } else {
       return (
       <div>
-        <Login signup={this.signup} login={this.login} isLoggedIn={this.state.isLoggedIn}/>
+        <Login token = {this.checkToken} signup={this.signup} login={this.login} isLoggedIn={this.state.isLoggedIn}/>
       </div>
       )
     }
