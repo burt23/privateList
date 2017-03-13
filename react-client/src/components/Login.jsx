@@ -12,7 +12,8 @@ class Login extends React.Component {
       accessToken: '',
       userWantsSignUp: false,
       userWantsLearnMore: false,
-      userWantsLogin: true
+      userWantsLogin: true,
+      invalidUserPassCombo: false
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -58,6 +59,8 @@ class Login extends React.Component {
     this.setState({ userWantsSignUp: true });
     this.setState({ userWantsLogin: false });
     this.setState({ userWantsLearnMore: false });
+    this.props.invalidUserPassCombo = false;
+
   }
 
   handleLearnMoreChange(event) {
@@ -65,6 +68,8 @@ class Login extends React.Component {
     this.setState({ userWantsSignUp: false });
     this.setState({ userWantsLogin: false });
     this.setState({ userWantsLearnMore: true });
+    this.props.invalidUserPassCombo = false;
+
   }
 
   handleLoginChange(event){
@@ -91,6 +96,9 @@ class Login extends React.Component {
               </div>
               <div className='submitButton'>
                 <input type='submit' value='Submit' />
+              </div>
+              <div className={ this.props.invalidUserPass ? '' : 'hidden' }>
+                <span><p>Not quite right</p></span>
               </div>
             </form>
           </div>

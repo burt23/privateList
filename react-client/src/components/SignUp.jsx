@@ -8,6 +8,9 @@ class SignUp extends React.Component {
       username: '',
       password: '',
       verifier: '',
+      validUsername: false,
+      validPassword: false,
+      invalidCombo: false
     }
   //BIND FUNCTIONS
     // this.handleSignUpChange = this.handleSignUpChange.bind(this);
@@ -23,6 +26,10 @@ class SignUp extends React.Component {
       console.log('username', this.state.username);
       console.log('password', this.state.password);
       this.props.signup(this.state.username, this.state.password);
+    } else {
+      this.setState({
+        invalidCombo: true
+      })
     }
     event.preventDefault();
   }
@@ -49,8 +56,6 @@ class SignUp extends React.Component {
       verifier: event.target.value
     })
   }
-  //DECLARE FUNCTIONS
-    //HANDLE CHANGE, HANDLE SUBMIT
 
   render(){
     if(!this.state.userWantsLogin){
@@ -73,6 +78,10 @@ class SignUp extends React.Component {
               <div className='submitButton'>
                 <input type='submit' value='Submit' />
               </div>
+              <span className={ this.state.invalidCombo ? 'invalidCombo' : 'hidden' }>
+                <p>Invalid Combo</p>
+                <p>Password's must match</p>
+              </span>
             </form>
           </div>
           <div className='signupWrapper'>

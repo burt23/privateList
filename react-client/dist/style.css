@@ -132,4 +132,16 @@ button{
   font-size: 1.4em;
 }
 
+.hidden {
+  display: none;
+}
+
+.showAccessToken{
+  background-color: rgba(255, 255, 255, 0.28);
+
+}
+
+.accessTokenWrapper{
+  padding: 1em;
+}
 

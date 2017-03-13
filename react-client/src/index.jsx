@@ -27,7 +27,8 @@ class App extends React.Component {
       showToken: false,
       accessToken: '',
       requestedToken: false,
-      userCanEdit: false
+      userCanEdit: false,
+      invalidUserPass: false
 
     };
     this.search = this.search.bind(this);
@@ -43,15 +44,13 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-  // this.get();
-    if(this.state.showToken){
 
-    }
   }
 
   handleLogout(event){
     this.setState({
-      isLoggedIn: false
+      isLoggedIn: false,
+      showToken: false
     })
   }
 
@@ -204,6 +203,9 @@ class App extends React.Component {
       },
       error: function(error, data) {
         console.log('error after loggggin in dduuuude', data);
+        context.setState({
+          invalidUserPass: true
+        })
       }
     })
   }
@@ -240,7 +242,7 @@ class App extends React.Component {
         </span>
         <span className='accessToken'>
           <button id='generateAccessToken' onClick={this.handleTokenChange}>Access Token</button>
-          <div>
+          <div className={this.state.showToken ? 'showAccessToken' : 'hidden'}>
             <input type='text' value={this.state.accessToken} className = 'showToken'></input>
           </div>
         </span>
@@ -251,7 +253,7 @@ class App extends React.Component {
     } else {
       return (
       <div>
-        <Login token = {this.checkToken} signup={this.signup} login={this.login} isLoggedIn={this.state.isLoggedIn}/>
+        <Login invalidUserPass={this.state.invalidUserPass} token = {this.checkToken} signup={this.signup} login={this.login} isLoggedIn={this.state.isLoggedIn}/>
       </div>
       )
     }
