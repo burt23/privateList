@@ -26,7 +26,8 @@ class App extends React.Component {
       user_id: null,
       showToken: false,
       accessToken: '',
-      requestedToken: false
+      requestedToken: false,
+      userCanEdit: false
 
     };
     this.search = this.search.bind(this);
@@ -85,6 +86,7 @@ class App extends React.Component {
 
   checkToken(accessToken){
     var context = this;
+    console.log('check token firing', accessToken);
 
     $.ajax({
       url: 'http://localhost:3000/token',
@@ -97,7 +99,8 @@ class App extends React.Component {
         console.log('data from access token', data);
         context.setState({
           isLoggedIn: true,
-          user_id: data
+          userCanEdit: false,
+          items: data
         })
 
       },

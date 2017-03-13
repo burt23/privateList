@@ -106,5 +106,18 @@ module.exports = {
         callback(null, randomString);
       }
     })
+  },
+
+  checkToken: function(userToken, callback){
+    connection.query('SELECT * FROM MESSAGES WHERE secret = ?', [userToken], function(error, results, fields) {
+      if(error){
+        console.log(error);
+        callback(error, null)
+      } else {
+        console.log('check token results', results);
+        callback(error, results);
+
+      }
+    })
   }
 }

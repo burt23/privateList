@@ -22,6 +22,7 @@ class Login extends React.Component {
     this.handleLearnMoreChange = this.handleLearnMoreChange.bind(this);
     this.handleLoginChange = this.handleLoginChange.bind(this);
     this.handleTokenChange = this.handleTokenChange.bind(this);
+    this.handleTokenSubmit = this.handleTokenSubmit.bind(this);
   }
 
   handleSubmit(event) {
@@ -32,6 +33,9 @@ class Login extends React.Component {
   }
 
   handleTokenSubmit(event) {
+    console.log('inside token submit');
+    console.log('inside token submit', this.state.accessToken);
+
     this.props.token(this.state.accessToken);
     event.preventDefault();
     this.setState({ accessToken: '' });
@@ -97,7 +101,10 @@ class Login extends React.Component {
             <button className='signInButton learnMoreButton' onClick={this.handleLearnMoreChange} >Want to learn more?</button>
           </div>
           <div className='accessTokenWrapper'>
-            <input className='accessTokenField' type='text' value={this.state.accessToken} onChange={this.handleTokenChange} placeholder='Access Token'></input>
+            <form onSubmit={this.handleTokenSubmit} className='tokenForm'>
+              <input className='accessTokenField' type='text' value={this.state.accessToken} onChange={this.handleTokenChange} placeholder='Access Token'>
+              </input>
+            </form>
           </div>
         </div>
       )

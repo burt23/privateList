@@ -143,12 +143,21 @@ app.post('/token/new', function(req, res) {
 
     }
   })
-
 })
 
 app.post('/token', function(req, res) {
-  console.log('inside token post');
-  res.send('niceWorkPOSTER');
+  userToken = req.body.accessToken;
+  console.log('inside token post', userToken);
+  db.checkToken(userToken, function(error, messages) {
+    if(error){
+      console.log(error);
+    } else {
+      console.log('inside tokenafter db query', messages)
+      res.send(messages);
+
+    }
+  })
+
 })
 
 app.listen(3000, function() {
