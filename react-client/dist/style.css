@@ -53,15 +53,20 @@ p {
   padding-bottom: 1em;
 }
 
-.submitButton {
-  display: block;
-  margin: 0 auto;
-}
-
 input {
   padding: 1em;
   position: relative;
+
 }
+
+.submitButton {
+  display: block;
+  margin: 0 auto;
+  font-family: 'Fugaz One', cursive;
+
+
+}
+
 
 
 #searchBox {
@@ -108,6 +113,8 @@ button#logoutButton {
 
 button{
   border-radius: 0.3em;
+  font-family: 'Special Elite', cursive;
+
 }
 
 #learnMoreTextWrapper {
