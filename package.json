@@ -1,5 +1,5 @@
 {
-  "name": "github-fetcher-fullstack-v2",
+  "name": "PrivateList",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,7 +8,7 @@
     "server-dev": "nodemon server/index.js"
   },
   "author": "Mike Burton",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.23.1",
     "babel-loader": "^6.3.2",
@@ -31,7 +31,6 @@
     "react-dom": "^15.4.2",
     "react-password": "^0.1.0",
     "react-timeago": "^3.2.0",
-    "request": "^2.81.0",
-    "soundcloud": "^3.1.2"
+    "request": "^2.81.0"
   }
 }
