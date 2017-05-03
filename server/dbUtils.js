@@ -1,5 +1,5 @@
 var mysql = require('mysql');
-var dbConfig = require('./dbConfig.js');
+var dbConfig = require('./dbconfig.js');
 var crypto = require('crypto');
 
 var connection = mysql.createConnection({

@@ -24,7 +24,6 @@ module.exports = (req, res) => {
           console.log(err);
         } else if (success) {
           //GET USER_ID
-
           res.status(201);
           res.send({ user_added: id });
         }
