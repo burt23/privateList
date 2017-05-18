@@ -16,7 +16,8 @@ CREATE TABLE messages (
   user_id INT NULL,
   message VARCHAR(2000) NOT NULL,
   secret VARCHAR(255) NULL,
-  time TIMESTAMP
+  time TIMESTAMP,
+  list_id INT
 );
 
 CREATE TABLE lists (

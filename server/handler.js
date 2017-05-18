@@ -6,3 +6,5 @@ module.exports.post = require('./routes/post.js');
 module.exports.newToken = require('./routes/newToken.js');
 module.exports.checkToken = require('./routes/checkToken.js');
 module.exports.users = require('./routes/users.js');
+module.exports.addList = require('./routes/addList.js');
+

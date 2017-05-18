@@ -30,6 +30,7 @@ app.post('/items/users', handler.post);
 app.post('/items/remove', handler.remove);
 app.post('/token/new', handler.newToken);
 app.post('/token', handler.checkToken);
+app.post('/lists/add', handler.addList);
 
 app.listen(3000, function() {
   console.log('listening on port 3000!');

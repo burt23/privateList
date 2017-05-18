@@ -135,7 +135,7 @@ button#logoutButton {
 button{
   border-radius: 0.3em;
   font-family: 'Lora', cursive;
-  width: 100%;
+  /*width: 100%;*/
   background-color: #f1f1f1;
   border: 0;
   border-radius: 0;
@@ -168,10 +168,7 @@ button{
   display: none;
 }
 
-.showAccessToken{
-  background-color: rgba(255, 255, 255, 0.28);
 
-}
 
 .accessTokenWrapper{
   padding: 1em;
@@ -476,4 +473,45 @@ button{
   flex: 1 1 auto;
 }
 
+.tokenModalWrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index:9999999;
+  top: 0;
+  left: 0;
+}
+
+.tokenModalFlexbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  margin: 0 auto;
+  width: 100%;
+  height:100%;
+  position: relative;
+  border: 1px solid green;
+  color: whitesmoke;
+}
+
+.tokenModelFlexItem {
+  flex: 1 1 auto;
+  align-self: stretch;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modalForm {
+  background-color: #232323;
+  padding: 1em;
+  border-radius: 1em;
+}
+
+.modalForm:hover {
+  background-color: #121212;
+  padding: 1em;
+  border-radius: 1em;
+}
 

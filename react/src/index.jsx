@@ -8,12 +8,14 @@ import Header from './containers/Header.jsx';
 import Homepage from './containers/Homepage.js';
 import Footer from './containers/Footer.js';
 import Portal from './containers/Portal.js';
+import TokenModal from './containers/TokenModal.js';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       items: [],
+      lists: ['one', 'two', 'three'],
       isLoggedIn: false,
       user_id: null,
       showToken: false,
@@ -36,6 +38,8 @@ class App extends React.Component {
     this.generateAccessToken = this.generateAccessToken.bind(this);
     this.handleSenderEmail = this.handleSenderEmail.bind(this);
     this.handleEmailSubmit = this.handleEmailSubmit.bind(this);
+    this.handleModalExit = this.handleModalExit.bind(this);
+    this.addList = this.addList.bind(this);
   }
 
   componentDidMount() {
@@ -48,8 +52,18 @@ class App extends React.Component {
     })
   }
 
+  handleModalExit(event){
+    console.log('almost there', event)
+    this.setState({
+      showToken: false
+    })
+  }
+
   handleEmailSubmit(event){
+    console.log('inside email submit')
     event.preventDefault();
+
+    event.stopPropagation();
     this.emailToken(this.state.senderEmail, this.state.accessToken);
   }
 
@@ -64,8 +78,10 @@ class App extends React.Component {
         token: token
       }),
       success: function(data){
+        console.log('mailed token', data);
         context.setState({
-          tokenMailed: true
+          tokenMailed: true,
+          showToken: false
         });
       },
       error: function(error){
@@ -84,6 +100,7 @@ class App extends React.Component {
   }
 
   handleTokenChange(event) {
+    console.log('inside token change');
     if(!this.state.requestedToken){
       this.setState({
         requestedToken: true
@@ -136,6 +153,30 @@ class App extends React.Component {
       },
       error: function(error){
         console.log('err', error);
+      }
+    })
+  }
+
+  addList(list){
+    var context = this;
+    $.ajax({
+      url: 'http://localhost:3000/lists/add',
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify({
+        list: list,
+        user_id: this.state.user_id
+      }),
+      success: function(data){
+        console.log('successful ajax in add list', data);
+        if(data.length>0){
+          context.setState({
+            lists: data.lists
+          })
+        }
+      },
+      error: function(err){
+        console.log('addList error', err);
       }
     })
   }
@@ -247,13 +288,17 @@ class App extends React.Component {
   }
 
   render () {
-
     if(this.state.isLoggedIn){
-
     return (
-
-
       <div className='appContainer'>
+        { this.state.showToken &&
+        <TokenModal
+          handleEmailSubmit={this.handleEmailSubmit}
+          handleSenderEmail={this.handleSenderEmail}
+          accessToken={this.state.accessToken}
+          handleModalExit={this.handleModalExit}
+        />
+        }
         <Header
           invalidUserPass={this.state.invalidUserPass}
           login={this.login}
@@ -271,43 +316,19 @@ class App extends React.Component {
           items={this.state.items}
           delete={this.delete}
           search={this.search}
+          lists={this.state.lists}
+          addList={this.addList}
         />
-        <Footer />
-      </div>
-
-
-      /*<div className='container'>
-      <div className='centerLogin'>
-        <Header
-          invalidUserPass={this.state.invalidUserPass}
-          login={this.login}
-          isLoggedIn={this.state.isLoggedIn}
+        <Footer
+          handleTokenChange={this.handleTokenChange}
+          user_id={this.state.user_id}
         />
-        <span className='logout'>
-          <button id='logoutButton' onClick={this.handleLogout}>logout</button>
-        </span>
-        <span className='accessToken'>
-          <button id='generateAccessToken' onClick={this.handleTokenChange}>Access Token</button>
-          <div className={this.state.showToken ? 'showAccessToken' : 'hidden'}>
-            <input type='text' value={this.state.accessToken} className = 'showToken'></input>
-            <form className='mailTokenForm' onSubmit={this.handleEmailSubmit}>
-              <input type='text' value={this.state.senderEmail} onChange={this.handleSenderEmail} placeholder='Enter your email'></input>
-              <div>
-                <button type='submit' submitid='mailTokenButton'>Email Token</button>
-              </div>
-            </form>
-          </div>
-        </span>
-        <Search search = {this.search} handleChange = {this.props.handleChange} handleSubmit = {this.props.handleSubmit}/> <List delete={this.delete} items={this.state.items}/>
       </div>
-    </div> */
-
       )
-
     } else {
       return (
-      <div className='appContainer'>
 
+      <div className='appContainer'>
         <Header
           invalidUserPass={this.state.invalidUserPass}
           login={this.login}

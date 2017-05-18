@@ -23,7 +23,10 @@ class Portal extends React.Component {
         <div className='portalFlexbox'>
           {/*****************  PORTAL LEFT SIDE  ******************/}
           <div className='portalFlexItem portalFlexItemLeft'>
-            <Lists />
+            <Lists
+              lists={this.props.lists}
+              addList={this.props.addList}
+            />
           </div>
           {/*****************  PORTAL RIGHT SIDE  ******************/}
           <div className='portalFlexItem portalFlexItemRight'>

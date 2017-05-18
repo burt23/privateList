@@ -1,7 +1,7 @@
 import React from 'react';
 import Login from '../containers/loginbar.js'
 
-class Header extends React.Component {
+class Footer extends React.Component {
   constructor(props){
     super(props);
     this.state = {};
@@ -17,6 +17,13 @@ class Header extends React.Component {
             Made with Love by @burt23
           </h4>
         </div>
+        {this.props.user_id &&
+          <div className='footerFlexItem'>
+            <button onClick={this.props.handleTokenChange}>
+              Access Token
+            </button>
+          </div>
+        }
 
         <div className='footerFlexItem'>
           <h4> MIT License </h4>
@@ -27,4 +34,4 @@ class Header extends React.Component {
 
 }
 
-export default Header;
+export default Footer;
