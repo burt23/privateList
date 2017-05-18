@@ -1,6 +1,6 @@
 import React from 'react';
 import Signup from './Signup.js';
-import AccessCode from './AccessCode.js';
+import AccessToken from './AccessToken.js';
 import Overview from '../components/Overview.js';
 
 class Homepage extends React.Component {
@@ -16,7 +16,7 @@ class Homepage extends React.Component {
 
         <div className='homepageFlexboxTopBar'>
            <div className='homepageFlexItemTopBar'>
-            <AccessCode
+            <AccessToken
               checkToken={this.props.checkToken}
             />
           </div>

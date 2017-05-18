@@ -18,13 +18,12 @@ class SignUp extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleSubmit(event){
-    console.log('handlin submit bbabby');
+    // Check for valid input before sending to server
+    // TODO: escape input
     if(this.state.username.length > 0 && this.state.password.length > 0 && this.state.password === this.state.verifier){
-      console.log('goodpassword duude');
-      console.log('username', this.state.username);
-      console.log('password', this.state.password);
       this.props.signup(this.state.username, this.state.password);
     } else {
+      // if false trigger conditional render
       this.setState({
         invalidCombo: true
       })
