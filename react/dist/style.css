@@ -144,11 +144,11 @@ button{
 }
 
 .timeStamp{
-  font-family: 'Special Elite', cursive;
+  font-family: 'Lora', serif;
 
 }
 
-.item {
+/*.item {
   width: 50%;
   margin: 0 auto;
   border-radius: 5px;
@@ -156,9 +156,10 @@ button{
   padding: 0.2em;
   background-color: rgba(255, 255, 255, 0.28);
 }
+
 .item .message {
   font-size: 1.4em;
-}
+}*/
 
 .hidden {
   display: none;
@@ -325,3 +326,112 @@ button{
   background-color: #3a3939;
   color: whitesmoke;
 }
+
+/*PORTAL*/
+.portalFlexTopBar {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  justify-content: space-around;
+  height: 10%;
+}
+
+.portalFlexItemTopBar {
+  flex: 1 1 auto;
+}
+
+.portalFlexbox {
+  position: absolute;
+  display: flex;
+  height: 80%;
+  width: 100%;
+  top: 20%;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-between;
+  background-color: #f1f1f1;
+
+}
+
+.portalFlexItem {
+  flex: 1 1 1;
+}
+
+.portalFlexItem:hover {
+  background-color: rgba(1, 1, 1, 0.05);
+  transition: 0.2s ease;
+}
+
+.portalFlexItemLeft {
+  /*flex-grow: 1;*/
+  padding: 1em;
+  border-right: 1px solid black;
+}
+
+
+.portalFlexItemRight {
+  flex-grow: 1;
+  padding: 2em;
+  overflow: scroll;
+}
+
+.accessTokenFlexbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /*align-content: stretch;*/
+  background-color: rgb(204, 204, 204);
+  color: black;
+  height: 5%;
+  width: 100%;
+  position: absolute;
+  top: 15%;
+  left: 0;
+}
+
+.accessTokenFlexbox:hover {
+  background-color: rgb(188, 188, 188);
+  transition: 0.2s ease;
+}
+
+.accessTokenFlexItem {
+  display: flex;
+  padding: 0em 1em;
+}
+
+.overviewFlexbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  align-content: stretch;
+}
+
+.overviewFlexItem {
+  flex: 1 1 auto;
+  align-self: stretch;
+  text-align: left;
+  font-family: 'Lora', serif;
+  padding: 1em;
+}
+
+.overviewFlexItem:hover {
+    background-color: rgba(171, 171, 171, 0.26);
+}
+
+.portalTopBarFlexbox {
+  top: 15%;
+  border: 2px red solid;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  /*align-content: center;*/
+}
+
+.portalTopBarFlexItem {
+  flex: 1 1 auto;
+}
+
+

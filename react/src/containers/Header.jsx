@@ -19,7 +19,15 @@ class Header extends React.Component {
         </div>
 
         <div className='headerFlexItem'>
-          <Login login={this.props.login}/>
+          { !this.props.isLoggedIn ?
+            (<Login
+              login={this.props.login}
+            />)
+              :
+            (<span className='headerFlexItem'>
+              <button className='' onClick={this.props.handleLogout}>Sign Out</button>
+            </span>)
+          }
         </div>
 
       </div>)

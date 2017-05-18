@@ -20,19 +20,48 @@ class ListItem extends React.Component {
     var time = this.props.item.time;
 
     return (
-      <div className = 'container'>
-        <div className='item' >
-          <p className='message'>{ this.props.item.message }</p>
-          <div className = 'messageControls'>
-            <div className ='editButton'>
-              <button>edit</button>
+        <div className='listItemFlexbox' >
+
+          {/*  LEFT CONTROLS */}
+          <div className='listItemFlexItem listItemFlexItemLeft'>
+
+            <div className='listMessageControlsVertFlexbox'>
+
+              <div className='listMessageControlsVertFlexItem'>
+                <p className='message'>Owner</p>
+              </div>
+
+              <div className='listMessageControlsVertFlexItem'>
+                <TimeAgo className='timeStamp' date={time} />
+              </div>
+
             </div>
-            <div className = 'deleteButton'>
+
+          </div>
+
+          {/*  MESSAGE CONTENT */}
+          <div className = 'listItemFlexItem listItemFlexItem'>
+            <p className='message'>{ this.props.item.message }</p>
+          </div>
+
+          {/*  RIGHT CONTROLS */}
+          <div className='listItemFlexItem listItemFlexItemRight'>
+
+            <div className='listMessageControlsVertFlexbox'>
+
+            <div className ='listMessageControlsVertFlexItem editButton'>
+              <p className='message'>{ this.props.item.message }</p>
+            </div>
+
+            <div className = 'listMessageControlsVertFlexItem deleteButton'>
+              <button>edit</button>
               <button onClick={this.handleDelete}>delete</button>
             </div>
+
           </div>
-          <TimeAgo className='timeStamp' date={time} />
+
         </div>
+
       </div>
       )
     }

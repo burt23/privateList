@@ -13,7 +13,7 @@ class Homepage extends React.Component {
   render(){
     return(
       <div>
-
+        {/*****************  ACCESS TOKEN BAR  ******************/}
         <div className='homepageFlexboxTopBar'>
            <div className='homepageFlexItemTopBar'>
             <AccessToken
@@ -21,21 +21,19 @@ class Homepage extends React.Component {
             />
           </div>
         </div>
-
+        {/*****************  HOMEPAGE FLEXBOX  ******************/}
         <div className='homepageFlexbox'>
-
+          {/*****************  HOMEPAGE LEFT SIDE  ******************/}
           <div className='homepageFlexItem homepageFlexItemLeft'>
             <Overview />
           </div>
-
+          {/*****************  HOMEPAGE RIGHT SIDE  ******************/}
           <div className='homepageFlexItem homepageFlexItemRight'>
             <Signup
               signup={this.props.signup}
             />
           </div>
-
         </div>
-
       </div>
     )
   }
