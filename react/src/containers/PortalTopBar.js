@@ -1,4 +1,5 @@
 import React from 'react';
+import Search from '../components/Search.jsx'
 
 class portalTopBar extends React.Component {
   constructor(props){
@@ -9,16 +10,8 @@ class portalTopBar extends React.Component {
 
   render(){
     return(
-      <div className='portalTopBarFlexbox'>
-        <div className='portalTopBarFlexItem'>
-          <h2> Create </h2>
-        </div>
-        <div className='portalTopBarFlexItem'>
-          <h2> Share </h2>
-        </div>
-        <div className='portalTopBarFlexItem'>
-          <h2> Settings </h2>
-        </div>
+      <div>
+        <Search search={this.props.search}/>
       </div>
     )
   }

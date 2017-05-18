@@ -134,8 +134,11 @@ button#logoutButton {
 
 button{
   border-radius: 0.3em;
-  font-family: 'Special Elite', cursive;
-
+  font-family: 'Lora', cursive;
+  width: 100%;
+  background-color: #f1f1f1;
+  border: 0;
+  border-radius: 0;
 }
 
 #learnMoreTextWrapper {
@@ -371,7 +374,6 @@ button{
 
 .portalFlexItemRight {
   flex-grow: 1;
-  padding: 2em;
   overflow: scroll;
 }
 
@@ -380,7 +382,6 @@ button{
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  /*align-content: stretch;*/
   background-color: rgb(204, 204, 204);
   color: black;
   height: 5%;
@@ -431,6 +432,47 @@ button{
 }
 
 .portalTopBarFlexItem {
+  flex: 3 1 auto;
+}
+
+.portalTopBarFlexItemRight {
+  flex: 0 1 auto;
+}
+
+.listItemFlexbox{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.listItemFlexItem {
+  flex: 0 1 auto;
+  padding: 0 0.2em;
+}
+
+.listItemFlexbox:hover {
+  background-color: rgba(0,0,0,0.3);
+}
+.listItemFlexbox:nth-child(even) {
+  background-color: rgba(0,0,0,0.2);
+}
+.listItemFlexbox:nth-child(even):hover {
+  background-color: rgba(0,0,0,0.2);
+  background-color: rgba(0,0,0,0.3);
+}
+
+.listItemFlexItemCenter {
+  flex: 1 1 auto;
+}
+
+.listMessageControlsVertFlexbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.listMessageControlsVertFlexItem {
   flex: 1 1 auto;
 }
 

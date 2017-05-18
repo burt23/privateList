@@ -16,7 +16,7 @@ class Portal extends React.Component {
         {/*****************  TOP APP BAR  ******************/}
         <div className='portalFlexboxTopBar'>
            <div className='portalFlexItemTopBar'>
-             <PortalTopBar />
+             <PortalTopBar search={this.props.search}/>
           </div>
         </div>
         {/*****************  PORTAL FLEXBOX  ******************/}
