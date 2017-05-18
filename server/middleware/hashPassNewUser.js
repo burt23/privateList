@@ -28,7 +28,7 @@ var hashPass = function(req, res, next) {
     // req.body.password = hash.digest('hex');
     req.body.password = passwordData.passwordHash;
     req.body.salt = passwordData.salt;
-
+    console.log('req.body inside newuserhashpass', req.body);
     next();
   }
 }

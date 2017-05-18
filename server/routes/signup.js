@@ -1,5 +1,4 @@
 const db = require('../dbUtils.js');
-const hashPassNewUser = require('../middleware/hashPassNewUser.js');
 
 //NEW USER SIGN UP
 module.exports = (req, res) => {

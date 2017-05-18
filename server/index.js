@@ -4,6 +4,11 @@ const cors = require('cors');
 const session = require('express-session');
 const cookie = require('cookie-parser');
 const handler = require('./handler.js');
+const hashPassNewUser = require('./middleware/hashPassNewUser.js');
+const hashPass = require('./middleware/hashPass.js');
+// const encryptPost = require('./middleware/encryptPost.js');
+
+
 
 const app = express();
 
@@ -18,9 +23,9 @@ app.get('/', function(req, res) {
 });
 
 app.post('/users', handler.users);
-app.post('/login', handler.login);
+app.post('/login', hashPass, handler.login);
 app.post('/email', handler.email);
-app.post('/signup', handler.signup);
+app.post('/signup', hashPassNewUser, handler.signup);
 app.post('/items/users', handler.post);
 app.post('/items/remove', handler.remove);
 app.post('/token/new', handler.newToken);

@@ -55,25 +55,32 @@ class Login extends React.Component {
   }
 
   handleSignUpChange(event) {
-    this.setState({ userWantsSignUp: true });
-    this.setState({ userWantsLogin: false });
-    this.setState({ userWantsLearnMore: false });
-    this.props.invalidUserPassCombo = false;
+    this.setState({
+      userWantsSignUp: true,
+      userWantsLogin: false,
+      userWantsLearnMore: false
+    });
+    // console.log('invalidUserPass', this.props.invalidUserPass);
+    // this.props.invalidUserPass = false;
 
   }
 
   handleLearnMoreChange(event) {
-    this.setState({ userWantsSignUp: false });
-    this.setState({ userWantsLogin: false });
-    this.setState({ userWantsLearnMore: true });
-    this.props.invalidUserPassCombo = false;
+    this.setState({
+      userWantsSignUp: false,
+      userWantsLogin: false,
+      userWantsLearnMore: true
+    });
+    // this.props.invalidUserPass = false;
 
   }
 
   handleLoginChange(event){
-    this.setState({ userWantsSignUp: false });
-    this.setState({ userWantsLearnMore: false });
-    this.setState({ userWantsLogin: true });
+    this.setState({
+      userWantsSignUp: false,
+      userWantsLearnMore: false,
+      userWantsLogin: true
+    });
   }
 
 
@@ -82,8 +89,6 @@ class Login extends React.Component {
       return (
         <div className = 'container'>
           <div className = 'formWrapper'>
-            <h1 id='mainTitle'>Private List</h1>
-            <h3> Login </h3>
             <form onSubmit={this.handleSubmit}>
               <div className='loginBox'>
                 <input type='text' id='username' placeholder='username' value={this.state.username} onChange={this.handleChangeUsername} />

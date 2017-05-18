@@ -4,24 +4,15 @@ import $ from 'jquery';
 import List from './components/List.jsx';
 import Search from './components/Search.jsx';
 import Login from './components/Login.jsx';
+import Header from './containers/Header.jsx';
+import Homepage from './containers/Homepage.js';
+import Footer from './containers/Footer.js';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: [
-        {name: 'wiki leaks',
-          description: 'send leaked docs to j assange'},
-
-        {name: 'cia letters',
-         description: 'destroy evidence of breach'},
-
-        {name: 'burner phone',
-          description: 'buy craigslist phone for secret activities'},
-
-        {name: '911 folsom',
-         description: 'ask for cindy, passphrase: today is an awefully nice day to ride a bike, dont you agree?'}
-      ],
+      items: [],
       isLoggedIn: false,
       user_id: null,
       showToken: false,
@@ -29,7 +20,8 @@ class App extends React.Component {
       requestedToken: false,
       userCanEdit: false,
       invalidUserPass: false,
-      senderEmail: ''
+      senderEmail: '',
+      emailError: false
 
     };
     this.search = this.search.bind(this);
@@ -43,11 +35,9 @@ class App extends React.Component {
     this.generateAccessToken = this.generateAccessToken.bind(this);
     this.handleSenderEmail = this.handleSenderEmail.bind(this);
     this.handleEmailSubmit = this.handleEmailSubmit.bind(this);
-    console.log('inside index', this);
   }
 
   componentDidMount() {
-
   }
 
   handleLogout(event){
@@ -58,16 +48,12 @@ class App extends React.Component {
   }
 
   handleEmailSubmit(event){
-    console.log('inside email submit', this.state.senderEmail);
     event.preventDefault();
     this.emailToken(this.state.senderEmail, this.state.accessToken);
   }
 
   emailToken(email, token){
     var context = this;
-    console.log('emailToken',email);
-    console.log('emailToken',token);
-
     $.ajax({
       url: 'http://localhost:3000/email',
       type: 'POST',
@@ -77,13 +63,15 @@ class App extends React.Component {
         token: token
       }),
       success: function(data){
-        console.log('mailer success', data);
         context.setState({
           tokenMailed: true
         });
       },
       error: function(error){
         console.log(error);
+        context.setState({
+          emailError: true
+        })
       }
     })
   }
@@ -129,7 +117,6 @@ class App extends React.Component {
 
   checkToken(accessToken){
     var context = this;
-    console.log('check token firing', accessToken);
 
     $.ajax({
       url: 'http://localhost:3000/token',
@@ -139,7 +126,6 @@ class App extends React.Component {
         accessToken: accessToken
       }),
       success: function(data){
-        console.log('data from access token', data);
           if(data.length>0){
           context.setState({
             isLoggedIn: true,
@@ -167,8 +153,7 @@ class App extends React.Component {
         context.get();
       },
       error: (function(err) {
-        console.log('error in deletion', err);
-      })
+        console.log('error in deletion', err); })
     })
   }
 
@@ -182,7 +167,6 @@ class App extends React.Component {
         id: this.state.user_id
       }),
       success: (data) => {
-        console.log('successful get dataDATA', data);
         context.setState({
           items: data.reverse()
         });
@@ -206,9 +190,6 @@ class App extends React.Component {
         password: password
       }),
       success: function(data) {
-        console.log('addedUser', data);
-        console.log('addedUser', data.user_added);
-        console.log('context', context);
         context.setState({
           isLoggedIn: true,
           user_id: data.user_added
@@ -224,8 +205,7 @@ class App extends React.Component {
 
   login( username, password ) {
     var context = this;
-    console.log('username:', username);
-    console.log('password:', password);
+
     $.ajax({
       url: 'http://localhost:3000/login',
       type: 'POST',
@@ -244,7 +224,6 @@ class App extends React.Component {
         context.get(context.state.user_id);
       },
       error: function(error, data) {
-        console.log('error after loggggin in dduuuude', data);
         context.setState({
           invalidUserPass: true
         })
@@ -275,7 +254,9 @@ class App extends React.Component {
   }
 
   render () {
+
     if(this.state.isLoggedIn){
+
     return (<div className='container'>
       <div className='centerLogin'>
         <h1 id='mainTitle'>Private List</h1>
@@ -294,14 +275,24 @@ class App extends React.Component {
             </form>
           </div>
         </span>
-        <Search search = {this.search} handleChange = {this.props.handleChange} handleSubmit = {this.props.handleSubmit}/>
-        <List delete={this.delete} items={this.state.items}/>
+        <Search search = {this.search} handleChange = {this.props.handleChange} handleSubmit = {this.props.handleSubmit}/> <List delete={this.delete} items={this.state.items}/>
       </div>
     </div>)
     } else {
       return (
-      <div>
-        <Login invalidUserPass={this.state.invalidUserPass} token = {this.checkToken} signup={this.signup} login={this.login} isLoggedIn={this.state.isLoggedIn}/>
+      <div className='appContainer'>
+
+        <Header
+          invalidUserPass={this.state.invalidUserPass}
+          login={this.login}
+          isLoggedIn={this.state.isLoggedIn}
+        />
+        <Homepage
+          checkToken={this.checkToken}
+          signup={this.signup}
+        />
+        {/*<Login invalidUserPass={this.state.invalidUserPass} token = {this.checkToken} signup={this.signup} login={this.login} isLoggedIn={this.state.isLoggedIn}/>*/}
+        <Footer />
       </div>
       )
     }
