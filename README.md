@@ -1,13 +1,19 @@
-# MVP Scaffold
+### Private List ###
 
-OPTIONAL: Use the provided scaffold to start your MVP project. It has everything you need to get started with an Angular or React client, a node express server, and a MySQL or Mongo database. If you choose to use this scaffold, please spend some time familiarizing yourself with how the pieces are connected after following the set up directions below. 
+### Secure TODO list ###
+Recognizing a general need for increased security and coding best practices, privateList aims to be a platform for others to build messaging applications.  By handling authentication, and basic encyption, hashing, and salting, developers can just right in getting focused on designing important features.
 
-**Important note:** Take the time to understand all of the code that is given to you before you write *any* code yourself.
+### A Note on Security ###
+Please do not copy and paste this repo thinking you and your users will 100% secure.  I take no responsiblity in misuse of this material.
 
-### Front End Set Up - React
+### Tech Stack ###
 
-To transpile your files, you'll use webpack, which you'll need to have globally installed. 
+React, Node, Express, and MySQL
 
-### General Set Up
+### Getting Started ###
 
-Remove unneeded folders from the repo and unneeded dependancies from package.json. Examine the `package.json` for helpful scripts. 
+Fork the repo and clone it to your local dev machine. Run npm install to install dependencies.  Now's also a good time to set up your linter.  Once your ready to get going turn on MySQL(build script located in schema.sql file) and run npm run build-dev and npm run server-dev to get going on port 3000.  Check into localhost and you should be ready to start hacking!
+
+### Questions ###
+
+Please feel free to reach out if you have any questions, or better yet submit a PR and I'll gladly look it over!
