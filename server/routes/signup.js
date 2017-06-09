@@ -24,7 +24,10 @@ module.exports = (req, res) => {
         } else if (success) {
           //GET USER_ID
           res.status(201);
-          res.send({ user_added: id });
+          res.send({
+            user_id: id,
+            username
+          });
         }
       })
     }

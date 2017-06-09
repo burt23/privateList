@@ -58,45 +58,47 @@ class SignUp extends React.Component {
   }
 
   render(){
-    if(!this.state.userWantsLogin){
-
     return(
-      <div className = 'container'>
-        <div className = 'formWrapper'>
-          <h1 id='mainTitle'>Private List</h1>
+        <div className = 'tokenModalWrapper'>
+
           <h3> Sign Up </h3>
-            <form onSubmit={this.handleSubmit}>
-              <div className='signupBoxUser'>
-                <input type='text' id='username' placeholder='username' onChange={this.handleChangeUsername} value={this.state.username}/>
+
+            <form
+              className='modalForm'
+              onClick={this.props.handleFormClick}
+              onSubmit={this.handleSubmit}>
+
+              <div className='tokenModalFlexItem'>
+                <div className='signupBoxUser'>
+                  <input type='text' id='username' placeholder='username' onChange={this.handleChangeUsername} value={this.state.username}/>
+                </div>
               </div>
-              <div className='signupBoxPass'>
-                <input type='password' id='password' placeholder='password' onChange={this.handleChangePassword} value={this.state.password} />
+              <div className='tokenModalFlexItem'>
+                <div className='signupBoxPass'>
+                  <input type='password' id='password' placeholder='password' onChange={this.handleChangePassword} value={this.state.password} />
+                </div>
               </div>
-              <div className='signupBoxPass'>
-                <input type='password' id='passwordVerify' placeholder='password' onChange={this.handleChangeVerifier} value={this.state.verifier}/>
+              <div className='tokenModalFlexItem'>
+                <div className='signupBoxPass'>
+                  <input type='password' id='passwordVerify' placeholder='verify' onChange={this.handleChangeVerifier} value={this.state.verifier}/>
+                </div>
               </div>
-              <div className='submitButton'>
-                <input type='submit' value='Submit' />
+              <div className='tokenModalFlexItem'>
+                <div className='submitButton'>
+                  <input type='submit' value='Submit' />
+                </div>
               </div>
-              <span className={ this.state.invalidCombo ? 'invalidCombo' : 'hidden' }>
-                <p>Invalid Combo</p>
-                <p>Password's must match</p>
-              </span>
+              <div className='tokenModalFlexItem'>
+                <span className={ this.state.invalidCombo ? 'invalidCombo' : 'hidden' }>
+                  <p>Invalid Combo</p>
+                  <p>Password's must match</p>
+                </span>
+              </div>
             </form>
-          </div>
-          <div className='signupWrapper'>
-            <button className='signInButton' onClick={this.props.handleLoginChange}>Already a user?</button>
-          </div>
-      </div>
-      )
-    } else {
-      return (
-        <div>
-          <Login />
         </div>
-        )
+
+          )
     }
-  }
 }
 
 export default SignUp;

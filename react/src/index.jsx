@@ -9,6 +9,7 @@ import Homepage from './containers/Homepage.js';
 import Footer from './containers/Footer.js';
 import Portal from './containers/Portal.js';
 import TokenModal from './containers/TokenModal.js';
+import SignupModal from './containers/SignupModal.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -24,9 +25,11 @@ class App extends React.Component {
       userCanEdit: false,
       invalidUserPass: false,
       senderEmail: '',
-      emailError: false
-
+      emailError: false,
+      wantsSignupModal: false,
+      username: ''
     };
+
     this.search = this.search.bind(this);
     this.login = this.login.bind(this);
     this.signup = this.signup.bind(this);
@@ -40,15 +43,27 @@ class App extends React.Component {
     this.handleEmailSubmit = this.handleEmailSubmit.bind(this);
     this.handleModalExit = this.handleModalExit.bind(this);
     this.addList = this.addList.bind(this);
+    this.wantsSignupModal = this.wantsSignupModal.bind(this);
   }
 
   componentDidMount() {
   }
 
+  wantsSignupModal(event){
+    console.log('clicked wantsSignupModal');
+    this.setState({
+      wantsSignupModal: !this.state.wantsSignupModal
+    })
+  }
+
   handleLogout(event){
     this.setState({
       isLoggedIn: false,
-      showToken: false
+      showToken: false,
+      wantsSignupModal: false,
+      showToken: false,
+      requestedToken: false,
+      invalidUserPass: false
     })
   }
 
@@ -231,7 +246,8 @@ class App extends React.Component {
       success: function(data) {
         context.setState({
           isLoggedIn: true,
-          user_id: data.user_added
+          user_id: data.user_id,
+          username
         });
       context.get(context.state.user_id);
       },
@@ -254,7 +270,8 @@ class App extends React.Component {
       success: function(data) {
         context.setState({
           isLoggedIn: true,
-          user_id: data.user_id
+          user_id: data.user_id,
+          username
         });
         context.get(context.state.user_id);
       },
@@ -325,6 +342,15 @@ class App extends React.Component {
         />
       </div>
       )
+    } else if (this.state.wantsSignupModal) {
+      return (
+        <div>
+          <SignupModal
+            handleModalExit={this.handleModalExit}
+            signup={this.signup}
+          />
+          <h2>hello</h2>
+        </div>)
     } else {
       return (
 
@@ -333,10 +359,11 @@ class App extends React.Component {
           invalidUserPass={this.state.invalidUserPass}
           login={this.login}
           isLoggedIn={this.state.isLoggedIn}
+          wantsSignupModal={this.wantsSignupModal}
+          signup={this.signup}
         />
         <Homepage
           checkToken={this.checkToken}
-          signup={this.signup}
         />
         <Footer />
       </div>

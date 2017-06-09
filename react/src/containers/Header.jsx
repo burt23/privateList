@@ -14,7 +14,7 @@ class Header extends React.Component {
 
         <div className='headerFlexItem headFlexItemCenter'>
           <h1>
-            <a href="#">Private List</a>
+            <a href="#">Node 360</a>
           </h1>
         </div>
 
@@ -22,6 +22,7 @@ class Header extends React.Component {
           { !this.props.isLoggedIn ?
             (<Login
               login={this.props.login}
+              signup={this.props.wantsSignupModal}
             />)
               :
             (<span className='headerFlexItem'>

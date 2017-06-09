@@ -47,12 +47,40 @@ class Login extends React.Component {
           </div>
         </div>
 
+
+
         <div className='loginFlexItem loginBox'>
-          <input type='password' id='password' placeholder='password' value={this.state.password} onChange={this.handleChangePassword}/>
-        </div>
+          <div className='loginbarColumnFlexbox'>
+            <div className='loginbarColumnFlexItem'>
+              <h4>
+                Password
+              </h4>
+            </div>
+            <div className='loginbarColumnFlexItem'>
+              <input type='password' id='password' placeholder='password' value={this.state.password} onChange={this.handleChangePassword}/>
+            </div>
+          </div>
+       </div>
 
         <div className='loginFlexItem loginFlexItemButton'>
-          <input type='submit' value='Login' />
+
+            <div className='loginbarColumnFlexbox'>
+              <div className='loginbarColumnFlexItem'>
+                <div className='loginFlexItem loginFlexItemButton'>
+                  <input type='submit' value='Login' />
+                </div>
+              </div>
+            </div>
+        </div>
+        <div className='loginFlexItem loginFlexItemButton'>
+
+            <div className='loginbarColumnFlexbox'>
+              <div className='loginbarColumnFlexItem'>
+                <div className='loginFlexItem loginFlexItemButton'>
+                  <input type='submit' value='Sign Up' onClick={this.props.signup}/>
+                </div>
+              </div>
+            </div>
         </div>
 
         <div className={ this.props.invalidUserPass ? 'loginFlexItem loginFlexItemLoginError' : 'hidden' }>
