@@ -5,6 +5,7 @@ import List from './components/List.jsx';
 import Search from './components/Search.jsx';
 import Login from './components/Login.jsx';
 import Header from './containers/Header.jsx';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Homepage from './containers/Homepage.js';
 import Footer from './containers/Footer.js';
 import Portal from './containers/Portal.js';
@@ -307,58 +308,63 @@ class App extends React.Component {
   render () {
     if(this.state.isLoggedIn){
     return (
-      <div>
-        { this.state.showToken &&
-        <TokenModal
-          handleEmailSubmit={this.handleEmailSubmit}
-          handleSenderEmail={this.handleSenderEmail}
-          accessToken={this.state.accessToken}
-          handleModalExit={this.handleModalExit}
-        />
-        }
-        <Portal
-          username={this.username}
-          user_id={this.user_id}
-          handleLogout={this.handleLogout}
-          handleTokenChange={this.handleTokenChange}
-          handleEmailSubmit={this.handleEmailSubmit}
-          handleSenderEmail={this.handleSenderEmail}
-          handleEmailSubmit={this.handleEmailSubmit}
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-          items={this.state.items}
-          delete={this.delete}
-          search={this.search}
-          lists={this.state.lists}
-          addList={this.addList}
-        />
-      </div>
+      <MuiThemeProvider>
+        <div>
+          { this.state.showToken &&
+          <TokenModal
+            handleEmailSubmit={this.handleEmailSubmit}
+            handleSenderEmail={this.handleSenderEmail}
+            accessToken={this.state.accessToken}
+            handleModalExit={this.handleModalExit}
+          />
+          }
+          <Portal
+            username={this.username}
+            user_id={this.user_id}
+            handleLogout={this.handleLogout}
+            handleTokenChange={this.handleTokenChange}
+            handleEmailSubmit={this.handleEmailSubmit}
+            handleSenderEmail={this.handleSenderEmail}
+            handleEmailSubmit={this.handleEmailSubmit}
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+            items={this.state.items}
+            delete={this.delete}
+            search={this.search}
+            lists={this.state.lists}
+            addList={this.addList}
+          />
+        </div>
+      </MuiThemeProvider>
       )
     } else if (this.state.wantsSignupModal) {
       return (
+       <MuiThemeProvider>
         <div>
           <SignupModal
             handleModalExit={this.handleModalExit}
             signup={this.signup}
           />
           <h2>hello</h2>
-        </div>)
+        </div>
+      </MuiThemeProvider>)
     } else {
       return (
-
-      <div className='welcomeContainer'>
-        <Header
-          invalidUserPass={this.state.invalidUserPass}
-          login={this.login}
-          isLoggedIn={this.state.isLoggedIn}
-          wantsSignupModal={this.wantsSignupModal}
-          signup={this.signup}
-        />
-        <Homepage
-          checkToken={this.checkToken}
-        />
-        <Footer />
-      </div>
+      <MuiThemeProvider>
+        <div className='welcomeContainer'>
+          <Header
+            invalidUserPass={this.state.invalidUserPass}
+            login={this.login}
+            isLoggedIn={this.state.isLoggedIn}
+            wantsSignupModal={this.wantsSignupModal}
+            signup={this.signup}
+          />
+          <Homepage
+            checkToken={this.checkToken}
+          />
+          <Footer />
+        </div>
+      </MuiThemeProvider>
       )
     }
   }
