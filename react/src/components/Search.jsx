@@ -25,10 +25,9 @@ class Search extends React.Component {
   render() {
     return(
     <div id='searchBar'>
-
-      <form id='searchForm' className='portalTopBarFlexbox' onSubmit={this.handleSubmit}>
-        <input id='searchBox' className='portalTopBarFlexItem' type='text' placeholder='create new message' value={this.state.value} onChange={this.handleChange}/>
-        <input type='submit' value='Submit' className='portalTopBarFlexItem portalTopBarFlexItemRight' />
+      <form id='searchForm' className='portalTopbarFlexbox' onSubmit={this.handleSubmit}>
+        <input id='searchBox' className='portalTopbarFlexItemLeft' type='text' placeholder='create new message' value={this.state.value} onChange={this.handleChange}/>
+        <input type='submit' value='Submit' className='portalTopbarFlexItemRight'/>
       </form>
     </div>
     )

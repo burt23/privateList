@@ -14,7 +14,7 @@ class Footer extends React.Component {
 
         <div className='footerFlexItem'>
           <h4>
-            Made with Love by @burt23
+            Made with Love by <a href="https://github.com/burt23">@burt23</a>
           </h4>
         </div>
         {this.props.user_id &&
@@ -26,12 +26,13 @@ class Footer extends React.Component {
         }
 
         <div className='footerFlexItem'>
-          <h4> MIT License </h4>
+          <a href="https://en.wikipedia.org/wiki/MIT_License">
+            <h4> MIT License </h4>
+          </a>
         </div>
 
       </div>)
   }
-
 }
 
 export default Footer;

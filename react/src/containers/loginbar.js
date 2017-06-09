@@ -33,17 +33,34 @@ class Login extends React.Component {
   render () {
     return (
       <form className='loginFlexbox' onSubmit={this.handleSubmit}>
+
         <div className='loginFlexItem loginBox'>
-          <input type='text' id='username' placeholder='username' value={this.state.username} onChange={this.handleChangeUsername} />
+          <div className='loginbarColumnFlexbox'>
+            <div className='loginbarColumnFlexItem'>
+              <h4>
+                Username
+              </h4>
+            </div>
+            <div className='loginbarColumnFlexItem'>
+              <input className='loginbarColumnFlexItem' type='text' id='username' placeholder='username' value={this.state.username} onChange={this.handleChangeUsername} />
+            </div>
+          </div>
         </div>
+
         <div className='loginFlexItem loginBox'>
           <input type='password' id='password' placeholder='password' value={this.state.password} onChange={this.handleChangePassword}/>
         </div>
-        <div className='loginFlexItem submitButton'>
+
+        <div className='loginFlexItem loginFlexItemButton'>
           <input type='submit' value='Login' />
         </div>
+
         <div className={ this.props.invalidUserPass ? 'loginFlexItem loginFlexItemLoginError' : 'hidden' }>
-          <span><p>Not quite right</p></span>
+          <span>
+            <p>
+              Not quite right
+            </p>
+          </span>
         </div>
       </form>
     )
@@ -53,3 +70,32 @@ class Login extends React.Component {
 
 
 export default Login;
+
+        // <div className='loginFlexItem'>
+
+        //   <div className='loginbarColumnFlexbox'>
+        //     <div className='loginbarColumnFlexItem'>
+        //       <h6>
+        //         Username
+        //       </h6>
+        //     </div>
+        //     <div className='loginbarColumnFlexItem'>
+        //       <input type='text' id='username' placeholder='username' value={this.state.username} onChange={this.handleChangeUsername} />
+        //     </div>
+        //   </div>
+        // </div>
+
+        // <div className='loginFlexItem'>
+        //   <div className='loginbarColumnFlexbox'>
+        //     <div className='loginbarColumnFlexItem'>
+        //       <h6>
+        //         Password
+        //       </h6>
+        //     </div>
+        //     <div className='loginbarColumnFlexItem'>
+        //       <input type='password' id='password' placeholder='password' value={this.state.password} onChange={this.handleChangePassword}/>
+        //     </div>
+        //   </div>
+        // </div>
+
+

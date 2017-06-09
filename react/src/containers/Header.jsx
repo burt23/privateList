@@ -14,7 +14,7 @@ class Header extends React.Component {
 
         <div className='headerFlexItem headFlexItemCenter'>
           <h1>
-            Private List
+            <a href="#">Private List</a>
           </h1>
         </div>
 
