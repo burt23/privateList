@@ -53,6 +53,7 @@ const PortalVerticalTabs = () => (
         >
           <ActionDashboard />
         </IconButton>
+        <span>Dashboard</span>
 
       </div>
 
@@ -60,9 +61,12 @@ const PortalVerticalTabs = () => (
        <IconButton
          iconStyle={styles.largeIcon}
          style={styles.large}
+         label="test"
        >
-         <ActionNetwork />
+         <ActionNetwork/>
        </IconButton>
+        <span>Network</span>
+
 
       </div>
 
@@ -73,6 +77,7 @@ const PortalVerticalTabs = () => (
         >
         <ActionSchedule />
       </IconButton>
+      <span>Schedule</span>
 
       </div>
 
@@ -83,6 +88,7 @@ const PortalVerticalTabs = () => (
         >
            <ActionHardware />
         </IconButton>
+        <span>Devices</span>
       </div>
       <div>
           <IconButton
@@ -91,6 +97,7 @@ const PortalVerticalTabs = () => (
           >
           <ActionSettings />
         </IconButton>
+        <span>Settings</span>
       </div>
     </section>
   </nav>

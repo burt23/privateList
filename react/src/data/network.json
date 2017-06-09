@@ -1,0 +1,145 @@
+var network = {
+    "network":          "test",
+    "panid":            "0xabcd",
+    "coap_port":        5683,
+    "beaconPeriod":     30,
+    "superFrameSize":   100,
+    "slotPeriod":       10,
+    "interface":
+        {
+            "if0":            "bt0",
+            "if1":            "lowpan0"
+        },
+    "radio":
+        {
+            "type":            "rfm95",
+            "modulation":       "gfsk",
+            "txpower":          14,
+            "channel":          10
+        },
+    "global_resources":    [
+    { "mac_cmd":        "coap://cfg/mac/cmd" },
+    { "mac_tsch":       "coap://cfg/mac/tsch" }
+    ],
+    "nodes": [
+        {
+            "name":        "controller",
+            "iid_mac":     "fb:73:43:70:20:7a",
+            "serial_no":   68294442,
+            "ipv6_addr":   "2001::db8:1",
+            "node_id":      1,
+            "broadcast":    255,
+            "state":       "6lbr",
+            "slots":       "all",
+            "resources":    [
+            ]
+            ,
+            "apptoken":    [
+            ]
+        },
+        {
+            "name":         "pond",
+            "iid_mac":      "00:00:d9:8e:95:29:29:97",
+            "ipv6_addr":    "2001::db8:2",
+            "node_id":      2,
+            "broadcast":    255,
+            "serial_no":    682525919,
+            "state":        "peer",
+            "slots": [
+                {
+                    "slot_offset":  1,
+                    "rx-tx":        "rx",
+                    "shared":       false
+                }
+            ],
+            "resources":    [
+                { "temp":       "coap://sensor/temperature" },
+                { "rh":         "coap://sensor/relative_humidity" },
+                { "ph":         "coap://sensor/ph" },
+                { "relay":      "coap://actuator/relay" },
+                { "solenoid":   "coap://actuator/solenoid" }
+            ]
+            ,
+            "apptoken":    [
+            ]
+        },
+        {
+            "name":         "tank",
+            "iid_mac":      "f4:63:1c:c1:96:c4",
+            "ipv6_addr":    "2001::db8:2",
+            "node_id":      3,
+            "broadcast":    255,
+            "serial_no":    682534722,
+            "state":        "peer",
+            "slots": [
+                {
+                    "slot_offset":  1,
+                    "rx-tx":        "rx",
+                    "shared":       false
+                }
+            ],
+            "resources":    [
+                { "temp":       "coap://sensor/temperature" },
+                { "rh":         "coap://sensor/relative_humidity" },
+                { "ph":         "coap://sensor/ph" },
+                { "relay":      "coap://actuator/relay" },
+                { "solenoid":   "coap://actuator/solenoid" }
+            ]
+            ,
+            "apptoken":    [
+            ]
+        },
+        {
+            "name":         "house",
+            "iid_mac":      "d4:d2:8f:d6:a5:cb",
+            "ipv6_addr":    "2001::db8:2",
+            "node_id":      4,
+            "broadcast":    255,
+            "serial_no":    682967690,
+            "state":        "peer",
+            "slots": [
+                {
+                    "slot_offset":  1,
+                    "rx-tx":        "rx",
+                    "shared":       false
+                }
+            ],
+            "resources":    [
+                { "temp":       "coap://sensor/temperature" },
+                { "rh":         "coap://sensor/relative_humidity" },
+                { "ph":         "coap://sensor/ph" },
+                { "relay":      "coap://actuator/relay" },
+                { "solenoid":   "coap://actuator/solenoid" }
+            ]
+            ,
+            "apptoken":    [
+            ]
+        }
+    ]
+    ,
+    "mcast_slot":   0,
+    "schedule": [
+        { "node A": 1 },
+        { "node B": 2 }
+    ],
+    "zoap_resource": [
+        {
+         "name":   "temp sensor resource",
+         "get":    "piggyback_get",
+         "post":   "test_post",
+         "put":    "test_put",
+         "del":    "test_del",
+         "path":    "/test"
+        },
+        {
+            "name":   "PH sensor resource",
+            "get":    "prod_get",
+            "post":   "prod_post",
+            "put":    "prod_put",
+            "del":    "prod_del",
+            "path":   "/test",
+            "notify": "notify_func",
+        }
+    ]
+}
+

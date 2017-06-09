@@ -5,6 +5,7 @@ import Paper from 'material-ui/Paper';
 import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
 import Home from 'material-ui/svg-icons/action/home.js';
 import Power from 'material-ui/svg-icons/image/flash-on.js';
+import App from 'material-ui/svg-icons/navigation/apps.js';
 import Farming from 'material-ui/svg-icons/maps/terrain.js';
 import Water from 'material-ui/svg-icons/maps/local-drink.js';
 
@@ -15,6 +16,7 @@ const homeIcon = <Home />;
 const farmingIcon = <Farming />;
 const powerIcon = <Power />;
 const waterIcon = <Water />;
+const appIcon = <App />;
 
 /**
  * A simple example of `BottomNavigation`, with three labels and icons
@@ -61,6 +63,11 @@ class BottomNavPortal extends Component {
               label="Power"
               icon={powerIcon}
               onClick={() => this.select(3)}
+            />
+            <BottomNavigationItem
+              label="Apps"
+              icon={appIcon}
+              onClick={() => this.select(4)}
             />
           </BottomNavigation>
         </Paper>

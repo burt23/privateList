@@ -1,14 +1,15 @@
 import React from 'react';
 import Lists from './Lists.js';
 import Messages from './Messages.js';
-import PortalTopBar from './PortalTopBar.js';
 import PortalMain from './PortalMain.js';
 import PortalVerticalTabs from './PortalVerticalTabs.js';
 import Settings from 'material-ui/svg-icons/action/settings.js'
 import WiFi from 'material-ui/svg-icons/device/wifi-tethering.js'
 import Bluetooth from 'material-ui/svg-icons/device/bluetooth.js'
 import IconButton from 'material-ui/IconButton';
+import PortalIconMenu from './PortalIconMenu.js';
 import BottomNavPortal from './BottomNavPortal.js';
+import Data from '../data/network.json';
 
 import {AutoComplete, DropDownMenu, SvgIcon, MenuItem } from 'material-ui';
 
@@ -31,6 +32,7 @@ class Portal extends React.Component {
     this.setState({
       dropDownValue: event.target.value
     })
+    console.log('data', Data);
   }
 
   handleSearchChange(event){
@@ -55,37 +57,27 @@ class Portal extends React.Component {
                 dataSource={this.state.dataSource}
                 hintText="Search Anything"
                 onChange={this.handleSearchChange}
+                fullWidth={true}
+
               />
             </li>
-            <li id='portalSettings'>
-            <Bluetooth id='Bluetooth'/>
-            <WiFi id='WiFi'/>
-            <Settings id='settings'/>
-
-
-            </li>
+            <PortalIconMenu />
           </ul>
         </header>
 
         <PortalVerticalTabs />
+
         <main>
           <PortalMain />
         </main>
+
         <footer className='bottomNav'>
           <BottomNavPortal className='bottomNav'/>
         </footer>
+
       </section>
     )
   }
 }
 
 export default Portal;
-            // <Messages
-            //   items={this.props.items}
-            //   delete={this.props.delete}
-            // />
-            //  <PortalTopBar search={this.props.search}/>
-            // <Lists
-            //   lists={this.props.lists}
-            //   addList={this.props.addList}
-            // />

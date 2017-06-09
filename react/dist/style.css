@@ -24,8 +24,9 @@ h1 {
 }
 
 h2 {
-  font-family: 'Special Elite', cursive;
-  font-size: 1.8em;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  font-size: 2.2em;
 
 }
 
@@ -102,7 +103,13 @@ header > ul > li {
   margin: 0;
 }
 
+#portalSearch {
+  flex-grow: 2;
+  align-self: right;
+  border-radius: 5em;
+  padding: 0em 0.5em;
 
+}
 #portal > nav {
   grid-area: nav;
 }
