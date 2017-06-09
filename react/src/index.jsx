@@ -17,7 +17,7 @@ class App extends React.Component {
     this.state = {
       items: [],
       lists: ['one', 'two', 'three'],
-      isLoggedIn: false,
+      isLoggedIn: true,
       user_id: null,
       showToken: false,
       accessToken: '',
@@ -307,7 +307,7 @@ class App extends React.Component {
   render () {
     if(this.state.isLoggedIn){
     return (
-      <div className='appContainer'>
+      <div>
         { this.state.showToken &&
         <TokenModal
           handleEmailSubmit={this.handleEmailSubmit}
@@ -316,14 +316,10 @@ class App extends React.Component {
           handleModalExit={this.handleModalExit}
         />
         }
-        <Header
-          invalidUserPass={this.state.invalidUserPass}
-          login={this.login}
-          isLoggedIn={this.state.isLoggedIn}
-          handleLogout={this.handleLogout}
-        />
-
         <Portal
+          username={this.username}
+          user_id={this.user_id}
+          handleLogout={this.handleLogout}
           handleTokenChange={this.handleTokenChange}
           handleEmailSubmit={this.handleEmailSubmit}
           handleSenderEmail={this.handleSenderEmail}
@@ -335,10 +331,6 @@ class App extends React.Component {
           search={this.search}
           lists={this.state.lists}
           addList={this.addList}
-        />
-        <Footer
-          handleTokenChange={this.handleTokenChange}
-          user_id={this.state.user_id}
         />
       </div>
       )
@@ -354,7 +346,7 @@ class App extends React.Component {
     } else {
       return (
 
-      <div className='appContainer'>
+      <div className='welcomeContainer'>
         <Header
           invalidUserPass={this.state.invalidUserPass}
           login={this.login}
