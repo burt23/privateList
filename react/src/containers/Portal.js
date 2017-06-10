@@ -68,7 +68,10 @@ class Portal extends React.Component {
         <PortalVerticalTabs />
 
         <main>
-          <PortalMain />
+          <PortalMain
+            connectFirstDevice={this.props.connectFirstDevice}
+            completeWhiz={this.props.completeWhiz}
+          />
         </main>
 
         <footer className='bottomNav'>

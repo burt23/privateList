@@ -12,6 +12,7 @@ import ActionSettings from 'material-ui/svg-icons/action/settings.js';
 import IconButton from 'material-ui/IconButton';
 
 
+
 const styles = {
   smallIcon: {
     width: 36,
@@ -43,6 +44,7 @@ const styles = {
 };
 
 
+
 const PortalVerticalTabs = () => (
   <nav>
     <section>
@@ -53,6 +55,7 @@ const PortalVerticalTabs = () => (
         >
           <ActionDashboard />
         </IconButton>
+
         <span>Dashboard</span>
 
       </div>

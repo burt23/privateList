@@ -8,16 +8,18 @@ export default class PortalMain extends Component {
   constructor(props){
     super(props);
     this.state = {
-      connectFirstDevice: false
+      connectFirstDevice: true
     }
   };
 
   render() {
-    if(this.state.connectFirstDevice) {
+    if(this.props.connectFirstDevice) {
       return (
         <div>
           <h2>Setup Wizard</h2>
-          <SignupWizard />
+          <SignupWizard
+            completeWhiz={this.props.completeWhiz}
+          />
         </div>
       )
     }

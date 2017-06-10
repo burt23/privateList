@@ -18,7 +18,7 @@ class App extends React.Component {
     this.state = {
       items: [],
       lists: ['one', 'two', 'three'],
-      isLoggedIn: true,
+      isLoggedIn: false,
       user_id: null,
       showToken: false,
       accessToken: '',
@@ -28,7 +28,8 @@ class App extends React.Component {
       senderEmail: '',
       emailError: false,
       wantsSignupModal: false,
-      username: ''
+      username: '',
+      connectFirstDevice: true
     };
 
     this.search = this.search.bind(this);
@@ -45,9 +46,17 @@ class App extends React.Component {
     this.handleModalExit = this.handleModalExit.bind(this);
     this.addList = this.addList.bind(this);
     this.wantsSignupModal = this.wantsSignupModal.bind(this);
+    this.completeWhiz = this.completeWhiz.bind(this);
   }
 
   componentDidMount() {
+  }
+
+  completeWhiz(){
+    console.log('completing teh wizard')
+    this.setState({
+      connectFirstDevice: false
+    })
   }
 
   wantsSignupModal(event){
@@ -248,6 +257,7 @@ class App extends React.Component {
         context.setState({
           isLoggedIn: true,
           user_id: data.user_id,
+          connectFirstDevice: true,
           username
         });
       context.get(context.state.user_id);
@@ -333,6 +343,8 @@ class App extends React.Component {
             search={this.search}
             lists={this.state.lists}
             addList={this.addList}
+            connectFirstDevice={this.state.connectFirstDevice}
+            completeWhiz={this.completeWhiz}
           />
         </div>
       </MuiThemeProvider>
@@ -359,9 +371,7 @@ class App extends React.Component {
             wantsSignupModal={this.wantsSignupModal}
             signup={this.signup}
           />
-          <Homepage
-            checkToken={this.checkToken}
-          />
+
           <Footer />
         </div>
       </MuiThemeProvider>

@@ -1,24 +1,5 @@
 import React from 'react';
 
-// const Messages = (props) => {
-//   return(
-//   <div className='listsFlexbox'>
-//     { props.lists===0 ? (props.lists.map(list =>
-//       <p
-//         className='listsFlexlist'
-//         delete={props.delete}
-//         key={list.id}
-//         list={list}
-//       />
-//     )) : (<h2 onClick>Create New List</h2>) }
-//   </div>
-//   )
-// }
-
-// export default Messages;
-
-// import React from 'react';
-
 class Lists extends React.Component {
   constructor(props){
     super(props);

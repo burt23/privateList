@@ -6,6 +6,9 @@ import {
 } from 'material-ui/Stepper';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
+import StepOne from './StepOne.js';
+import StepTwo from './StepTwo.js';
+import StepThree from './StepThree.js';
 
 /**
  * Horizontal steppers are ideal when the contents of one step depend on an earlier step.
@@ -19,14 +22,21 @@ class SignupWizard extends React.Component {
     this.state = {
       finished: false,
       stepIndex: 0,
+      connectionType: ''
     };
     // bind functions
     this.handleNext = this.handleNext.bind(this);
     this.handlePrev = this.handlePrev.bind(this);
   }
 
-  handleNext(){
-    console.log('inside handlePrev')
+  handleNext(connectionType){
+    console.log('inside handleNext  ')
+
+    if (connectionType === 'bt' || connectionType !== 'nfc'){
+      this.setState({
+        connectionType
+      })
+    }
     const stepIndex = this.state.stepIndex;
     this.setState({
       stepIndex: stepIndex + 1,
@@ -42,14 +52,31 @@ class SignupWizard extends React.Component {
     }
   };
 
+
+  handleComplete(){
+    console.log('complete wiz');
+    this.props.completeWhiz();
+  }
+
   getStepContent(stepIndex) {
+    const stepOne = () => (<h2>lots of great content</h2>);
     switch (stepIndex) {
       case 0:
-        return 'Lets get started!';
+        return <StepOne
+                 handleNext={this.handleNext}
+                 handlePrev={this.handlePrev}
+               />;
       case 1:
-        return 'What is an ad group anyways?';
+        return  <StepTwo
+                  connectionType={this.state.connectionType}
+                  handleNext={this.handleNext}
+                  handlePrev={this.handlePrev}
+                />;
       case 2:
-        return 'This is the bit I really care about!';
+        return <StepThree
+                handleNext={this.handleNext}
+                handlePrev={this.handlePrev}
+              />;
       default:
         return 'You\'re a long way from home sonny jim!';
     }
@@ -59,14 +86,15 @@ class SignupWizard extends React.Component {
     const {finished, stepIndex} = this.state;
     const contentStyle = {margin: '0 16px'};
 
+
     return (
       <div style={{width: '100%', maxWidth: 700, margin: 'auto'}}>
         <Stepper activeStep={stepIndex}>
           <Step>
-            <StepLabel>Connect Gateway</StepLabel>
+            <StepLabel>Connection Type</StepLabel>
           </Step>
           <Step>
-            <StepLabel>Pair Nodes</StepLabel>
+            <StepLabel>Pair Gateway</StepLabel>
           </Step>
           <Step>
             <StepLabel>Manage Account</StepLabel>
@@ -74,33 +102,12 @@ class SignupWizard extends React.Component {
         </Stepper>
         <div style={contentStyle}>
           {finished ? (
-            <p>
-              <a
-                href="#"
-                onClick={(event) => {
-                  event.preventDefault();
-                  this.setState({stepIndex: 0, finished: false});
-                }}
-              >
-                Click here
-              </a> to reset the example.
-            </p>
-          ) : (
+            <span>{this.handleComplete()}</span>
+           ) : (
             <div>
               <p>{this.getStepContent(stepIndex)}</p>
-              <div style={{marginTop: 12}}>
-                <FlatButton
-                  label="Back"
-                  disabled={stepIndex === 0}
-                  onClick={this.handlePrev}
-                  style={{marginRight: 12}}
-                />
-                <RaisedButton
-                  label={stepIndex === 2 ? 'Finish' : 'Next'}
-                  primary={true}
-                  onClick={this.handleNext}
-                />
-              </div>
+
+
             </div>
           )}
         </div>
@@ -110,3 +117,16 @@ class SignupWizard extends React.Component {
 }
 
 export default SignupWizard;
+              // <div style={{marginTop: 12}}>
+              //   <FlatButton
+              //     label="Back"
+              //     disabled={stepIndex === 0}
+              //     onClick={this.handlePrev}
+              //     style={{marginRight: 12}}
+              //   />
+              //   <RaisedButton
+              //     label={stepIndex === 2 ? 'Finish' : 'Next'}
+              //     primary={true}
+              //     onClick={this.handleNext}
+              //   />
+              // </div>
