@@ -30,7 +30,7 @@ class App extends React.Component {
       username: '',
       connectFirstDevice: false,
       openMenu: false,
-      portalIndex: '3'
+      portalIndex: '0'
     };
 
     this.search = this.search.bind(this);

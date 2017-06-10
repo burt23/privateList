@@ -49,7 +49,7 @@ class StepOne extends Component {
         <h3 id="wizardHeadliner"> Choose your connection method </h3>
         <div className='swTiles'>
           <div className='swTile'>
-            <Paper className='paper'>
+            <Paper className='paper' zDepth={2}>
               <div className='paperCol'>
                 <IconButton
                   iconStyle={styles.largeIcon}
@@ -57,17 +57,15 @@ class StepOne extends Component {
                 >
                   <Bluetooth />
                 </IconButton>
-                <h2 className='paperCol'>Bluetooth</h2>
+              </div>
+              <h2 className='paperCol'>Bluetooth</h2>
                 <p className='paperCol'>Bluetooth offers a fast and easy way to quickly add devices to your network.  Please note that Bluetooth pairing may not meet certain compliance requirements, and that it is less secure than NFC pairing.</p>
-              </div>
-              <div className='paperCol'>
                 <RaisedButton value="bt" onClick={this.handleButtonClick} className='paperCol' label="Connect" primary={true} style={styles.button} />
-              </div>
             </Paper>
           </div>
 
           <div className='swTile'>
-            <Paper className='paper'>
+            <Paper className='paper'zDepth={2}>
               <div className='paperCol'>
                   <IconButton
                     iconStyle={styles.largeIcon}
@@ -80,10 +78,14 @@ class StepOne extends Component {
                 NFC
               </h2>
               <p className='paperCol'>NFC offers the best of security and convenience.  Simply tap your smartphone to your 3sixty and the devices are configured automatically, and securely. Required for compliance in certain industries.</p>
-              <span className='paperCol'>
-                <RaisedButton value="nfc" onClick={this.handleButtonClick}  label="Connect" primary={true} style={styles.button}
+                <RaisedButton
+                  value="nfc"
+                  onClick={this.handleButtonClick}
+                  label="Connect"
+                  primary={true}
+                  style={styles.button}
+                  className="paperCol"
                 />
-              </span>
             </Paper>
           </div>
         </div>

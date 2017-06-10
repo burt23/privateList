@@ -124,9 +124,6 @@ class Portal extends React.Component {
           />
         </main>
 
-        <footer className='bottomNav'>
-          <BottomNavPortal className='bottomNav'/>
-        </footer>
 
       </section>
     )
@@ -134,3 +131,6 @@ class Portal extends React.Component {
 }
 
 export default Portal;
+        // <footer className='bottomNav'>
+        //   <BottomNavPortal className='bottomNav'/>
+        // </footer>
