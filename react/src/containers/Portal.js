@@ -5,6 +5,8 @@ import PortalMain from './PortalMain.js';
 import PortalVerticalTabs from './PortalVerticalTabs.js';
 import Settings from 'material-ui/svg-icons/action/settings.js'
 import WiFi from 'material-ui/svg-icons/device/wifi-tethering.js'
+import BadgeIcon from '../components/Badge.jsx';
+import Menu from 'material-ui/svg-icons/navigation/menu.js'
 import Bluetooth from 'material-ui/svg-icons/device/bluetooth.js'
 import IconButton from 'material-ui/IconButton';
 import PortalIconMenu from './PortalIconMenu.js';
@@ -19,12 +21,32 @@ class Portal extends React.Component {
     this.state = {
       dataSource: [],
       searchValue: '',
-      dropDownValue: 1
+      dropDownValue: 1,
+      openMenu: false,
+      portalIndex: 0,
     };
     // bind functions
     this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleDropDownChange = this.handleDropDownChange.bind(this);
+    this.handleMenuClick = this.handleMenuClick.bind(this);
+    this.handleIndexChange = this.handleIndexChange.bind(this);
+    this.handleWindowChange = this.handleWindowChange.bind(this);
 
+
+  }
+
+  handleIndexChange(portalIndex){
+    console.log('inside handleIndexChangePORTAL', portalIndex);
+    this.setState({
+      portalIndex
+    }, this.handleWindowChange(portalIndex))
+
+    console.log('portalIndexpost async, should hit first', this.state.portalIndex)
+  }
+
+  handleWindowChange(e){
+    console.log('inside handleWindowChangeASYNCPORTAL', e)
+    console.log('inside handleWindowChangeASYNCPORTAL', this.state.portalIndex);
   }
 
   handleDropDownChange(event){
@@ -32,10 +54,18 @@ class Portal extends React.Component {
     this.setState({
       dropDownValue: event.target.value
     })
-    console.log('data', Data);
+
+  }
+
+  handleMenuClick(event){
+    console.log('menu clicked', this.state.openMenu)
+    this.props.handleOpenMenu();
   }
 
   handleSearchChange(event){
+
+    console.log('handleSearchChange event', event)
+
     this.setState({
       searchValue: event.target.value,
       dataSource: [
@@ -47,11 +77,18 @@ class Portal extends React.Component {
   }
 
   render(){
+
     return(
-      <section id="portal">
+
+      <section id={!this.state.openMenu ? 'portal' : 'portalClosedMenu'}>
+
         <header>
           <ul>
-            <li id='portalLogo'>Node 360</li>
+            <li onClick={this.handleMenuClick}>
+              <IconButton>
+                <Menu id='portalLogo'/>
+              </IconButton>
+            </li>
             <li id='portalSearch'>
               <AutoComplete
                 dataSource={this.state.dataSource}
@@ -61,16 +98,29 @@ class Portal extends React.Component {
 
               />
             </li>
-            <PortalIconMenu />
+            <li>
+              <BadgeIcon />
+            </li>
+            <li>
+              <PortalIconMenu />
+            </li>
           </ul>
         </header>
 
-        <PortalVerticalTabs />
+
+
+        <PortalVerticalTabs
+          handleIndexChange={this.handleIndexChange}
+          changePortalIndex={this.props.changePortalIndex}
+        />
+
+
 
         <main>
           <PortalMain
             connectFirstDevice={this.props.connectFirstDevice}
             completeWhiz={this.props.completeWhiz}
+            portalIndex={this.props.portalIndex}
           />
         </main>
 

@@ -90,14 +90,16 @@ header > ul {
   flex-direction: row;
   padding: 0;
   margin: 0;
+  top: 0;
+  left: 0;
+  height: 5vh;
   flex-wrap: nowrap;
-  justify-content: center;
-  align-content: center;
+  justify-content: stretch;
+  align-items: center;
 }
 
 header > ul > li {
-  flex: 1 1 auto;
-  align-self: center;
+  flex: 0 1 auto;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -140,7 +142,67 @@ header > ul > li {
   grid-area: foot;
 }
 
+#portal > nav > section > div:hover {
+    background-color: cyan;
+}
 
+/*closed menu*/
+
+#portalClosedMenu {
+  display: grid;
+  height: 100%;
+  background: white;
+  grid-template-areas: "head head"
+                       "nav  main"
+                       "nav  main";
+  grid-template-rows: 50px 1fr 30px;
+  grid-template-columns: 50px 1fr;
+}
+
+
+#portalClosedMenu > header {
+  grid-area: head;
+}
+
+#portalClosedMenu > nav {
+  grid-area: nav;
+}
+
+#portalClosedMenu > nav > section {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: stretch;
+  justify-content: center;
+  height: 88vh;
+  background-color: rgba(255, 204, 128, 0.8);
+}
+
+#portalClosedMenu > nav > section > div {
+  flex: 1 1 auto;
+  align-self: center;
+}
+
+
+#portalClosedMenu > main {
+  background-color: white;
+  grid-area: main;
+}
+
+#portalClosedMenu > footer {
+  background-color: gold;
+  grid-area: foot;
+}
+
+#portalClosedMenu > nav > section > div:hover {
+    background-color: cyan;
+}
+.notificationID {
+  display: none;
+}
+
+
+/*portalClosedMenu closed*/
 .pt {
   display: flex;
   flex-direction: column;

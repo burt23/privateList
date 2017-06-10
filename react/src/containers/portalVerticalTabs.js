@@ -13,98 +13,127 @@ import IconButton from 'material-ui/IconButton';
 
 
 
-const styles = {
-  smallIcon: {
-    width: 36,
-    height: 36,
-  },
-  mediumIcon: {
-    width: 48,
-    height: 48,
-  },
-  largeIcon: {
-    width: 60,
-    height: 60,
-  },
-  small: {
-    width: 72,
-    height: 72,
-    padding: 16,
-  },
-  medium: {
-    width: 96,
-    height: 96,
-    padding: 24,
-  },
-  large: {
-    width: 120,
-    height: 120,
-    padding: 30,
-  },
-};
 
 
+class PortalVerticalTabs extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {}
+    this.handleIndexChange = this.handleIndexChange.bind(this);
+  }
 
-const PortalVerticalTabs = () => (
-  <nav>
-    <section>
-      <div>
-        <IconButton
-          iconStyle={styles.largeIcon}
-          style={styles.large}
-        >
-          <ActionDashboard />
-        </IconButton>
+  handleIndexChange(event){
+    console.log('VERTICAL TABS', event.target.value);
+    this.props.changePortalIndex(event.target.value);
+  }
 
-        <span>Dashboard</span>
+  render(){
 
-      </div>
+    const styles = {
+      smallIcon: {
+        width: 36,
+        height: 36,
+      },
+      mediumIcon: {
+        width: 48,
+        height: 48,
+      },
+      largeIcon: {
+        width: 60,
+        height: 60,
+      },
+      small: {
+        width: 72,
+        height: 72,
+        padding: 16,
+      },
+      medium: {
+        width: 96,
+        height: 96,
+        padding: 24,
+      },
+      large: {
+        width: 120,
+        height: 120,
+        padding: 30,
+      },
+    };
 
-      <div>
-       <IconButton
-         iconStyle={styles.largeIcon}
-         style={styles.large}
-         label="test"
-       >
-         <ActionNetwork/>
-       </IconButton>
-        <span>Network</span>
+    return(
+      <nav>
+        <section>
+          <div>
+            <IconButton
+              iconStyle={styles.largeIcon}
+              style={styles.large}
+              value={'0'}
+              onClick={this.handleIndexChange}
+
+            >
+              <ActionDashboard />
+            </IconButton>
+
+            <span>Dashboard</span>
+
+          </div>
+
+          <div>
+           <IconButton
+             iconStyle={styles.largeIcon}
+             style={styles.large}
+             label="test"
+             value={'1'}
+              onClick={this.handleIndexChange}
+           >
+             <ActionNetwork/>
+           </IconButton>
+            <span>Network</span>
 
 
-      </div>
+          </div>
 
-      <div>
-        <IconButton
-          iconStyle={styles.largeIcon}
-          style={styles.large}
-        >
-        <ActionSchedule />
-      </IconButton>
-      <span>Schedule</span>
+          <div>
+            <IconButton
+              iconStyle={styles.largeIcon}
+              style={styles.large}
+              onClick={this.handleIndexChange}
+              value={'2'}
+            >
+            <ActionSchedule />
+          </IconButton>
+          <span>Schedule</span>
 
-      </div>
+          </div>
 
-      <div>
-        <IconButton
-          iconStyle={styles.largeIcon}
-          style={styles.large}
-        >
-           <ActionHardware />
-        </IconButton>
-        <span>Devices</span>
-      </div>
-      <div>
-          <IconButton
-            iconStyle={styles.largeIcon}
-            style={styles.large}
-          >
-          <ActionSettings />
-        </IconButton>
-        <span>Settings</span>
-      </div>
-    </section>
-  </nav>
-);
+          <div>
+            <IconButton
+              iconStyle={styles.largeIcon}
+              style={styles.large}
+              value={'3'}
+              onClick={this.handleIndexChange}
+
+            >
+               <ActionHardware />
+            </IconButton>
+            <span>Devices</span>
+          </div>
+          <div>
+              <IconButton
+                iconStyle={styles.largeIcon}
+                style={styles.large}
+                value={'4'}
+                onClick={this.handleIndexChange}
+
+              >
+              <ActionSettings />
+            </IconButton>
+            <span>Settings</span>
+          </div>
+        </section>
+      </nav>
+    )
+  }
+}
 
 export default PortalVerticalTabs;
 

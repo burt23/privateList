@@ -6,7 +6,6 @@ import Search from './components/Search.jsx';
 import Login from './components/Login.jsx';
 import Header from './containers/Header.jsx';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Homepage from './containers/Homepage.js';
 import Footer from './containers/Footer.js';
 import Portal from './containers/Portal.js';
 import TokenModal from './containers/TokenModal.js';
@@ -18,7 +17,7 @@ class App extends React.Component {
     this.state = {
       items: [],
       lists: ['one', 'two', 'three'],
-      isLoggedIn: false,
+      isLoggedIn: true,
       user_id: null,
       showToken: false,
       accessToken: '',
@@ -29,7 +28,9 @@ class App extends React.Component {
       emailError: false,
       wantsSignupModal: false,
       username: '',
-      connectFirstDevice: true
+      connectFirstDevice: false,
+      openMenu: false,
+      portalIndex: '3'
     };
 
     this.search = this.search.bind(this);
@@ -47,9 +48,35 @@ class App extends React.Component {
     this.addList = this.addList.bind(this);
     this.wantsSignupModal = this.wantsSignupModal.bind(this);
     this.completeWhiz = this.completeWhiz.bind(this);
+    this.handleOpenMenu = this.handleOpenMenu.bind(this)
+    this.changePortalIndex = this.changePortalIndex.bind(this)
+
   }
 
   componentDidMount() {
+  }
+
+  changePortalIndex(i){
+    console.log('inside change portalIndexFROMINDEX', i)
+    const navMenu = [
+     '1', '2', '3', '4', '0'
+    ]
+    let valid = navMenu.includes(i) === true ? true : false;
+    console.log('validityCheck', valid);
+    if(valid){
+      console.log('validInput')
+      this.setState({
+        portalIndex: i
+      })
+    }
+  }
+
+  handleOpenMenu() {
+    console.log('inside handleOpenMenu pre changed', this.state.openMenu);
+
+    this.setState({
+      openMenu: !this.state.openMenu
+    })
   }
 
   completeWhiz(){
@@ -345,6 +372,10 @@ class App extends React.Component {
             addList={this.addList}
             connectFirstDevice={this.state.connectFirstDevice}
             completeWhiz={this.completeWhiz}
+            handleOpenMenu={this.handleOpenMenu}
+            openMenu={this.state.openMenu}
+            portalIndex={this.state.portalIndex}
+            changePortalIndex={this.changePortalIndex}
           />
         </div>
       </MuiThemeProvider>
@@ -371,7 +402,6 @@ class App extends React.Component {
             wantsSignupModal={this.wantsSignupModal}
             signup={this.signup}
           />
-
           <Footer />
         </div>
       </MuiThemeProvider>
