@@ -60,24 +60,22 @@ class PortalVerticalTabs extends React.Component {
     };
 
     return(
-      <nav>
-        <section>
-          <div>
+      <nav id="verticalNavBar">
+        <ul>
+          <li>
             <IconButton
               iconStyle={styles.largeIcon}
               style={styles.large}
               value={'0'}
               onClick={this.handleIndexChange}
-
             >
               <ActionDashboard />
             </IconButton>
 
             <span>Dashboard</span>
 
-          </div>
-
-          <div>
+          </li>
+          <li>
            <IconButton
              iconStyle={styles.largeIcon}
              style={styles.large}
@@ -87,25 +85,23 @@ class PortalVerticalTabs extends React.Component {
            >
              <ActionNetwork/>
            </IconButton>
-            <span>Network</span>
+           <span>Network</span>
+          </li>
 
-
-          </div>
-
-          <div>
+          <li>
             <IconButton
               iconStyle={styles.largeIcon}
               style={styles.large}
               onClick={this.handleIndexChange}
               value={'2'}
             >
-            <ActionSchedule />
-          </IconButton>
-          <span>Schedule</span>
+              <ActionSchedule />
+            </IconButton>
+            <span>Schedule</span>
+          </li>
 
-          </div>
 
-          <div>
+          <li>
             <IconButton
               iconStyle={styles.largeIcon}
               style={styles.large}
@@ -116,8 +112,9 @@ class PortalVerticalTabs extends React.Component {
                <ActionHardware />
             </IconButton>
             <span>Devices</span>
-          </div>
-          <div>
+          </li>
+          <li>
+
               <IconButton
                 iconStyle={styles.largeIcon}
                 style={styles.large}
@@ -128,8 +125,8 @@ class PortalVerticalTabs extends React.Component {
               <ActionSettings />
             </IconButton>
             <span>Settings</span>
-          </div>
-        </section>
+          </li>
+        </ul>
       </nav>
     )
   }

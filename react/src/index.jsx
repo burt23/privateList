@@ -346,7 +346,7 @@ class App extends React.Component {
     if(this.state.isLoggedIn){
     return (
       <MuiThemeProvider>
-        <div>
+        <div className="portalWrapper">
           { this.state.showToken &&
           <TokenModal
             handleEmailSubmit={this.handleEmailSubmit}

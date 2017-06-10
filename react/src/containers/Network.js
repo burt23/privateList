@@ -12,31 +12,76 @@ class Network extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userWantsAccount: true,
-      userWantsAdvanced: false,
-      userWantsResources: false
+      userWantsGateways: true,
+      userWantsPeripherials: false,
+      userWantsCheck: false
     }
-    //bind
+    this.handleTabClick = this.handleTabClick.bind(this);
   }
+
+handleTabClick(e){
+  console.log('inside tab click yeah label buddy',  e.target.value);
+
+}
 
 
 render() {
-  return (
-    <Tabs className='portalTabs' >
-      <Tab
-        icon={<WiFi />}
-        label="Gateways"
-      />
-      <Tab
-        icon={<Hub />}
-        label="Peripherials"
-      />
-      <Tab
-        icon={<Check />}
-        label="Network Check"
-      />
-    </Tabs>
-    )
+  if(this.state.userWantsGateways) {
+    return (
+      <Tabs
+        className='portalTabs' >
+        <Tab
+          icon={<WiFi />}
+          label="Gateways"
+          onClick={this.handleTabClick.bind(this)}
+          value='2'
+        />
+        <Tab
+          icon={<Hub />}
+          label="Peripherials"
+        />
+        <Tab
+          icon={<Check />}
+          label="Network Check"
+        />
+      </Tabs>
+      )
+    } else if (this.state.userWantsPeripherials) {
+    return (
+      <Tabs className='portalTabs' >
+        <Tab
+          icon={<WiFi />}
+          label="Gateways"
+        />
+        <Tab
+          icon={<Hub />}
+          label="Peripherials"
+        />
+        <Tab
+          icon={<Check />}
+          label="Network Check"
+        />
+      </Tabs>
+
+      )
+    } else  if (this.state.userWantsCheck) {
+    return (
+      <Tabs className='portalTabs' >
+        <Tab
+          icon={<WiFi />}
+          label="Gateways"
+        />
+        <Tab
+          icon={<Hub />}
+          label="Peripherials"
+        />
+        <Tab
+          icon={<Check />}
+          label="Network Check"
+        />
+      </Tabs>
+      )
+    }
   }
 }
 

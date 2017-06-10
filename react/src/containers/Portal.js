@@ -12,6 +12,7 @@ import IconButton from 'material-ui/IconButton';
 import PortalIconMenu from './PortalIconMenu.js';
 import BottomNavPortal from './BottomNavPortal.js';
 import Data from '../data/network.json';
+import MagicMenu from './MagicMenu.js';
 
 import {AutoComplete, DropDownMenu, SvgIcon, MenuItem } from 'material-ui';
 
@@ -85,9 +86,9 @@ class Portal extends React.Component {
         <header>
           <ul>
             <li onClick={this.handleMenuClick}>
-              <IconButton>
-                <Menu id='portalLogo'/>
-              </IconButton>
+              <MagicMenu
+                id='portalLogo'
+              />
             </li>
             <li id='portalSearch'>
               <AutoComplete
@@ -108,11 +109,12 @@ class Portal extends React.Component {
         </header>
 
 
-
-        <PortalVerticalTabs
-          handleIndexChange={this.handleIndexChange}
-          changePortalIndex={this.props.changePortalIndex}
-        />
+        <nav>
+          <PortalVerticalTabs
+            handleIndexChange={this.handleIndexChange}
+            changePortalIndex={this.props.changePortalIndex}
+          />
+        </nav>
 
 
 
