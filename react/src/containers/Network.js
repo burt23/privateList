@@ -6,6 +6,7 @@ import Check from 'material-ui/svg-icons/notification/network-check'
 import Bluetooth from 'material-ui/svg-icons/device/bluetooth.js'
 import Hub from 'material-ui/svg-icons/hardware/device-hub';
 import WiFi from 'material-ui/svg-icons/device/wifi-tethering';
+import Gateways from './PortalMainRight.js';
 
 
 class Network extends React.Component {
@@ -71,7 +72,7 @@ render() {
           </Tabs>
         </div>
         <div>
-          <h1> Gateways </h1>
+          <Gateways />
         </div>
       </div>
       )
@@ -98,7 +99,7 @@ render() {
           </Tabs>
         </div>
         <div>
-          <h1> Peripherials </h1>
+        <Gateways />
         </div>
       </div>
 

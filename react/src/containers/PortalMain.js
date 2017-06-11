@@ -6,6 +6,7 @@ import Settings from './Settings.js'
 import Schedule from './Schedule.js'
 import Network from './Network.js'
 import Devices from './Devices.js'
+import Dashboard from './Dashboard.js'
 
 
 export default class PortalMain extends Component {
@@ -61,15 +62,11 @@ export default class PortalMain extends Component {
 
       } else if (this.props.portalIndex==='0'){
         return (
+          <div>
+          <Dashboard
+            />
+          </div>
 
-          <section id='dashboard'>
-            <ul>
-              <li id='dashUL'></li>
-              <li id='dashUR'></li>
-              <li id='dashLL'></li>
-              <li id='dashLR'></li>
-            </ul>
-          </section>
 
         )
       }

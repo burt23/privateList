@@ -5,7 +5,7 @@ class StepTwo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      successfullyPaired: false
     }
     // bind
     this.handleClick = this.handleClick.bind(this);
@@ -15,7 +15,11 @@ class StepTwo extends Component {
     console.log('inside handle click', event.target.value);
 
     if(event.target.value === 'next') {
-      this.props.handleNext()
+
+
+      this.setState({
+        successfullyPaired: true
+      })
     } else if (event.target.value === 'back') {
       this.props.handlePrev()
     }
@@ -44,8 +48,7 @@ class StepTwo extends Component {
 
       </div>
       )
-    }
-    else {
+    } else if (this.props.connectionType === 'nfc') {
       return (
         <div>
           <h3 id="wizardHeadliner">Ready to Pair</h3>
@@ -67,9 +70,8 @@ class StepTwo extends Component {
           />
         </div>
       )
-    }
+    } else return (<h1> oooooops! </h1>)
   }
-
 }
 
 export default StepTwo;

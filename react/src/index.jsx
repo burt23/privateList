@@ -28,7 +28,7 @@ class App extends React.Component {
       emailError: false,
       wantsSignupModal: false,
       username: '',
-      connectFirstDevice: true,
+      connectFirstDevice: false,
       openMenu: false,
       portalIndex: '0'
     };

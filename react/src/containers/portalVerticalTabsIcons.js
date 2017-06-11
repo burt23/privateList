@@ -87,101 +87,100 @@ class PortalVerticalTabsIcons extends React.Component {
 
       <div className="vnavFlex">
 
-        <div className="vnavChild">
+        <div className="vnavChild" onClick={this.handleToggle}>
           <IconButton
             label="Open Drawer"
-            onClick={this.handleToggle}
             iconStyle={styles.smallIcon}
           >
             <Menu />
           </IconButton>
-        <div className="vnavChild">
+        </div>
+        <div className="vnavChild" onClick={this.handleIndexChange}>
           <IconButton
             iconStyle={styles.smallIcon}
             style={styles.small}
             value={'0'}
-            onClick={this.handleIndexChange}
           >
             <ActionDashboard />
           </IconButton>
         </div>
 
-        <div className="vnavChild">
+        <div className="vnavChild" onClick={this.handleIndexChange}>
          <IconButton
            iconStyle={styles.smallIcon}
            style={styles.small}
            label="test"
            value={'1'}
-            onClick={this.handleIndexChange}
          >
            <ActionNetwork/>
          </IconButton>
         </div>
 
-        <div className="vnavChild">
+        <div className="vnavChild" onClick={this.handleIndexChange}>
 
           <IconButton
             iconStyle={styles.smallIcon}
             style={styles.small}
-            onClick={this.handleIndexChange}
             value={'2'}
           >
             <ActionSchedule />
           </IconButton>
         </div>
 
-        <div className="vnavChild">
+        <div className="vnavChild" onClick={this.handleIndexChange}>
 
             <IconButton
               iconStyle={styles.smallIcon}
               style={styles.small}
               value={'3'}
-              onClick={this.handleIndexChange}
-
             >
                <ActionHardware />
             </IconButton>
         </div>
-        <div className="vnavChild">
+        <div className="vnavChild" onClick={this.handleIndexChange}>
               <IconButton
                 iconStyle={styles.smallIcon}
                 style={styles.small}
                 value={'4'}
-                onClick={this.handleIndexChange}
 
               >
               <ActionSettings />
             </IconButton>
-        </div>
-        </div>
-        <Drawer
-          style={styles.small}
-          docked={false}
-          width={200}
-          open={this.state.open}
-          onClick={(open) => this.setState({open})}
-          id='drawerFlexbox'
-        >
 
-          <ul>
-            <li>
-            <MenuItem className='drawerFI' onClick={this.handleClose}>Dashboard</MenuItem>
-            </li>
-            <li>
-              <MenuItem className='drawerFI' onClick={this.handleClose}>Network</MenuItem>
-            </li>
-            <li>
-              <MenuItem className='drawerFI' onClick={this.handleClose}>Schedule</MenuItem>
-            </li>
-            <li>
-              <MenuItem className='drawerFI' onClick={this.handleClose}>Devices</MenuItem>
-            </li>
-            <li>
-              <MenuItem className='drawerFI' onClick={this.handleClose}>Apps</MenuItem>
-            </li>
-          </ul>
-        </Drawer>
+
+
       </div>
+      <div>
+            <Drawer
+              style={styles.small}
+              docked={false}
+              width={200}
+              open={this.state.open}
+              className={this.state.open ? '' : 'hidden'}
+              onClick={(open) => this.setState({open})}
+              id='drawerFlexbox'
+            >
+
+            <ul>
+               <li>
+              <MenuItem className='drawerFI' onClick={this.handleClose}>Dashboard</MenuItem>
+              </li>
+              <li>
+                <MenuItem className='drawerFI' onClick={this.handleClose}>Network</MenuItem>
+              </li>
+              <li>
+                <MenuItem className='drawerFI' onClick={this.handleClose}>Schedule</MenuItem>
+              </li>
+              <li>
+                <MenuItem className='drawerFI' onClick={this.handleClose}>Devices</MenuItem>
+              </li>
+              <li>
+                <MenuItem className='drawerFI' onClick={this.handleClose}>Apps</MenuItem>
+              </li>
+            </ul>
+          </Drawer>
+          </div>
+        </div>
     )
   }
 }

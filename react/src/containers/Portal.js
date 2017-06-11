@@ -64,12 +64,11 @@ class Portal extends React.Component {
     this.props.handleOpenMenu();
   }
 
-  handleSearchChange(event){
+  handleSearchChange(searchValue){
 
-    console.log('handleSearchChange event', event)
+    console.log('handleSearchChange event', searchValue)
 
     this.setState({
-      searchValue: event.target.value,
       dataSource: [
         searchValue,
         searchValue + searchValue,
@@ -90,11 +89,11 @@ class Portal extends React.Component {
               <AutoComplete
                 dataSource={this.state.dataSource}
                 hintText="Search Anything"
-                onChange={this.handleSearchChange}
+                onUpdateInput={this.handleSearchChange}
                 fullWidth={true}
               />
             </div>
-            <div className='portalHeaderFlexItem'>
+            <div className='portalHeaderFlexItem portalHeaderFlexIconMenu'>
               <PortalIconMenu />
             </div>
           </div>
