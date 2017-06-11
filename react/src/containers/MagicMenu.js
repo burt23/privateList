@@ -43,9 +43,25 @@ class MagicMenu extends Component {
           width={200}
           open={this.state.open}
           onClick={(open) => this.setState({open})}
+          id='drawerFlexbox'
         >
-          <MenuItem onClick={this.handleClose}>Menu Item</MenuItem>
-          <MenuItem onClick={this.handleClose}>Menu Item 2</MenuItem>
+        <ul>
+          <li>
+          <MenuItem className='drawerFI' onClick={this.handleClose}>Dashboard</MenuItem>
+          </li>
+          <li>
+            <MenuItem className='drawerFI' onClick={this.handleClose}>Network</MenuItem>
+          </li>
+          <li>
+            <MenuItem className='drawerFI' onClick={this.handleClose}>Schedule</MenuItem>
+          </li>
+          <li>
+            <MenuItem className='drawerFI' onClick={this.handleClose}>Devices</MenuItem>
+          </li>
+          <li>
+            <MenuItem className='drawerFI' onClick={this.handleClose}>Apps</MenuItem>
+          </li>
+          </ul>
         </Drawer>
       </div>
     );

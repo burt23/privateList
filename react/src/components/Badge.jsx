@@ -5,7 +5,6 @@ import NotificationsIcon from 'material-ui/svg-icons/social/notifications';
 
 const BadgeIcon = function(){
   return(
-    <div>
       <Badge
         badgeContent={10}
         primary={true}
@@ -18,7 +17,6 @@ const BadgeIcon = function(){
           />
         </IconButton>
       </Badge>
-    </div>
     )
 }
 

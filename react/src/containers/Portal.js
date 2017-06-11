@@ -3,6 +3,7 @@ import Lists from './Lists.js';
 import Messages from './Messages.js';
 import PortalMain from './PortalMain.js';
 import PortalVerticalTabs from './PortalVerticalTabs.js';
+import PortalVerticalTabsIcons from './PortalVerticalTabsIcons.js';
 import Settings from 'material-ui/svg-icons/action/settings.js'
 import WiFi from 'material-ui/svg-icons/device/wifi-tethering.js'
 import BadgeIcon from '../components/Badge.jsx';
@@ -81,40 +82,38 @@ class Portal extends React.Component {
 
     return(
 
-      <section id={!this.state.openMenu ? 'portal' : 'portalClosedMenu'}>
+      <section id={!this.state.openMenu ? 'portal' : 'portal'}>
 
         <header>
-          <ul>
-            <li onClick={this.handleMenuClick}>
-              <MagicMenu
-                id='portalLogo'
-              />
-            </li>
-            <li id='portalSearch'>
+          <div className='portalHeaderFlexbox'>
+            <div className='portalHeaderFlexItem' id='portalSearch'>
               <AutoComplete
                 dataSource={this.state.dataSource}
                 hintText="Search Anything"
                 onChange={this.handleSearchChange}
                 fullWidth={true}
-
               />
-            </li>
-            <li>
-              <BadgeIcon />
-            </li>
-            <li>
+            </div>
+            <div className='portalHeaderFlexItem'>
               <PortalIconMenu />
-            </li>
-          </ul>
+            </div>
+          </div>
         </header>
-
-
+        {/*
         <nav>
           <PortalVerticalTabs
             handleIndexChange={this.handleIndexChange}
-            changePortalIndex={this.props.changePortalIndex}
           />
         </nav>
+      */}
+      <nav>
+        <PortalVerticalTabsIcons
+          handleIndexChange={this.handleIndexChange}
+          changePortalIndex={this.props.changePortalIndex}
+          handleIndexChange={this.handleIndexChange}
+          changePortalIndex={this.props.changePortalIndex}
+        />
+      </nav>
 
 
 

@@ -18,31 +18,7 @@ export default class PortalMain extends Component {
 
     render() {
 
-      if (this.props.connectFirstDevice) {
-
-        return (
-          <div>
-            <h2>Setup Wizard</h2>
-            <SignupWizard
-              completeWhiz={this.props.completeWhiz}
-            />
-          </div>
-        )
-
-      } else if (this.props.portalIndex==='0'){
-        return (
-
-          <section id='dashboard'>
-            <ul>
-              <li id='dashUL'></li>
-              <li id='dashUR'></li>
-              <li id='dashLL'></li>
-              <li id='dashLR'></li>
-            </ul>
-          </section>
-
-        )
-      } else if (this.props.portalIndex==='1'){
+      if (this.props.portalIndex==='1'){
         return (
           <div className='portalMain'>
           <Network />
@@ -70,6 +46,31 @@ export default class PortalMain extends Component {
           <div>
             <Settings />
           </div>
+        )
+      }
+        else if (this.props.connectFirstDevice) {
+
+        return (
+          <div>
+            <h2>Setup Wizard</h2>
+            <SignupWizard
+              completeWhiz={this.props.completeWhiz}
+            />
+          </div>
+        )
+
+      } else if (this.props.portalIndex==='0'){
+        return (
+
+          <section id='dashboard'>
+            <ul>
+              <li id='dashUL'></li>
+              <li id='dashUR'></li>
+              <li id='dashLL'></li>
+              <li id='dashLR'></li>
+            </ul>
+          </section>
+
         )
       }
   }

@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400|Fugaz+One|Lora:400,700|Monoton|Cormorant+Garamond|Poiret+One|Special+Elite');
 
+
 html {
   background-size: cover;
   background-attachment: absolute;
@@ -55,14 +56,20 @@ p {
 
 #portal {
   display: grid;
-  height: 100%;
-  border: 3px solid red;
+  border: 1px solid black;
   background: white;
-  grid-template-areas: "head head"
-                       "nav  main"
+  align-items: stretch;
+  align-items: content;
+  position: absolute;
+  grid-template-areas: "nav  head head head head"
+                       "nav  main main main main"
+                       "nav  main main main main"
+                       "nav  main main main main"
+                       "nav  main main main main"
+
                        /*"foot  foot"*/;
-  grid-template-rows: 50px 1fr;
-  grid-template-columns: 150px 1fr;
+  grid-template-rows: 5vh 95vh;
+  grid-template-columns: 1fr 15fr;
 }
 
 
@@ -86,59 +93,66 @@ p {
 
 #portal > header {
   grid-area: head;
+  justify-self: stretch;
+  align-self: stretch;
+  position: relative;
+  height: 100%;
   background: cornsilk;
-  border: 1px solid cornflowerblue;
+  /*border: 4px solid black;*/
 
 }
 
 #portal > header > ul {
   display: flex;
   flex-direction: row;
-  padding: 0;
-  margin: 0;
-  top: 0;
-  left: 0;
-  flex-wrap: nowrap;
   justify-content: stretch;
   align-items: stretch;
 }
 
-header > ul > li {
-  flex: 0 1 auto;
+#portal > header > ul > li {
+  flex: 1 1 auto;
   list-style: none;
-  padding: 0;
-  margin: 0;
+
+  align-items: stretch;
 }
 
 #portalSearch {
   flex-grow: 2;
   border-radius: 5em;
   padding: 0em 0.5em;
-
 }
+
 #portal > nav {
   grid-area: nav;
+  /*border: 2px solid cyan;*/
+  background-color: lightseagreen;
+  justify-self: stretch;
+  align-self: stretch;
+
+  /*align-items: stretch;*/
+  /*justify-items: stretch;*/
 }
 
-#portal > nav > section {
+.portalHeaderFlexbox {
   display: flex;
-  flex-direction: column;
-  align-content: center;
-  align-items: stretch;
-  justify-content: center;
-  height: 95vh;
-  background-color: rgb(225, 249, 233);
+  flex-direction: row;
+  justify-content: flex-end;
+  height: 2px;
 }
 
-#portal > nav > section > div {
-  flex: auto;
-  align-self: center;
-}
+.portalHeaderFlexItem{
+  border: 1px solid green;
+  flex: 1 2 auto;
 
+
+}
 
 #portal > main {
   background-color: white;
   grid-area: main;
+  border: 1px solid black;
+  justify-self: stretch;
+  align-self: stretch;
 }
 
 #portal > footer {
@@ -149,66 +163,6 @@ header > ul > li {
 #portal > nav > section > div:hover {
     background-color: cyan;
 }
-
-/*closed menu*/
-
-#portalClosedMenu {
-  display: grid;
-  height: 100%;
-  background: white;
-  border: 30px solid red;
-  grid-template-areas: "head head"
-                       "nav  main"
-                       "nav  main";
-  grid-template-rows: 50px 1fr 30px;
-  grid-template-columns: 50px 1fr;
-}
-
-
-#portalClosedMenu > header {
-  grid-area: head;
-  border: 5px solid red;
-
-}
-
-#portalClosedMenu > nav {
-  grid-area: nav;
-  border: 5px solid green;
-}
-
-#portalClosedMenu > nav > section {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  align-items: stretch;
-  justify-content: center;
-  height: 88vh;
-  background-color: rgba(255, 204, 128, 0.8);
-}
-
-#portalClosedMenu > nav > section > div {
-  flex: 1 1 auto;
-  align-self: center;
-}
-
-
-#portalClosedMenu > main {
-  background-color: white;
-  grid-area: main;
-}
-
-#portalClosedMenu > footer {
-  background-color: gold;
-  grid-area: foot;
-}
-
-#portalClosedMenu > nav > section > div:hover {
-    background-color: cyan;
-}
-.notificationID {
-  display: none;
-}
-
 
 /*portalClosedMenu closed*/
 .pt {
@@ -228,23 +182,9 @@ header > ul > li {
   padding-bottom: 1em;
 }
 
-input {
-  padding: 0.1em;
-  position: relative;
-  color: black;
-  background-color: #e4e4e4;
-  border-radius: 5px;
-  font-size: 1em;
-  font-weight: 300;
-  text-align: center;
-}
 
 input:focus  {
   border-color: lightseagreen;
-}
-
-input:hover {
-  background-color: #d6d6d6;
 }
 
 .submitButton {
@@ -252,13 +192,6 @@ input:hover {
   font-family: 'Fugaz One', cursive;
 }
 
-
-
-#searchBox {
-  padding: 0.5em;
-  font-family: 'Special Elite', cursive;
-  font-size: 1.1em;
-}
 
 ::-webkit-input-placeholder {
    text-align: center;
@@ -269,59 +202,8 @@ input:hover {
 #songTotal {
   font-size: 1.6em;
 }
-
-.signupWrapper {
-  padding: 2em;
-}
-
-.signInButton {
-  padding: 1em;
-  background-color: rgba(3, 3, 4, 0.26);
-  font-size: 1.3em;
-  color: white;
-  font-family: 'Special Elite', cursive;
-
-}
-
-.signInButton:hover {
-  padding: 1em;
-  font-size: 1.3em;
-  background-color: rgba(0, 0, 0, 0.53);
-  color: aliceblue;
-  transition: 0.2s ease;
-}
-
-button#logoutButton {
-    position: absolute;
-    top: 2%;
-    right: 2%;
-}
-
-button{
-  border-radius: 0.3em;
-  font-family: 'Lora', cursive;
-  /*width: 100%;*/
-  background-color: #f1f1f1;
-  border: 0;
-  border-radius: 0;
-}
-
-#learnMoreTextWrapper {
-  width: 50%;
-  margin: 0 auto;
-}
-
-.timeStamp{
-  font-family: 'Lora', serif;
-
-}
-
 .hidden {
   display: none;
-}
-
-.accessTokenWrapper{
-  padding: 1em;
 }
 
 /*------------------HEADER---------------------*/
@@ -332,8 +214,6 @@ button{
   top: 0;
   left: 0;
   width: 100%;
-  height: 5vh;
-  padding: 2vh;
   color: white;
   justify-content: space-between;
   align-items: center;
@@ -779,7 +659,7 @@ a:hover {
 }
 
 .nfcGif {
-  border: 9px solid red;
+  /*border: 9px solid red;*/
   height: 20vh;
   width: 40vh;
   background-color: blue;
@@ -787,61 +667,58 @@ a:hover {
 
 #dashboard > ul {
   display: grid;
-  height: 95vh;
   background: white;
-  grid-template-rows: 50% 50%;
-  grid-template-columns: 50% 50%;
-
+  grid-template-rows: auto;
+  grid-template-columns: auto;
+  /*border: 10px solid red;*/
 }
 
 #dashboard > ul > li {
   list-style: none
 
+
 }
 
 #dashUL {
   background-color: salmon;
+  grid-column-start: 2;
+
 }
 
 #dashUR {
   background-color: cyan;
+  grid-column-start: 2;
+
 }
 #dashLL {
   background-color: aquamarine;
+    grid-column-start: 2;
+
 }
 #dashLR {
   background-color: lime;
+    grid-column-start: 2;
+
 }
 p.paperCol {
     padding: 1em;
 }
-div.portalWrapper {
-  position: fixed;
-  height: 100%;
-  width: 100%;
+
+
+.vnavFlex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-item: stretch;
+  /*border: 10px solid gold;*/
+  justify-self: stretch;
+
 }
 
-#verticalNavBar {
-  position: absolute;
-  border: 4px solid tan;
-}
-#verticalNavBar > ul{
-  display: flex;
-  border: 3px solid gold;
-  flex-direction: column;
-  height: 95vh;
+.vnavChild  {
+  flex: 1 1 auto;
+  list-style: none;
+
+  /*border: 4px solid green;*/
   align-items: stretch;
 }
-
-#verticalNavBar > ul > li {
-  flex: 1 1 auto;
-
-  border: 4px solid green;
-}
-#verticalNavBar > ul > li > span {
-
-  border: 4px solid black;
-  display: block;
-}
-
-

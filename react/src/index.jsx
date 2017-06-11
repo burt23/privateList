@@ -28,7 +28,7 @@ class App extends React.Component {
       emailError: false,
       wantsSignupModal: false,
       username: '',
-      connectFirstDevice: false,
+      connectFirstDevice: true,
       openMenu: false,
       portalIndex: '0'
     };
@@ -346,15 +346,15 @@ class App extends React.Component {
     if(this.state.isLoggedIn){
     return (
       <MuiThemeProvider>
-        <div className="portalWrapper">
-          { this.state.showToken &&
+        <div>
+          {/* this.state.showToken &&
           <TokenModal
             handleEmailSubmit={this.handleEmailSubmit}
             handleSenderEmail={this.handleSenderEmail}
             accessToken={this.state.accessToken}
             handleModalExit={this.handleModalExit}
-          />
-          }
+          />*/}
+
           <Portal
             username={this.username}
             user_id={this.user_id}
