@@ -10,12 +10,6 @@ import StepOne from './StepOne.js';
 import StepTwo from './StepTwo.js';
 import StepThree from './StepThree.js';
 
-/**
- * Horizontal steppers are ideal when the contents of one step depend on an earlier step.
- * Avoid using long step names in horizontal steppers.
- *
- * Linear steppers require users to complete one step in order to move on to the next.
- */
 class SignupWizard extends React.Component {
   constructor(props) {
     super(props);
@@ -30,9 +24,9 @@ class SignupWizard extends React.Component {
   }
 
   handleNext(connectionType){
-    console.log('inside handleNext  ')
+    console.log('inside handleNext', connectionType)
 
-    if (connectionType === 'bt' || connectionType !== 'nfc'){
+    if (connectionType === 'bt' || connectionType === 'nfc'){
       this.setState({
         connectionType
       })
@@ -63,6 +57,7 @@ class SignupWizard extends React.Component {
     switch (stepIndex) {
       case 0:
         return <StepOne
+                  connectionType={this.state.connectionType}
                  handleNext={this.handleNext}
                  handlePrev={this.handlePrev}
                />;
@@ -71,11 +66,19 @@ class SignupWizard extends React.Component {
                   connectionType={this.state.connectionType}
                   handleNext={this.handleNext}
                   handlePrev={this.handlePrev}
+                  user_id={this.props.user_id}
+                  setDevice={this.props.setDevice}
                 />;
       case 2:
         return <StepThree
+                connectionType={this.state.connectionType}
                 handleNext={this.handleNext}
                 handlePrev={this.handlePrev}
+                device_id={this.props.device_id}
+                user_id={this.props.user_id}
+                setDevice={this.props.setDevice}
+                device_id={this.props.device_id}
+                device_name={this.props.device_name}
               />;
       default:
         return 'You\'re a long way from home sonny jim!';
@@ -85,7 +88,6 @@ class SignupWizard extends React.Component {
    render() {
     const {finished, stepIndex} = this.state;
     const contentStyle = {margin: '0 16px'};
-
 
     return (
       <div style={{width: '100%', maxWidth: 700, margin: 'auto'}}>
@@ -106,8 +108,6 @@ class SignupWizard extends React.Component {
            ) : (
             <div>
               <p>{this.getStepContent(stepIndex)}</p>
-
-
             </div>
           )}
         </div>
@@ -117,16 +117,3 @@ class SignupWizard extends React.Component {
 }
 
 export default SignupWizard;
-              // <div style={{marginTop: 12}}>
-              //   <FlatButton
-              //     label="Back"
-              //     disabled={stepIndex === 0}
-              //     onClick={this.handlePrev}
-              //     style={{marginRight: 12}}
-              //   />
-              //   <RaisedButton
-              //     label={stepIndex === 2 ? 'Finish' : 'Next'}
-              //     primary={true}
-              //     onClick={this.handleNext}
-              //   />
-              // </div>

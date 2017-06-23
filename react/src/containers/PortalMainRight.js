@@ -24,7 +24,6 @@ class PortalMainRight extends Component {
       enableSelectAll: true,
       deselectOnClickaway: true,
       showCheckboxes: true,
-      height: '40vh',
     }
     // bind functions
   }
@@ -81,6 +80,7 @@ class PortalMainRight extends Component {
     },
   };
 
+console.log('devices inside PortalMainRight', this.props.devices)
     return(
       <div>
         <Table
@@ -98,20 +98,21 @@ class PortalMainRight extends Component {
           >
             <TableRow>
               <TableHeaderColumn colSpan="1" tooltip="Super Header" style={{textAlign: 'left'}}>
-                Connected Nodes Acting as Gateways <strong>5</strong>
+                Connected Devices <strong>{this.props.devices.length}</strong>
               </TableHeaderColumn>
               <TableHeaderColumn colSpan="1" tooltip="Super Header" style={{textAlign: 'left'}}>
-                5
               </TableHeaderColumn>
 
               <TableHeaderColumn colSpan="1" tooltip="Super Header" style={{textAlign: 'right'}}>
-                Gateway Listing
+                Total Gateways: 0
               </TableHeaderColumn>
             </TableRow>
             <TableRow>
-              <TableHeaderColumn tooltip="The ID">ID</TableHeaderColumn>
-              <TableHeaderColumn tooltip="The Name">Name</TableHeaderColumn>
-              <TableHeaderColumn tooltip="The Status">Status</TableHeaderColumn>
+              <TableHeaderColumn tooltip="The UUID">UUID</TableHeaderColumn>
+              <TableHeaderColumn tooltip="Call it whatever you want">Device Name</TableHeaderColumn>
+              <TableHeaderColumn tooltip="Latitute">Latitute</TableHeaderColumn>
+              <TableHeaderColumn tooltip="Last recorded device Longitude">Longitude</TableHeaderColumn>
+              <TableHeaderColumn tooltip="The power level of your device ">Signal Strength</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody
@@ -120,21 +121,28 @@ class PortalMainRight extends Component {
             showRowHover={this.state.showRowHover}
             stripedRows={this.state.stripedRows}
           >
-            {tableData.map( (row, index) => (
+            {this.props.devices.map( (device, index) => (
               <TableRow key={index}>
-                <TableRowColumn>{index}</TableRowColumn>
-                <TableRowColumn>{row.name}</TableRowColumn>
-                <TableRowColumn>{row.status}</TableRowColumn>
+                <TableRowColumn>{device.device_name}</TableRowColumn>
+                <TableRowColumn>{device.device_id}</TableRowColumn>
+                <TableRowColumn>{device.device_lat}</TableRowColumn>
+                <TableRowColumn>{device.device_long}</TableRowColumn>
+                <TableRowColumn>62%</TableRowColumn>
               </TableRow>
               ))}
           </TableBody>
+          {/*
+            USE THE FOOTER TO HIGHLIGHT THE SELECTED NODE
+        */}
           <TableFooter
             adjustForCheckbox={this.state.showCheckboxes}
           >
             <TableRow>
-              <TableRowColumn>ID</TableRowColumn>
-              <TableRowColumn>Name</TableRowColumn>
-              <TableRowColumn>Status</TableRowColumn>
+              <TableRowColumn>UUID</TableRowColumn>
+              <TableRowColumn>Device Name</TableRowColumn>
+              <TableRowColumn>Battery</TableRowColumn>
+              <TableRowColumn>Range</TableRowColumn>
+              <TableRowColumn>Signal Strength</TableRowColumn>
             </TableRow>
             <TableRow>
               <TableRowColumn colSpan="3" style={{textAlign: 'center'}}>

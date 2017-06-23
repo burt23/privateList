@@ -20,9 +20,9 @@ class StepOne extends Component {
   }
 
 
-  handleButtonClick(event){
-    console.log('hello for the nth time', event.target.value);
-    this.props.handleNext(event.target.value);
+  handleButtonClick(e){
+    console.log('hello for the nth time', e);
+    this.props.handleNext(e);
   }
 
   render() {
@@ -46,7 +46,7 @@ class StepOne extends Component {
 
     return(
       <div>
-        <h3 id="wizardHeadliner"> Choose your connection method </h3>
+        <h3 className="wizardHeadliner"> Choose your connection method </h3>
         <div className='swTiles'>
           <div className='swTile'>
             <Paper className='paper' zDepth={2}>
@@ -60,7 +60,7 @@ class StepOne extends Component {
               </div>
               <h2 className='paperCol'>Bluetooth</h2>
                 <p className='paperCol'>Bluetooth offers a fast and easy way to quickly add devices to your network.  Please note that Bluetooth pairing may not meet certain compliance requirements, and that it is less secure than NFC pairing.</p>
-                <RaisedButton value="bt" onClick={this.handleButtonClick} className='paperCol' label="Connect" primary={true} style={styles.button} />
+                <RaisedButton value="bt" onClick={()=>this.handleButtonClick('bt')} className='paperCol' label="Connect" primary={true} style={styles.button} />
             </Paper>
           </div>
 
@@ -80,7 +80,7 @@ class StepOne extends Component {
               <p className='paperCol'>NFC offers the best of security and convenience.  Simply tap your smartphone to your 3sixty and the devices are configured automatically, and securely. Required for compliance in certain industries.</p>
                 <RaisedButton
                   value="nfc"
-                  onClick={this.handleButtonClick}
+                  onClick={()=>this.handleButtonClick('nfc')}
                   label="Connect"
                   primary={true}
                   style={styles.button}

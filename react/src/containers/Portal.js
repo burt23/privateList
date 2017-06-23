@@ -1,21 +1,10 @@
 import React from 'react';
-import Lists from './Lists.js';
-import Messages from './Messages.js';
 import PortalMain from './PortalMain.js';
-import PortalVerticalTabs from './PortalVerticalTabs.js';
-import PortalVerticalTabsIcons from './PortalVerticalTabsIcons.js';
-import Settings from 'material-ui/svg-icons/action/settings.js'
-import WiFi from 'material-ui/svg-icons/device/wifi-tethering.js'
-import BadgeIcon from '../components/Badge.jsx';
-import Menu from 'material-ui/svg-icons/navigation/menu.js'
-import Bluetooth from 'material-ui/svg-icons/device/bluetooth.js'
-import IconButton from 'material-ui/IconButton';
 import PortalIconMenu from './PortalIconMenu.js';
 import BottomNavPortal from './BottomNavPortal.js';
-import Data from '../data/network.json';
+import { AutoComplete } from 'material-ui';
 import MagicMenu from './MagicMenu.js';
-
-import {AutoComplete, DropDownMenu, SvgIcon, MenuItem } from 'material-ui';
+import WelcomeLogin from './welcomeLogin.js';
 
 class Portal extends React.Component {
   constructor(props){
@@ -24,50 +13,57 @@ class Portal extends React.Component {
       dataSource: [],
       searchValue: '',
       dropDownValue: 1,
-      openMenu: false,
       portalIndex: 0,
+      devices: []
     };
     // bind functions
     this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleDropDownChange = this.handleDropDownChange.bind(this);
-    this.handleMenuClick = this.handleMenuClick.bind(this);
-    this.handleIndexChange = this.handleIndexChange.bind(this);
-    this.handleWindowChange = this.handleWindowChange.bind(this);
-
-
+    this.getDevices = this.getDevices.bind(this);
+  }
+  componentWillMount(){
+    // on load call fetch function to get devices from the db associated with their user_id
+    this.props.getDevices(this.props.user_id);
   }
 
-  handleIndexChange(portalIndex){
-    console.log('inside handleIndexChangePORTAL', portalIndex);
-    this.setState({
-      portalIndex
-    }, this.handleWindowChange(portalIndex))
+  getDevices(user_id) {
+    // bind 'this' to preserve it's original 'context' inside fetch
+    const context = this;
 
-    console.log('portalIndexpost async, should hit first', this.state.portalIndex)
-  }
+    // obj to pass into fetch function, modify for SSL
+    const init = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        user_id
+      })
+    }
 
-  handleWindowChange(e){
-    console.log('inside handleWindowChangeASYNCPORTAL', e)
-    console.log('inside handleWindowChangeASYNCPORTAL', this.state.portalIndex);
+    // Fetch takes two params: fn(url, optionsObject) returning promise
+    fetch('http://localhost:3000/portal/init', init)
+      .then( (data) => data.json() )
+      .then( (devices) => {
+        console.log('devicesFETCHPORTAL', devices)
+        context.setState({
+          devices
+        })
+      })
+      .catch((e) => (console.error(e))
+    );
   }
 
   handleDropDownChange(event){
-    console.log('inside handleDropDownChange function', event.target.value)
+    console.log('handleDropDownChange', event.target.value)
     this.setState({
       dropDownValue: event.target.value
     })
-
-  }
-
-  handleMenuClick(event){
-    console.log('menu clicked', this.state.openMenu)
-    this.props.handleOpenMenu();
   }
 
   handleSearchChange(searchValue){
-
+    // function enables dropDownMenu in autocomplete
     console.log('handleSearchChange event', searchValue)
-
     this.setState({
       dataSource: [
         searchValue,
@@ -79,32 +75,135 @@ class Portal extends React.Component {
 
   render(){
 
+    // Entry Point to portal css3 grid
+    // nav areas: header, main, and footer
+
     return(
 
-      <section id={!this.state.openMenu ? 'portal' : 'portal'}>
+      <div>
+        <div className='welcomeGrid'>
+          <div id="welcomeHeaderLeft">
+            <MagicMenu />
+          </div>
 
-        <header>
-          <div className='portalHeaderFlexbox'>
-            <div className='portalHeaderFlexItem' id='portalSearch'>
-              <AutoComplete
-                dataSource={this.state.dataSource}
-                hintText="Search Anything"
-                onUpdateInput={this.handleSearchChange}
-                fullWidth={true}
+           <div id="welcomeHeaderCenter">
+             <h2>
+               NODE360
+              </h2>
+            </div>
+          <div id="welcomeHeaderRight" onClick={this.handleWelcomeMenu}>
+            <WelcomeLogin
+              handleWelcomeMenu={this.handleWelcomeMenu}
+            />
+          </div>
+
+            {this.state.userWantsLoginMenu &&
+
+              <div id="welcomeLoginMenuWrapper">
+                <div id="welcomeLoginMenu">
+                  <ul>
+                    <li  label="Modal Dialog" onClick={this.handleLoginPortalOpen} >
+                      <div>
+
+                        <a>Login</a>
+                        {/*<RaisedButton label="Modal Dialog" onClick={this.handleLoginPortalOpen} />
+                      */}
+
+                        <Dialog
+                          title="Dialog With Actions"
+                          actions={actions}
+                          modal={true}
+                          open={this.state.userWantsLoginPortal}
+                        >
+                          <Login
+                            invalidUserPass={this.state.invalidUserPass}
+                            login={this.login}
+                            isLoggedIn={this.state.isLoggedIn}
+                            wantsSignupModal={this.wantsSignupModal}
+                            signup={this.signup}
+                          />
+                        </Dialog>
+                      </div>
+
+                    </li>
+                    <li onClick={this.wantsSignupModal}><a>Signup</a></li>
+                    <li><a>Support</a></li>
+                    <li><a>About</a></li>
+                  </ul>
+                </div>
+              </div>
+            }
+
+            <div id="portalCenter">
+
+              <PortalMain
+                portalIndex={this.props.portalIndex}
+                connectFirstDevice={this.props.connectFirstDevice}
+                username={this.props.username}
+                wantsWizard={this.props.wantsWizard}
+                user_id={this.props.user_id}
+                devices={this.props.devices}
+                handleLogout={this.props.handleLogout}
+                completeWhiz={this.props.completeWhiz}
+                setDevice={this.props.setDevice}
+                device_id={this.props.device_id}
+                device_name={this.props.device_name}
               />
             </div>
-            <div className='portalHeaderFlexItem portalHeaderFlexIconMenu'>
-              <PortalIconMenu />
-            </div>
+             <div className="welcomeFooter">
+                <BottomNavPortal
+                  portalIndex={this.props.portalIndex}
+                  changePortalIndex={this.props.changePortalIndex}
+                />
+             </div>
           </div>
-        </header>
+        </div>
+    )
+  }
+}
+
+export default Portal;
+       {/*
+        <section id='welcomeBannerTagline'>
+
+          <h1>
+            Join our IoT revolution
+          </h1>
+          <div>
+            <h3>Conserving precious resources, empowering decision makers, improving health and safety, and enriching lives through a radically new approach to wireless
+            </h3>
+            <br />
+            <RaisedButton
+              id='welcomeBannerButton'
+              label="Learn More"
+              primary={true}
+              onClick={this.learnMore}
+              style={{width: '50%', margin: '1em'}}
+            />
+          </div>
+        </section>
+
+       TODO ADD CHEVRONS FOR MAIN TOPIC PANELS: BT, THREAD, LoRa, Product Promo
+
+        <div id='welcomeBannerLeftArrow'>
+          <LeftChevron />
+        </div>
+        <div id='welcomeBannerRightArrow'>
+        <RightChevron />
+        </div>
+        <div id='welcomeBannerDownArrow'>
+        <Down />
+      </div>
+       */}
+        // <footer className='bottomNav'>
+        //   <BottomNavPortal className='bottomNav'/>
+        // </footer>
         {/*
         <nav>
           <PortalVerticalTabs
             handleIndexChange={this.handleIndexChange}
           />
         </nav>
-      */}
       <nav>
         <PortalVerticalTabsIcons
           handleIndexChange={this.handleIndexChange}
@@ -113,24 +212,19 @@ class Portal extends React.Component {
           changePortalIndex={this.props.changePortalIndex}
         />
       </nav>
+      */}
+// import PortalVerticalTabs from './PortalVerticalTabs.js';
+// import PortalVerticalTabsIcons from './PortalVerticalTabsIcons.js';
 
 
+  // handleIndexChange(portalIndex){
+  //   console.log('inside handleIndexChangePORTAL', portalIndex);
+  //   this.setState({
+  //     portalIndex
+  //   })
 
-        <main>
-          <PortalMain
-            connectFirstDevice={this.props.connectFirstDevice}
-            completeWhiz={this.props.completeWhiz}
-            portalIndex={this.props.portalIndex}
-          />
-        </main>
+  //   console.log('portalIndexpost async, should hit first', this.state.portalIndex)
+  // }
 
-
-      </section>
-    )
-  }
-}
-
-export default Portal;
-        // <footer className='bottomNav'>
-        //   <BottomNavPortal className='bottomNav'/>
-        // </footer>
+// this.handleIndexChange = this.handleIndexChange.bind(this);
+    // this.handleWindowChange = this.handleWindowChange.bind(this);

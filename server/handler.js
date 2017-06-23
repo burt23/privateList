@@ -7,4 +7,7 @@ module.exports.newToken = require('./routes/newToken.js');
 module.exports.checkToken = require('./routes/checkToken.js');
 module.exports.users = require('./routes/users.js');
 module.exports.addList = require('./routes/addList.js');
+module.exports.wizard = require('./routes/wizard.js');
+module.exports.gps = require('./routes/gps.js');
+module.exports.init = require('./routes/init.js');
 

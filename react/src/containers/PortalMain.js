@@ -6,7 +6,8 @@ import Settings from './Settings.js'
 import Schedule from './Schedule.js'
 import Network from './Network.js'
 import Devices from './Devices.js'
-import Dashboard from './Dashboard.js'
+// import Dashboard from './Dashboard.js'
+import Dashboard from './dash2.js'
 
 
 export default class PortalMain extends Component {
@@ -22,7 +23,9 @@ export default class PortalMain extends Component {
       if (this.props.portalIndex==='1'){
         return (
           <div className='portalMain'>
-          <Network />
+          <Network
+            devices={this.props.devices}
+          />
 
             <div className='portalTable'>
 
@@ -52,20 +55,26 @@ export default class PortalMain extends Component {
         else if (this.props.connectFirstDevice) {
 
         return (
-          <div>
-            <h2>Setup Wizard</h2>
+          <div id="setupWizardWrapper">
             <SignupWizard
               completeWhiz={this.props.completeWhiz}
+              user_id={this.props.user_id}
+              setDevice={this.props.setDevice}
+              device_id={this.props.device_id}
+              device_name={this.props.device_name}
             />
           </div>
         )
 
       } else if (this.props.portalIndex==='0'){
         return (
-          <div>
           <Dashboard
+            username={this.props.username}
+            wantsWizard={this.props.wantsWizard}
+            user_id={this.props.user_id}
+            devices={this.props.devices}
+            handleLogout={this.props.handleLogout}
             />
-          </div>
 
 
         )

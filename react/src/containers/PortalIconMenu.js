@@ -3,8 +3,6 @@ import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import React, {Component} from 'react';
-import ContentFilter from 'material-ui/svg-icons/content/filter-list';
-import FileFileDownload from 'material-ui/svg-icons/file/file-download';
 
 
 /**
@@ -35,7 +33,13 @@ class PortalIconMenu extends Component {
   }
 
   handleChangePage(e){
+
+
   console.log('yeah buddy handleChangePage', e)
+
+  if(e === '5'){
+    this.props.handleLogout();
+  }
     this.setState({
       openMenu: false,
     });
@@ -51,11 +55,11 @@ class PortalIconMenu extends Component {
           value={this.state.valueSingle}
           open={this.state.openMenu}
         >
-          <MenuItem value="1" onClick={this.handleChangePage}primaryText="Add Device" />
-          <MenuItem value="2" onClick={this.handleChangePage}primaryText="Send feedback" />
-          <MenuItem value="3" onClick={this.handleChangePage}primaryText="Settings" />
-          <MenuItem value="4" onClick={this.handleChangePage}primaryText="Help" />
-          <MenuItem value="5" onClick={(e)=>(this.handleChangePage.bind(this, 'e'))}primaryText="Sign out" />
+          <MenuItem value="1" onClick={()=>this.handleChangePage('1')} primaryText="Add Device" />
+          <MenuItem value="2" onClick={()=>this.handleChangePage('2')} primaryText="Send feedback" />
+          <MenuItem value="3" onClick={()=>this.handleChangePage('3')} primaryText="Settings" />
+          <MenuItem value="4" onClick={()=>this.handleChangePage('4')} primaryText="Help" />
+          <MenuItem value="5" onClick={()=>this.handleChangePage('5')} primaryText="Sign out" />
         </IconMenu>
       </div>
     );

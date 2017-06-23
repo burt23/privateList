@@ -12,12 +12,22 @@ CREATE TABLE users (
 );
 
 CREATE TABLE messages (
-  id INT NOT NULL AUTO_INCREMENT PRIMARY key,
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   user_id INT NULL,
   message VARCHAR(2000) NOT NULL,
   secret VARCHAR(255) NULL,
   time TIMESTAMP,
   list_id INT
+);
+
+CREATE TABLE devices (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NULL,
+  device_name VARCHAR(2000) NOT NULL,
+  device_id VARCHAR(255) NULL,
+  device_lat VARCHAR(100) NULL,
+  device_long VARCHAR(100) NULL,
+  time TIMESTAMP
 );
 
 CREATE TABLE lists (
@@ -32,4 +42,3 @@ CREATE TABLE lists (
  *    mysql -u root < server/schema.sql
  *  to create the database and the tables.*/
 
-// mysql -h private.czcxajtopxzy.us-west-2.rds.amazonaws.com -P 3306 -u private -p

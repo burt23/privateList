@@ -119,5 +119,45 @@ module.exports = {
 
       }
     })
+  },
+
+  addDevice: function(device, callback){
+    console.log('Adding device:', device);
+    console.log('device_id', device.device_id);
+    console.log('device_name', device.device_name);
+    console.log('user_id', device.user_id);
+
+    connection.query('INSERT INTO devices (device_id, device_name, user_id, device_lat, device_long) VALUES (?, ?, ?, ?, ?)', [device.device_id, device.device_name, device.user_id, device.device_lat, device.device_long ], function(error, results){
+      if(error){
+        console.log('error adding bt device' )
+        callback(error)
+      }
+      console.log('added to db from addDevice query', results)
+      callback(error, results)
+    })
+  },
+
+  getDevices: function(user_id, callback) {
+    console.log('user_id inside of getDevices', user_id)
+
+    connection.query('SELECT * FROM devices WHERE user_id = ?', [user_id], function(error, devices) {
+      if (error, null) callback(error)
+
+      console.log('devices from getDevices mysql query', devices);
+      callback(error, devices);
+    })
+  },
+
+  saveGPS: function(device, callback) {
+    console.log('saving the device gps info', device);
+    connection.query('INSERT INTO devices WHERE device_id = ? ', [device.long, device.lat], function(error, results){
+      if(error){
+        console.log('error', error);
+        callback(error, null)
+      } else {
+        console.log('sucess ;?', results)
+        callback(error, results)
+      }
+    })
   }
 }

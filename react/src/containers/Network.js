@@ -72,7 +72,9 @@ render() {
           </Tabs>
         </div>
         <div>
-          <Gateways />
+          <Gateways
+            devices={this.props.devices}
+          />
         </div>
       </div>
       )
@@ -99,7 +101,9 @@ render() {
           </Tabs>
         </div>
         <div>
-        <Gateways />
+        <Gateways
+          devices={this.props.devices}
+        />
         </div>
       </div>
 

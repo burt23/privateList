@@ -31,6 +31,10 @@ app.post('/items/remove', handler.remove);
 app.post('/token/new', handler.newToken);
 app.post('/token', handler.checkToken);
 app.post('/lists/add', handler.addList);
+app.post('/wizard', handler.wizard);
+app.post('/wizard/gps', handler.gps);
+app.post('/portal/init', handler.init);
+
 
 app.listen(3000, function() {
   console.log('listening on port 3000!');

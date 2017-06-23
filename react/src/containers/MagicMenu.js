@@ -35,8 +35,10 @@ class MagicMenu extends Component {
         <IconButton
           label="Open Drawer"
           onClick={this.handleToggle}
+          iconStyle={{ color: 'white', 'width': '10vw', height: '10vh'}}
         >
-        <Menu />
+          <Menu
+          />
         </IconButton>
         <Drawer
           docked={false}
@@ -47,19 +49,54 @@ class MagicMenu extends Component {
         >
         <ul>
           <li>
-          <MenuItem className='drawerFI' onClick={this.handleClose}>Dashboard</MenuItem>
+          <MenuItem className='drawerFI' onClick={this.handleClose}>
+          { !this.props.isLoggedIn ?
+            (
+            <h2>Overview</h2>
+            ) : (
+            <h2>Home</h2>
+            )}
+            </MenuItem>
           </li>
           <li>
-            <MenuItem className='drawerFI' onClick={this.handleClose}>Network</MenuItem>
+            <MenuItem className='drawerFI' onClick={this.handleClose}>
+              { !this.props.isLoggedIn ?
+              (
+              <h2>Bluetooth</h2>
+              ) : (
+              <h2>Network</h2>
+              )}
+            </MenuItem>
           </li>
           <li>
-            <MenuItem className='drawerFI' onClick={this.handleClose}>Schedule</MenuItem>
+            <MenuItem className='drawerFI' onClick={this.handleClose}>
+            { !this.props.isLoggedIn ?
+            (
+            <h2>LoRa</h2>
+            ) : (
+            <h2>Schedule</h2>
+            )}
+            </MenuItem>
           </li>
           <li>
-            <MenuItem className='drawerFI' onClick={this.handleClose}>Devices</MenuItem>
+            <MenuItem className='drawerFI' onClick={this.handleClose}>
+            { !this.props.isLoggedIn ?
+            (
+            <h2>Thread</h2>
+            ) : (
+            <h2>Cloud</h2>
+            )}
+            </MenuItem>
           </li>
           <li>
-            <MenuItem className='drawerFI' onClick={this.handleClose}>Apps</MenuItem>
+            <MenuItem className='drawerFI' onClick={this.handleClose}>
+            { !this.props.isLoggedIn ?
+            (
+            <h2>Setup</h2>
+            ) : (
+            <h2>Settings</h2>
+            )}
+            </MenuItem>
           </li>
           </ul>
         </Drawer>

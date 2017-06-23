@@ -3,13 +3,25 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import List from './components/List.jsx';
 import Search from './components/Search.jsx';
-import Login from './components/Login.jsx';
+// import Login from './containers/Login.js';
+import Login from './containers/WelcomeMenuLogin.js';
 import Header from './containers/Header.jsx';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Footer from './containers/Footer.js';
 import Portal from './containers/Portal.js';
 import TokenModal from './containers/TokenModal.js';
 import SignupModal from './containers/SignupModal.js';
+import RaisedButton from 'material-ui/RaisedButton';
+import RightChevron from 'material-ui/svg-icons/navigation/chevron-right';
+import LeftChevron from 'material-ui/svg-icons/navigation/chevron-left';
+import Down from 'material-ui/svg-icons/navigation/expand-more';
+import MagicMenu from './containers/MagicMenu.js'
+import WelcomeLogin from './containers/welcomeLogin.js'
+import TextField from 'material-ui/TextField';
+import {orange500, blue500} from 'material-ui/styles/colors';
+import Paper from 'material-ui/Paper';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 
 class App extends React.Component {
   constructor(props) {
@@ -17,7 +29,7 @@ class App extends React.Component {
     this.state = {
       items: [],
       lists: ['one', 'two', 'three'],
-      isLoggedIn: true,
+      isLoggedIn: false,
       user_id: null,
       showToken: false,
       accessToken: '',
@@ -27,12 +39,23 @@ class App extends React.Component {
       senderEmail: '',
       emailError: false,
       wantsSignupModal: false,
-      username: '',
+      username: 'Fredric',
       connectFirstDevice: false,
       openMenu: false,
-      portalIndex: '0'
+      portalIndex: '0',
+      wizardIndex: '0',
+      wizardConnectionType: '',
+      userWantsLoginMenu: false,
+      userWantsLoginPortal: false,
+      portalBottomNavTabIndex: 1,
+      device_id: '',
+      device_name: '',
+      device_lat: '',
+      device_long: '',
+      devices: []
     };
 
+    this.getDevices = this.getDevices.bind(this);
     this.search = this.search.bind(this);
     this.login = this.login.bind(this);
     this.signup = this.signup.bind(this);
@@ -50,10 +73,86 @@ class App extends React.Component {
     this.completeWhiz = this.completeWhiz.bind(this);
     this.handleOpenMenu = this.handleOpenMenu.bind(this)
     this.changePortalIndex = this.changePortalIndex.bind(this)
+    this.wantsWizard = this.wantsWizard.bind(this)
+    this.learnMore = this.learnMore.bind(this);
+    this.handleWelcomeMenu = this.handleWelcomeMenu.bind(this);
+    this.handleLoginPortalOpen = this.handleLoginPortalOpen.bind(this);
+    this.handleLoginPortalClose = this.handleLoginPortalClose.bind(this);
+    this.setDevice = this.setDevice.bind(this)
 
   }
 
-  componentDidMount() {
+  getDevices(user_id){
+    const context = this;
+
+    console.log('getting all devices for user_id', user_id)
+
+    const init = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        user_id
+      })
+    }
+
+    fetch('http://localhost:3000/portal/init', init)
+      .then( (data) => data.json() )
+      .then( (devices) => {
+        console.log('getting devices inside index', devices)
+        context.setState({
+          devices
+        })
+      })
+      .catch((e) => (console.error(e))
+    );
+  }
+
+  handlePortalBottomNavChange(index){
+    console.log('inside handlePortalBottomNavChange', index)
+
+    this.setState({
+      portalBottomNavTabIndex: index
+    })
+  }
+
+  setDevice(device){
+    console.log('setting device inside index, passed deviced obj:', device)
+
+    if (device.device_id !== undefined) {
+      this.setState({
+        device_id: device.device_id,
+        device_name: device.device_name
+      })
+
+    } else if (device.device_lat && device.device_long)
+      this.setState({
+        device_lat: device.device_lat,
+        device_long: device.device_long
+      })
+  }
+
+  handleLoginPortalClose(){
+    console.log('trying to close to portal!')
+    this.setState({
+      userWantsLoginPortal: false,
+      userWantsLoginMenu: false
+    })
+  }
+
+handleLoginPortalOpen(){
+  console.log('trying to open to portal!')
+    this.setState({
+      userWantsLoginPortal: true
+    })
+  }
+
+  handleWelcomeMenu() {
+    console.log('clickedWelcomeMenu');
+    this.setState({
+      userWantsLoginMenu: !this.state.userWantsLoginMenu
+    })
   }
 
   changePortalIndex(i){
@@ -64,11 +163,15 @@ class App extends React.Component {
     let valid = navMenu.includes(i) === true ? true : false;
     console.log('validityCheck', valid);
     if(valid){
-      console.log('validInput')
+      console.log('validInput:', i)
       this.setState({
         portalIndex: i
       })
     }
+  }
+
+  learnMore() {
+    console.log('inside learnmore click');
   }
 
   handleOpenMenu() {
@@ -81,8 +184,18 @@ class App extends React.Component {
 
   completeWhiz(){
     console.log('completing teh wizard')
+
     this.setState({
       connectFirstDevice: false
+    })
+
+    this.getDevices(this.state.user_id);
+  }
+
+  wantsWizard(){
+    console.log('opening the wizard index');
+    this.setState({
+      connectFirstDevice: true
     })
   }
 
@@ -347,17 +460,9 @@ class App extends React.Component {
     return (
       <MuiThemeProvider>
         <div>
-          {/* this.state.showToken &&
-          <TokenModal
-            handleEmailSubmit={this.handleEmailSubmit}
-            handleSenderEmail={this.handleSenderEmail}
-            accessToken={this.state.accessToken}
-            handleModalExit={this.handleModalExit}
-          />*/}
-
           <Portal
-            username={this.username}
-            user_id={this.user_id}
+            username={this.state.username}
+            user_id={this.state.user_id}
             handleLogout={this.handleLogout}
             handleTokenChange={this.handleTokenChange}
             handleEmailSubmit={this.handleEmailSubmit}
@@ -376,6 +481,15 @@ class App extends React.Component {
             openMenu={this.state.openMenu}
             portalIndex={this.state.portalIndex}
             changePortalIndex={this.changePortalIndex}
+            wantsWizard={this.wantsWizard}
+            devices={this.state.devices}
+            portalBottomNavTabIndex={this.state.portalBottomNavTabIndex}
+            setDevice={this.setDevice}
+            currentDevice={this.state.currentDevice}
+            device_id={this.state.device_id}
+            device_name={this.state.device_name}
+            handlePortalBottomNavChange={this.props.handlePortalBottomNavChange}
+            getDevices={this.getDevices}
           />
         </div>
       </MuiThemeProvider>
@@ -387,27 +501,144 @@ class App extends React.Component {
           <SignupModal
             handleModalExit={this.handleModalExit}
             signup={this.signup}
+            handleLogout={this.handleLogout}
           />
           <h2>hello</h2>
         </div>
       </MuiThemeProvider>)
     } else {
+
+      const style = {
+        height: '100%',
+        width: '100vw',
+        textAlign: 'center',
+        display: 'inline-block',
+      };
+
+      const actions = [
+        <FlatButton
+          label="Cancel"
+          primary={true}
+          onClick={this.handleLoginPortalClose}
+        />,
+        <FlatButton
+          label="Submit"
+          primary={true}
+          disabled={true}
+          onClick={this.handleLoginPortalClose}
+        />,
+      ];
+
       return (
+
       <MuiThemeProvider>
-        <div className='welcomeContainer'>
-          <Header
-            invalidUserPass={this.state.invalidUserPass}
-            login={this.login}
-            isLoggedIn={this.state.isLoggedIn}
-            wantsSignupModal={this.wantsSignupModal}
-            signup={this.signup}
-          />
-          <Footer />
-        </div>
-      </MuiThemeProvider>
+        <div>
+          <div className='welcomeGrid'>
+           {/*
+           <Header
+              invalidUserPass={this.state.invalidUserPass}
+              login={this.login}
+              isLoggedIn={this.state.isLoggedIn}
+              wantsSignupModal={this.wantsSignupModal}
+              signup={this.signup}
+            />
+
+           */}
+            <div id="welcomeHeaderLeft">
+              <MagicMenu
+                isLoggedIn={this.state.isLoggedIn}
+              />
+
+            </div>
+
+             <div id="welcomeHeaderCenter">
+               <h2>
+                 NODE360
+                </h2>
+              </div>
+            <div id="welcomeHeaderRight" onClick={this.handleWelcomeMenu}>
+              <WelcomeLogin
+                handleWelcomeMenu={this.handleWelcomeMenu}
+              />
+            </div>
+
+              {this.state.userWantsLoginMenu &&
+
+                <div id="welcomeLoginMenuWrapper">
+                  <div id="welcomeLoginMenu">
+                    <ul>
+                      <li  label="Modal Dialog" onClick={this.handleLoginPortalOpen} >
+                        <div>
+
+                          <a>Login</a>
+                          {/*<RaisedButton label="Modal Dialog" onClick={this.handleLoginPortalOpen} />
+                        */}
+
+                          <Dialog
+                            title="Dialog With Actions"
+                            actions={actions}
+                            modal={true}
+                            open={this.state.userWantsLoginPortal}
+                          >
+                            <Login
+                              invalidUserPass={this.state.invalidUserPass}
+                              login={this.login}
+                              isLoggedIn={this.state.isLoggedIn}
+                              wantsSignupModal={this.wantsSignupModal}
+                              signup={this.signup}
+                            />
+                          </Dialog>
+                        </div>
+
+                      </li>
+                      <li onClick={this.wantsSignupModal}><a>Signup</a></li>
+                      <li><a>Support</a></li>
+                      <li><a>About</a></li>
+                    </ul>
+                  </div>
+                </div>
+
+              }
+
+                <section id='welcomeBannerTagline'>
+
+                  <h1>
+                    Join our IoT revolution
+                  </h1>
+                  <div>
+                    <h3>Conserving precious resources, empowering decision makers, improving health and safety, and enriching lives through a radically new approach to wireless
+                    </h3>
+                    <br />
+                    <RaisedButton
+                      id='welcomeBannerButton'
+                      label="Learn More"
+                      primary={true}
+                      onClick={this.learnMore}
+                      style={{width: '50%', margin: '1em'}}
+                    />
+                  </div>
+                </section>
+
+               {/* TODO ADD CHEVRONS FOR MAIN TOPIC PANELS: BT, THREAD, LoRa, Product Promo
+
+                <div id='welcomeBannerLeftArrow'>
+                  <LeftChevron />
+                </div>
+                <div id='welcomeBannerRightArrow'>
+                <RightChevron />
+                </div>
+                <div id='welcomeBannerDownArrow'>
+                <Down />
+              </div>
+               <div className="welcomeFooter">
+               </div>
+               */}
+            </div>
+          </div>
+        </MuiThemeProvider>
       )
     }
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'))
