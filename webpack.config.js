@@ -1,4 +1,5 @@
 var path = require('path');
+const { resolve } = require('path');
 var SRC_DIR = path.join(__dirname, '/react/src');
 var DIST_DIR = path.join(__dirname, '/react/dist');
 
@@ -21,3 +22,7 @@ module.exports = {
     ]
   }
 };
+
+// module.exports = env => {
+  
+// }

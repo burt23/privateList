@@ -1,0 +1,8 @@
+{
+  "plugins": ["transform-react-jsx"],
+  "presets": ["env", "es2015"],
+  "ignore": [
+    "foo.js",
+    "bar/**/*.js"
+  ]
+}

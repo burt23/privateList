@@ -1,9 +1,11 @@
 var mysql = require('mysql');
 
+console.log('mysql loco', PROCESS.env.MYSQL_LOCO);
+
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
-  password : 'FILL_ME_IN',
+  password : 'PROCESS.env.MYSQL_LOCO',
   database : 'test'
 });
 
