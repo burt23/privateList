@@ -18,6 +18,9 @@ class Lists extends React.Component {
     event.stopPropagation();
     console.log('inside list submit', this.state.listTitle);
     this.props.addList(this.state.listTitle);
+    this.setState({
+      listTitle: ''
+    });
   }
 
   handleWantsNewList(event) {
@@ -36,7 +39,9 @@ class Lists extends React.Component {
 
   render() {
     return (
+
       <div className="listsFlexbox">
+        <h1>all lists</h1>
         { this.state.wantsNewList &&
 
           <form onSubmit={this.handleListSubmit}>
@@ -57,10 +62,11 @@ class Lists extends React.Component {
               list={list}
             />
           )) : (
-            <h2
-              onClick={this.handleWantsNewList}>
-              Create New List
-            </h2>
+            <input  
+              type="submit"
+              onClick={this.handleListSubmit}
+              value="Create New List"
+            />
           )
         }
       </div>
