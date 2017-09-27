@@ -24,7 +24,7 @@ class App extends React.Component {
       userCanEdit: false,
       invalidUserPass: false,
       senderEmail: '',
-      emailError: false,
+      emailError: false
     };
 
     this.search = this.search.bind(this);
@@ -42,17 +42,17 @@ class App extends React.Component {
     this.addList = this.addList.bind(this);
   }
 
-  handleLogout(event) {
+  handleLogout() {
     this.setState({
       isLoggedIn: false,
-      showToken: false,
+      showToken: false
     });
   }
 
   handleModalExit(event) {
     console.log('almost there', event);
     this.setState({
-      showToken: false,
+      showToken: false
     });
   }
 

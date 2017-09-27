@@ -13,6 +13,10 @@ class Lists extends React.Component {
     this.handleListTitleChange = this.handleListTitleChange.bind(this);
   }
 
+  componentDidMount(){
+    console.log('you have 0 lists');
+  }
+
   handleListSubmit(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -41,9 +45,10 @@ class Lists extends React.Component {
     return (
 
       <div className="listsFlexbox">
-        <h1>all lists</h1>
-        { this.state.wantsNewList &&
 
+        <h1>all lists</h1>
+
+        { this.state.wantsNewList &&
           <form onSubmit={this.handleListSubmit}>
             <input 
               type="text"
@@ -64,7 +69,7 @@ class Lists extends React.Component {
           )) : (
             <input  
               type="submit"
-              onClick={this.handleListSubmit}
+              onClick={this.handleWantsNewList}
               value="Create New List"
             />
           )
