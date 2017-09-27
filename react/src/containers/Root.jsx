@@ -1,15 +1,20 @@
 import React from 'react';
 import { BrowserRouter, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { Provider, connect } from 'react-redux';
+import { createStore, bindActionCreators } from 'redux';
 import Routes from '../routes';
 import * as Actions from '../actions';
+import store from '../store/configStore';
+
+// const store = createStore(configStore);
 
 
 const Root = () => (
-  <BrowserRouter>
-    <Routes />
-  </BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter>
+      <Routes />
+    </BrowserRouter>
+  </Provider>
 );
 
 function mapDispatchToProps(dispatch) {
