@@ -1,23 +1,25 @@
 var path = require('path');
 const { resolve } = require('path');
-var SRC_DIR = path.join(__dirname, '/react/src');
+var SRC_DIR = path.join(__dirname, '/react/src/containers');
 var DIST_DIR = path.join(__dirname, '/react/dist');
 
 module.exports = {
-  entry: `${SRC_DIR}/index.jsx`,
+  entry: `${SRC_DIR}/Root.jsx`,
   output: {
     filename: 'bundle.js',
     path: DIST_DIR
   },
   module : {
-    loaders : [
+    rules: [
       {
         test : /\.jsx?/,
-        include : SRC_DIR,
-        loader : 'babel-loader',
-        query: {
-          presets: ['react', 'es2015']
-       }
+        exclude: /(node_modules)/,
+        use: {
+          loader : 'babel-loader',
+          options: {
+            presets: ['env', 'es2015', 'react']
+          }
+        }
       }
     ]
   }

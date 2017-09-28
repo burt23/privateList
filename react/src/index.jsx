@@ -25,8 +25,8 @@ class App extends React.Component {
       invalidUserPass: false,
       senderEmail: '',
       emailError: false
-
     };
+
     this.search = this.search.bind(this);
     this.login = this.login.bind(this);
     this.signup = this.signup.bind(this);
@@ -42,75 +42,72 @@ class App extends React.Component {
     this.addList = this.addList.bind(this);
   }
 
-  componentDidMount() {
-  }
-
-  handleLogout(event){
+  handleLogout() {
     this.setState({
       isLoggedIn: false,
       showToken: false
-    })
+    });
   }
 
-  handleModalExit(event){
-    console.log('almost there', event)
+  handleModalExit(event) {
+    console.log('almost there', event);
     this.setState({
       showToken: false
-    })
+    });
   }
 
-  handleEmailSubmit(event){
-    console.log('inside email submit')
+  handleEmailSubmit(event) {
+    console.log('inside email submit');
     event.preventDefault();
 
     event.stopPropagation();
     this.emailToken(this.state.senderEmail, this.state.accessToken);
   }
 
-  emailToken(email, token){
-    var context = this;
+  emailToken(email, token) {
+    const context = this;
     $.ajax({
       url: 'http://localhost:3000/email',
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({
-        email: email,
-        token: token
+        email,
+        token,
       }),
-      success: function(data){
+      success(data) {
         console.log('mailed token', data);
         context.setState({
           tokenMailed: true,
-          showToken: false
+          showToken: false,
         });
       },
-      error: function(error){
+      error(error) {
         console.log(error);
         context.setState({
-          emailError: true
-        })
-      }
-    })
+          emailError: true,
+        });
+      },
+    });
   }
 
-  handleSenderEmail(event){
+  handleSenderEmail(event) {
     this.setState({
-      senderEmail: event.target.value
+      senderEmail: event.target.value,
     });
   }
 
   handleTokenChange(event) {
     console.log('inside token change');
-    if(!this.state.requestedToken){
+    if (!this.state.requestedToken) {
       this.setState({
-        requestedToken: true
+        requestedToken: true,
       });
       this.generateAccessToken(this.state.accessToken);
     }
   }
 
-  generateAccessToken(){
-    var context = this;
+  generateAccessToken() {
+    const context = this;
 
     $.ajax({
       url: 'http://localhost:3000/token/new',
@@ -118,217 +115,217 @@ class App extends React.Component {
       contentType: 'application/json',
       data: JSON.stringify({
         user_id: this.state.user_id,
-        token: this.state.accessToken
+        token: this.state.accessToken,
       }),
-      success: function(data){
+      success(data) {
         // console.log('data from access token', data);
         context.setState({
           accessToken: data,
-          showToken: true
-        })
+          showToken: true,
+        });
       },
-      error: function(error){
+      error(error) {
         console.log('err', error);
-      }
-    })
+      },
+    });
   }
 
-  checkToken(accessToken){
-    var context = this;
+  checkToken(accessToken) {
+    const context = this;
     $.ajax({
       url: 'http://localhost:3000/token',
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({
-        accessToken: accessToken
+        accessToken,
       }),
-      success: function(data){
-          if(data.length>0){
+      success(data) {
+        if (data.length > 0) {
           context.setState({
             isLoggedIn: true,
             userCanEdit: false,
-            items: data
-          })
+            items: data,
+          });
         }
       },
-      error: function(error){
+      error(error) {
         console.log('err', error);
-      }
-    })
+      },
+    });
   }
 
-  addList(list){
-    var context = this;
+  addList(list) {
+    const context = this;
     $.ajax({
       url: 'http://localhost:3000/lists/add',
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({
-        list: list,
-        user_id: this.state.user_id
+        list,
+        user_id: this.state.user_id,
       }),
-      success: function(data){
+      success(data) {
         console.log('successful ajax in add list', data);
-        if(data.length>0){
+        if (data.length > 0) {
           context.setState({
-            lists: data.lists
-          })
+            lists: data.lists,
+          });
         }
       },
-      error: function(err){
+      error(err) {
         console.log('addList error', err);
-      }
-    })
+      },
+    });
   }
 
-  delete( message_id ) {
-    var context = this;
+  delete(message_id) {
+    const context = this;
     $.ajax({
       url: 'http://localhost:3000/items/remove',
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({
-        message_id: message_id
+        message_id,
       }),
-      success: function(data) {
+      success(data) {
         context.get();
       },
-      error: (function(err) {
-        console.log('error in deletion', err); })
-    })
+      error(err) {
+        console.log('error in deletion', err);
+      },
+    });
   }
 
   get() {
-    var context = this;
+    const context = this;
     $.ajax({
       url: 'http://localhost:3000/users',
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({
-        id: this.state.user_id
+        id: this.state.user_id,
       }),
       success: (data) => {
         context.setState({
-          items: data.reverse()
+          items: data.reverse(),
         });
       },
       error: (err) => {
         console.log('err', err);
-      }
+      },
     });
   }
 
-  signup( username, password ) {
-    var context = this;
+  signup(username, password) {
+    const context = this;
     $.ajax({
       url: 'http://localhost:3000/signup',
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({
-        username: username,
-        password: password
+        username,
+        password,
       }),
-      success: function(data) {
+      success(data) {
         context.setState({
           isLoggedIn: true,
-          user_id: data.user_added
+          user_id: data.user_added,
         });
-      context.get(context.state.user_id);
+        context.get(context.state.user_id);
       },
-      error: function(error){
+      error(error) {
         console.log(error);
-      }
-    })
+      },
+    });
   }
 
-  login( username, password ) {
-    var context = this;
+  login(username, password) {
+    const context = this;
     $.ajax({
       url: 'http://localhost:3000/login',
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({
-        username: username,
-        password: password
+        username,
+        password,
       }),
-      success: function(data) {
+      success(data) {
         context.setState({
           isLoggedIn: true,
-          user_id: data.user_id
+          user_id: data.user_id,
         });
         context.get(context.state.user_id);
       },
-      error: function(error, data) {
+      error(error, data) {
         context.setState({
-          invalidUserPass: true
-        })
-      }
-    })
+          invalidUserPass: true,
+        });
+      },
+    });
   }
 
-  search (term) {
-    var context = this;
+  search(term) {
+    const context = this;
     $.ajax({
       url: 'http://localhost:3000/items/users',
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({
-        term: term,
-        id: this.state.user_id
+        term,
+        id: this.state.user_id,
       }),
-      success: function(data) {
+      success(data) {
         context.setState({
-          items: data.reverse()
+          items: data.reverse(),
         });
       },
-      error: function(error) {
+      error(error) {
         console.log('error', error);
-      }
-    })
+      },
+    });
   }
 
-  render () {
-    if(this.state.isLoggedIn){
-    return (
-      <div className='appContainer'>
-        { this.state.showToken &&
-        <TokenModal
-          handleEmailSubmit={this.handleEmailSubmit}
-          handleSenderEmail={this.handleSenderEmail}
-          accessToken={this.state.accessToken}
-          handleModalExit={this.handleModalExit}
-        />
-        }
-        <Header
-          invalidUserPass={this.state.invalidUserPass}
-          login={this.login}
-          isLoggedIn={this.state.isLoggedIn}
-          handleLogout={this.handleLogout}
-        />
-
-        <Portal
-          handleTokenChange={this.handleTokenChange}
-          handleEmailSubmit={this.handleEmailSubmit}
-          handleSenderEmail={this.handleSenderEmail}
-          handleEmailSubmit={this.handleEmailSubmit}
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-          items={this.state.items}
-          delete={this.delete}
-          search={this.search}
-          lists={this.state.lists}
-          addList={this.addList}
-        />
-        <Footer
-          handleTokenChange={this.handleTokenChange}
-          user_id={this.state.user_id}
-        />
-      </div>
-      )
-    } else {
+  render() {
+    if (this.state.isLoggedIn) {
       return (
+        <div className="appContainer">
+          { this.state.showToken &&
+          <TokenModal
+            handleEmailSubmit={this.handleEmailSubmit}
+            handleSenderEmail={this.handleSenderEmail}
+            accessToken={this.state.accessToken}
+            handleModalExit={this.handleModalExit}
+          />
+          }
+          <Header
+            invalidUserPass={this.state.invalidUserPass}
+            login={this.login}
+            isLoggedIn={this.state.isLoggedIn}
+            handleLogout={this.handleLogout}
+          />
 
-      <div className='appContainer'>
+          <Portal
+            handleTokenChange={this.handleTokenChange}
+            handleEmailSubmit={this.handleEmailSubmit}
+            handleSenderEmail={this.handleSenderEmail}
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+            items={this.state.items}
+            delete={this.delete}
+            search={this.search}
+            lists={this.state.lists}
+            addList={this.addList}
+          />
+          <Footer
+            handleTokenChange={this.handleTokenChange}
+            user_id={this.state.user_id}
+          />
+        </div>
+      );
+    }
+    return (
+
+      <div className="appContainer">
         <Header
           invalidUserPass={this.state.invalidUserPass}
           login={this.login}
@@ -340,8 +337,7 @@ class App extends React.Component {
         />
         <Footer />
       </div>
-      )
-    }
+    );
   }
 }
 
