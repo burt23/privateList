@@ -1,14 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import List from './components/List.jsx';
-import Search from './components/Search.jsx';
-import Login from './components/Login.jsx';
 import Header from './containers/Header.jsx';
-import Homepage from './containers/Homepage.js';
-import Footer from './containers/Footer.js';
-import Portal from './containers/Portal.js';
-import TokenModal from './containers/TokenModal.js';
+import Homepage from './containers/Homepage';
+import Footer from './containers/Footer';
+import Portal from './containers/Portal';
+import TokenModal from './containers/TokenModal';
 
 class App extends React.Component {
   constructor(props) {
@@ -49,17 +46,14 @@ class App extends React.Component {
     });
   }
 
-  handleModalExit(event) {
-    console.log('almost there', event);
+  handleModalExit() {
     this.setState({
       showToken: false
     });
   }
 
   handleEmailSubmit(event) {
-    console.log('inside email submit');
     event.preventDefault();
-
     event.stopPropagation();
     this.emailToken(this.state.senderEmail, this.state.accessToken);
   }
@@ -72,35 +66,32 @@ class App extends React.Component {
       contentType: 'application/json',
       data: JSON.stringify({
         email,
-        token,
+        token
       }),
-      success(data) {
-        console.log('mailed token', data);
+      success() {
         context.setState({
           tokenMailed: true,
-          showToken: false,
+          showToken: false
         });
       },
-      error(error) {
-        console.log(error);
+      error() {
         context.setState({
-          emailError: true,
+          emailError: true
         });
-      },
+      }
     });
   }
 
   handleSenderEmail(event) {
     this.setState({
-      senderEmail: event.target.value,
+      senderEmail: event.target.value
     });
   }
 
-  handleTokenChange(event) {
-    console.log('inside token change');
+  handleTokenChange() {
     if (!this.state.requestedToken) {
       this.setState({
-        requestedToken: true,
+        requestedToken: true
       });
       this.generateAccessToken(this.state.accessToken);
     }
@@ -115,18 +106,17 @@ class App extends React.Component {
       contentType: 'application/json',
       data: JSON.stringify({
         user_id: this.state.user_id,
-        token: this.state.accessToken,
+        token: this.state.accessToken
       }),
       success(data) {
-        // console.log('data from access token', data);
         context.setState({
           accessToken: data,
-          showToken: true,
+          showToken: true
         });
       },
       error(error) {
         console.log('err', error);
-      },
+      }
     });
   }
 
@@ -137,20 +127,20 @@ class App extends React.Component {
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({
-        accessToken,
+        accessToken
       }),
       success(data) {
         if (data.length > 0) {
           context.setState({
             isLoggedIn: true,
             userCanEdit: false,
-            items: data,
+            items: data
           });
         }
       },
       error(error) {
         console.log('err', error);
-      },
+      }
     });
   }
 
@@ -162,19 +152,19 @@ class App extends React.Component {
       contentType: 'application/json',
       data: JSON.stringify({
         list,
-        user_id: this.state.user_id,
+        user_id: this.state.user_id
       }),
       success(data) {
         console.log('successful ajax in add list', data);
         if (data.length > 0) {
           context.setState({
-            lists: data.lists,
+            lists: data.lists
           });
         }
       },
       error(err) {
         console.log('addList error', err);
-      },
+      }
     });
   }
 
@@ -185,14 +175,14 @@ class App extends React.Component {
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({
-        message_id,
+        message_id
       }),
-      success(data) {
+      success() {
         context.get();
       },
       error(err) {
         console.log('error in deletion', err);
-      },
+      }
     });
   }
 
@@ -203,16 +193,16 @@ class App extends React.Component {
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({
-        id: this.state.user_id,
+        id: this.state.user_id
       }),
       success: (data) => {
         context.setState({
-          items: data.reverse(),
+          items: data.reverse()
         });
       },
       error: (err) => {
         console.log('err', err);
-      },
+      }
     });
   }
 
@@ -224,18 +214,18 @@ class App extends React.Component {
       contentType: 'application/json',
       data: JSON.stringify({
         username,
-        password,
+        password
       }),
       success(data) {
         context.setState({
           isLoggedIn: true,
-          user_id: data.user_added,
+          user_id: data.user_added
         });
         context.get(context.state.user_id);
       },
       error(error) {
         console.log(error);
-      },
+      }
     });
   }
 
@@ -247,20 +237,20 @@ class App extends React.Component {
       contentType: 'application/json',
       data: JSON.stringify({
         username,
-        password,
+        password
       }),
       success(data) {
         context.setState({
           isLoggedIn: true,
-          user_id: data.user_id,
+          user_id: data.user_id
         });
         context.get(context.state.user_id);
       },
-      error(error, data) {
+      error() {
         context.setState({
-          invalidUserPass: true,
+          invalidUserPass: true
         });
-      },
+      }
     });
   }
 
@@ -272,16 +262,16 @@ class App extends React.Component {
       contentType: 'application/json',
       data: JSON.stringify({
         term,
-        id: this.state.user_id,
+        id: this.state.user_id
       }),
       success(data) {
         context.setState({
-          items: data.reverse(),
+          items: data.reverse()
         });
       },
       error(error) {
         console.log('error', error);
-      },
+      }
     });
   }
 
@@ -295,15 +285,13 @@ class App extends React.Component {
             handleSenderEmail={this.handleSenderEmail}
             accessToken={this.state.accessToken}
             handleModalExit={this.handleModalExit}
-          />
-          }
+          />}
           <Header
             invalidUserPass={this.state.invalidUserPass}
             login={this.login}
             isLoggedIn={this.state.isLoggedIn}
             handleLogout={this.handleLogout}
           />
-
           <Portal
             handleTokenChange={this.handleTokenChange}
             handleEmailSubmit={this.handleEmailSubmit}
@@ -323,8 +311,8 @@ class App extends React.Component {
         </div>
       );
     }
-    return (
 
+    return (
       <div className="appContainer">
         <Header
           invalidUserPass={this.state.invalidUserPass}

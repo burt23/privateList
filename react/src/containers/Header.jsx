@@ -1,38 +1,33 @@
 import React from 'react';
-import Login from '../containers/loginbar.js'
+import Login from '../containers/loginbar.js';
 
 class Header extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {};
-    //bind functions
   }
-  render(){
-    return(
-      <div className='headerFlexbox'>
+  render() {
+    return (
+      <div className={this.props.isLoggedIn ? "portalHeaderFlexbox" : "headerFlexbox"}>
 
-
-        <div className='headerFlexItem headFlexItemCenter'>
+        <div className="headerFlexItem headFlexItemCenter">
           <h1>
             Private List
           </h1>
         </div>
 
-        <div className='headerFlexItem'>
+        <div className="headerFlexItem">
           { !this.props.isLoggedIn ?
             (<Login
               login={this.props.login}
-            />)
-              :
-            (<span className='headerFlexItem'>
-              <button className='' onClick={this.props.handleLogout}>Sign Out</button>
+            />) :
+            (<span className="headerFlexItem">
+              <button className="signoutButton" onClick={this.props.handleLogout}>Sign Out</button>
             </span>)
           }
         </div>
-
-      </div>)
+      </div>);
   }
-
 }
 
 export default Header;

@@ -1,21 +1,21 @@
 import React from 'react';
-import Signup from './Signup.js';
-import AccessToken from './AccessToken.js';
-import Overview from '../components/Overview.js';
+import Signup from './Signup';
+import AccessToken from './AccessToken';
+import Overview from '../components/Overview';
 
 class Homepage extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {};
     // bind functions
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <div>
         {/*****************  ACCESS TOKEN BAR  ******************/}
         <div className='homepageFlexboxTopBar'>
-           <div className='homepageFlexItemTopBar'>
+          <div className='homepageFlexItemTopBar'>
             <AccessToken
               checkToken={this.props.checkToken}
             />
@@ -35,7 +35,7 @@ class Homepage extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 

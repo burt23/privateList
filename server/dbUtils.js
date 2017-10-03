@@ -1,8 +1,8 @@
-var mysql = require('mysql');
-var dbConfig = require('./dbconfig.js');
-var crypto = require('crypto');
+const mysql = require('mysql');
+const dbConfig = require('./dbconfig.js');
+const crypto = require('crypto');
 
-var connection = mysql.createConnection({
+const connection = mysql.createConnection({
   host: 'localhost',
   user: dbConfig.user,
   password: dbConfig.password,
@@ -11,19 +11,19 @@ var connection = mysql.createConnection({
 
 module.exports = {
 
-  selectAll : function(userId, callback) {
-  connection.query('SELECT * FROM messages where user_id = ?', [userId], function(err, results, fields) {
-    if(err) {
-      callback(err, null);
-    } else {
-      console.log('selectALLLLLLLLLLLLLLLLL results', results);
-      callback(null, results);
-    }
-  });
-},
+  selectAll: (userId, callback) => {
+    connection.query('SELECT * FROM messages where user_id = ?', [userId], (err, results) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        console.log('selectALLLLLLLLLLLLLLLLL results', results);
+        callback(null, results);
+      }
+    });
+  },
 
-  insert : function(message, userId, callback) {
-    connection.query('INSERT INTO messages (user_id, message) VALUES (?,?)', [userId, message], function(err, results, fields) {
+  insert: (message, userId, callback) => {
+    connection.query('INSERT INTO messages (user_id, message) VALUES (?,?)', [userId, message], (err, results) => {
       if(err) {
         console.log('resultsERRRRR', results);
         callback(err, null);
@@ -31,39 +31,51 @@ module.exports = {
         console.log('results AFTER INSERT', results);
         callback(null, true);
       }
-    })
+    });
   },
 
-  getUserSalt: function(username, callback){
-    connection.query('SELECT salt FROM users WHERE user = ?', [username], function(err, results, fields) {
-      if(err){
-        callback(err, null)
+  addList: (list, userId, callback) => {
+    connection.query('INSERT INTO lists (list_name, user_id) VALUES (?, ?)', [list, userId], (err, results) => {
+      if(err) {
+        console.error(err)
+        callback(err, null);
       } else {
-        console.log('getUserSalt', results);
+        console.log('insert into addList', results);
         callback(null, results);
       }
     })
   },
 
-  checkUsername : function(username, callback) {
-    connection.query('SELECT * FROM users WHERE user = ? ', [username], function(err, results, fields) {
-      if(err) {
+  getUserSalt: (username, callback) => {
+    connection.query('SELECT salt FROM users WHERE user = ?', [username], (err, results) => {
+      if (err) {
         callback(err, null);
-      } else if (results.length === 0){
+      } else {
+        console.log('getUserSalt', results);
+        callback(null, results);
+      }
+    });
+  },
+
+  checkUsername: (username, callback) => {
+    connection.query('SELECT * FROM users WHERE user = ? ', [username], (err, results) => {
+      if (err) {
+        callback(err, null);
+      } else if (results.length === 0) {
         console.log('inside checkUser NEW USER ADDED', results);
         callback(err, true);
       } else {
         console.log('USER ALREADY EXISTS, try again ??????', results);
         callback(err, false);
       }
-    })
+    });
   },
 
-  addUser : function(username, password, salt, callback) {
-    connection.query('INSERT INTO users (user, password, salt) values (?, ?, ?)', [username, password, salt], function(err, results, fields) {
+  addUser: (username, password, salt, callback) => {
+    connection.query('INSERT INTO users (user, password, salt) values (?, ?, ?)', [username, password, salt], (err, results, fields) => {
       if(err){
-        console.log(err)
-        callback(err, null, null)
+        console.log(err);
+        callback(err, null, null);
       } else {
         console.log('insertID', results.insertId);
         callback(null, true, results.insertId);
@@ -71,9 +83,9 @@ module.exports = {
     })
   },
 
-  validateUser : function(username, password, salt, callback) {
-    connection.query('SELECT id FROM users where user = ? AND password = ?', [username, password], function(err, results, fields) {
-      if(err){
+  validateUser: (username, password, salt, callback) => {
+    connection.query('SELECT id FROM users where user = ? AND password = ?', [username, password], (err, results) => {
+      if (err) {
         console.log('error in validate user', err);
         callback(err, null);
       } else if (results.length === 0) {
@@ -81,43 +93,42 @@ module.exports = {
       } else {
         callback(null, true, results[0].id);
       }
-    })
+    });
   },
 
-  deleteMessage: function(message_id, callback) {
-    connection.query('DELETE FROM messages WHERE id = ?', [message_id], function(err, results, fields) {
-      if(err) {
+  deleteMessage: (message_id, callback) => {
+    connection.query('DELETE FROM messages WHERE id = ?', [message_id], (err, results) => {
+      if (err) {
         console.log(err);
         callback(err, false, null);
       } else {
         callback(err, true, results);
       }
-    })
+    });
   },
 
-  getToken: function(userId, callback){
+  getToken: (userId, callback) => {
     var randomString = crypto.randomBytes(30).toString('hex').slice(0, 30);
     console.log('random strin ', randomString);
-    connection.query('UPDATE MESSAGES SET secret=? WHERE user_id = ?', [randomString, userId], function(error, results, fields){
-      if(error){
-        console.log(error)
-        callback(error, null)
+    connection.query('UPDATE MESSAGES SET secret=? WHERE user_id = ?', [randomString, userId], (error, results) => {
+      if (error) {
+        console.log(error);
+        callback(error, null);
       } else {
         callback(null, randomString);
       }
-    })
+    });
   },
 
-  checkToken: function(userToken, callback){
-    connection.query('SELECT * FROM MESSAGES WHERE secret = ?', [userToken], function(error, results, fields) {
-      if(error){
+  checkToken: (userToken, callback) => {
+    connection.query('SELECT * FROM MESSAGES WHERE secret = ?', [userToken], (error, results) => {
+      if (error) {
         console.log(error);
-        callback(error, null)
+        callback(error, null);
       } else {
         console.log('check token results', results);
         callback(error, results);
-
       }
-    })
+    });
   }
-}
+};

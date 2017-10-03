@@ -5,7 +5,7 @@ class Lists extends React.Component {
     super(props);
     this.state = {
       wantsNewList: false,
-      listTitle: '',
+      listTitle: ''
     };
     // bind functions
     this.handleWantsNewList = this.handleWantsNewList.bind(this);
@@ -13,8 +13,9 @@ class Lists extends React.Component {
     this.handleListTitleChange = this.handleListTitleChange.bind(this);
   }
 
-  componentDidMount(){
-    console.log('you have 0 lists');
+  componentDidMount() {
+   console.log('you have 0 lists', this.props.lists.length);
+   console.log('you have lists', this.props.lists);
   }
 
   handleListSubmit(event) {
@@ -30,50 +31,49 @@ class Lists extends React.Component {
   handleWantsNewList(event) {
     console.log('wants new list', event);
     this.setState({
-      wantsNewList: true,
+      wantsNewList: true
     });
   }
 
   handleListTitleChange(event) {
     console.log('list', event);
     this.setState({
-      listTitle: event.target.value,
+      listTitle: event.target.value
     });
   }
 
   render() {
     return (
-
       <div className="listsFlexbox">
+        <h1>You have {this.props.lists.length} lists</h1>
+        <form onSubmit={this.handleListSubmit}>
+          <input
+            type="text"
+            placeholder="title"
+            value={this.state.listTitle}
+            onChange={this.handleListTitleChange} 
+          />
+          <input
+            type="submit"
+            onClick={this.handleWantsNewList}
+            value="Create New List"
+          />
+        </form>
 
-        <h1>all lists</h1>
-
-        { this.state.wantsNewList &&
-          <form onSubmit={this.handleListSubmit}>
-            <input 
-              type="text"
-              placeholder="title"
-              value={this.state.listTitle}
-              onChange={this.handleListTitleChange}
-            />
-          </form>
-        }
-        { this.props.lists === 0 ? 
+        { this.props.lists === 0 &&
           (this.props.lists.map(list =>
             <p
-              className="listsFlexlis"t
-              delete={props.delete}
+              className="listsFlexlist"
               key={list.id}
               list={list}
             />
-          )) : (
-            <input  
-              type="submit"
-              onClick={this.handleWantsNewList}
-              value="Create New List"
-            />
-          )
+          )) 
         }
+
+        <ul>
+          {this.props.lists.map(list => (
+            <li>{list}</li>))}
+        </ul>
       </div>
     );
   }
