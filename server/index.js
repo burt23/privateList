@@ -8,8 +8,6 @@ const hashPassNewUser = require('./middleware/hashPassNewUser.js');
 const hashPass = require('./middleware/hashPass.js');
 // const encryptPost = require('./middleware/encryptPost.js');
 
-
-
 const app = express();
 
 //MIDDLEWARE

@@ -67,7 +67,7 @@ class App extends React.Component {
   emailToken(email, token) {
     const context = this;
     $.ajax({
-      url: 'http://localhost:3000/email',
+      url: '/email',
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({
@@ -110,7 +110,7 @@ class App extends React.Component {
     const context = this;
 
     $.ajax({
-      url: 'http://localhost:3000/token/new',
+      url: '/token/new',
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({
@@ -133,7 +133,7 @@ class App extends React.Component {
   checkToken(accessToken) {
     const context = this;
     $.ajax({
-      url: 'http://localhost:3000/token',
+      url: '/token',
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({
@@ -157,7 +157,7 @@ class App extends React.Component {
   addList(list) {
     const context = this;
     $.ajax({
-      url: 'http://localhost:3000/lists/add',
+      url: '/lists/add',
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({
@@ -181,7 +181,7 @@ class App extends React.Component {
   delete(message_id) {
     const context = this;
     $.ajax({
-      url: 'http://localhost:3000/items/remove',
+      url: '/items/remove',
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({
@@ -199,7 +199,7 @@ class App extends React.Component {
   get() {
     const context = this;
     $.ajax({
-      url: 'http://localhost:3000/users',
+      url: '/users',
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({
@@ -219,7 +219,7 @@ class App extends React.Component {
   signup(username, password) {
     const context = this;
     $.ajax({
-      url: 'http://localhost:3000/signup',
+      url: '/signup',
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({
@@ -242,7 +242,7 @@ class App extends React.Component {
   login(username, password) {
     const context = this;
     $.ajax({
-      url: 'http://localhost:3000/login',
+      url: '/login',
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({
@@ -267,7 +267,7 @@ class App extends React.Component {
   search(term) {
     const context = this;
     $.ajax({
-      url: 'http://localhost:3000/items/users',
+      url: '/items/users',
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({

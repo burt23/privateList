@@ -4,11 +4,14 @@ import { Provider, connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Routes from '../routes';
 import * as Actions from '../actions';
-import store from '../store/configStore';
+import configStore from '../store/configStore';
 
 // const store = createStore(configStore);
 console.log('store', store)
 
+const store = configStore();
+
+console.log('store2', store)
 const Root = () => (
   <Provider store={store}>
     <BrowserRouter>

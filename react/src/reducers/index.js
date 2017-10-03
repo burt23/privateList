@@ -1,9 +1,12 @@
-import combineReducers from 'redux';
+import { combineReducers } from 'redux';
+
 // import additional reducers
 import userWantsLogin from './userWantsLogin';
 
 const rootReducer = combineReducers({
-  wantsLogin: userWantsLogin
+	userWantsLogin
 });
 
 export default rootReducer;
+
+console.log('root', rootReducer);
