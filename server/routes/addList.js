@@ -17,7 +17,7 @@ module.exports = (req, res) => {
 
     if (success) {
       console.log('successful insertion', success);
-      db.selectAll(user_id, (error, messages) => {
+      db.getLists(user_id, (error, messages) => {
         if (error) {
           console.log(error);
         }

@@ -60,7 +60,8 @@ class Lists extends React.Component {
           />
         </form>
 
-        { this.props.lists === 0 &&
+        { this.props.lists !== 0 &&
+          
           (this.props.lists.map(list =>
             <p
               className="listsFlexlist"
@@ -72,7 +73,7 @@ class Lists extends React.Component {
 
         <ul>
           {this.props.lists.map(list => (
-            <li>{list}</li>))}
+            <li key={list.time}>{list}</li>))}
         </ul>
       </div>
     );

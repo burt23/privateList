@@ -36,14 +36,24 @@ module.exports = {
 
   addList: (list, userId, callback) => {
     connection.query('INSERT INTO lists (list_name, user_id) VALUES (?, ?)', [list, userId], (err, results) => {
-      if(err) {
-        console.error(err)
+      if (err) {
+        console.error(err);
         callback(err, null);
       } else {
         console.log('insert into addList', results);
         callback(null, results);
       }
-    })
+    });
+  },
+
+  getLists: (userId, callback) => {
+    connection.query('SELECT * FROM lists WHERE user_id = ?', [userId], (err, results) => {
+      if (err) {callback(err, null)}
+      else {
+        console.log('got lists', results);
+        callback(null, results);
+      }
+    });
   },
 
   getUserSalt: (username, callback) => {

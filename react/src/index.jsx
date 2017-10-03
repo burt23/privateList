@@ -156,9 +156,11 @@ class App extends React.Component {
       }),
       success(data) {
         console.log('successful ajax in add list', data);
+
         if (data.length > 0) {
+        console.log('successfuasdflkajsdf;lkajsfd;lkjl ajax in add list', data);
           context.setState({
-            lists: data.lists
+            lists: data
           });
         }
       },
