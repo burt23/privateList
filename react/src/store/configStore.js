@@ -1,20 +1,32 @@
-import { createStore } from 'redux';
+import 'babel-polyfill';
+import { createStore, applyMiddleware } from 'redux';
 import rootReducer from '../reducers/index';
+import createSagaMiddleware from 'redux-saga';
 
-/* eslint-disable no-underscore-dangle */
+
+import { yatta } from '../sagas/sagas.js';
+
+console.log('yatta ###############33', yatta)
+const sagaMiddleware = createSagaMiddleware();
+
+ // eslint-disable no-underscore-dangle 
 export default function configureStore(initialState) {
   return createStore(
     rootReducer,
+    applyMiddleware(sagaMiddleware),
     initialState,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   );
 }
-  /* eslint-enable */
 
-    // window.devToolsExtension ? window.devToolsExtension() : undefined
+sagaMiddleware.run(yatta);
+
+/* eslint-enable */
+
+// window.devToolsExtension ? window.devToolsExtension() : undefined
 
 
-  console.log('module hot', module.hot)
+console.log('module hot', module.hot);
 //   // HMR support
 //   if (module.hot) {
 //     // enable webpack HMR for reducers

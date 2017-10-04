@@ -4,13 +4,14 @@ import Messages from './Messages';
 import PortalTopBar from './PortalTopBar';
 
 class Portal extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {};
     // bind functions
   }
 
   render() {
+    console.log('this lists', this.props.lists)
     return (
       <div>
         {/*****************  TOP APP BAR  ******************/}

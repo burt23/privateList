@@ -11,4 +11,3 @@ const userWantsLogin = (state = false, action) => {
 console.log('inside userWantsLogin', userWantsLogin)
 
 export default userWantsLogin;
-

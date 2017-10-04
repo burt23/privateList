@@ -159,6 +159,9 @@ class App extends React.Component {
 
         if (data.length > 0) {
         console.log('successfuasdflkajsdf;lkajsfd;lkjl ajax in add list', data);
+        console.log('context', context)
+        console.log('this', this)
+
           context.setState({
             lists: data
           });
